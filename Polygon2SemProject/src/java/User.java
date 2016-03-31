@@ -14,38 +14,32 @@ public class User
     String username;
     String password;
 
-    public
-    int getId()
+    public int getId()
     {
         return id;
     }
 
-    public
-    void setId(int id)
+    public void setId(int id)
     {
         this.id = id;
     }
 
-    public
-    String getUsername()
+    public String getUsername()
     {
         return username;
     }
 
-    public
-    void setUsername(String username)
+    public void setUsername(String username)
     {
         this.username = username;
     }
 
-    public
-    String getPassword()
+    public String getPassword()
     {
         return password;
     }
 
-    public
-    void setPassword(String password)
+    public void setPassword(String password)
     {
         this.password = password;
     }
@@ -55,6 +49,9 @@ public class User
     
     public User(int id, String username, String password)
     {
+        this.id=id;
+        this.password=password;
+        this.username=username;
         
     }
 }
