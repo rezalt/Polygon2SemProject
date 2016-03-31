@@ -13,8 +13,8 @@
     </head>
     <body>
         <h1>Hello and welcome, please insert your user settings.</h1>
-        <input type="text" name="username">
-        <input type="text" name="password">
+        username<input type="text" name="username"><br>
+        password<input type="text" name="password">
         
         
     </body>
