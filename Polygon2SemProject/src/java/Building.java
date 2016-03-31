@@ -88,7 +88,6 @@ public class Building
         this.owner = owner;
         this.ParcelNo = ParcelNo;
     }
-
     
     
 }
