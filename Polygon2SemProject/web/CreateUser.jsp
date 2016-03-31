@@ -12,11 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
         <h1>Hello and welcome, please insert your user settings.</h1>
         username<input type="text" name="username"><br>
         password<input type="text" name="password"><br>
         submit<input type="submit" name="submit" value="create">
-        
-        
+
     </body>
 </html>
