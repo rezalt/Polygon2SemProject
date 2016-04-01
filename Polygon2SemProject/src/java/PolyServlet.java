@@ -6,6 +6,8 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,23 +31,10 @@ public class PolyServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter())
+        throws ServletException, IOException
         {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PolyServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PolyServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            response.setContentType("text/html;charset=UTF-8");
         }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -77,13 +66,24 @@ public class PolyServlet extends HttpServlet
     {
         HttpSession session = request.getSession(true);
         
+        String do_this = request.getParameter("do_this");     
         
-        
-        
+        if (do_this == null)
+        {
+             forward(request, response, "/index.html");
+        }
         
         
         
         processRequest(request, response);
+    } // end of doPost
+    
+    
+    private void forward(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException 
+    {
+        ServletContext sc = getServletContext();
+        RequestDispatcher rd = sc.getRequestDispatcher(path);
+        rd.forward(request, response);
     }
 
     /**

@@ -79,6 +79,11 @@ public class Building
         this.ParcelNo = ParcelNo;
     }
 
+    public Building()
+    {
+        
+    }
+    
     public Building(int ID, String name, String address, int condition, String owner, String ParcelNo)
     {
         this.ID = ID;

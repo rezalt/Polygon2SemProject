@@ -14,9 +14,13 @@
     <body>
         
         <h1>Hello and welcome, please insert your user settings.</h1>
+        <form action="PolyServlet" method="post">
         username<input type="text" name="username"><br>
         password<input type="text" name="password"><br>
-        submit<input type="submit" name="submit" value="create">
+        submit<input type="submit" name="submit" value="do_this">  <%-- Der stod "create" som value før. --%>
+        </form>
+        
+            
 
     </body>
 </html>
