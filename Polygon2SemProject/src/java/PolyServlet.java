@@ -5,8 +5,15 @@
  */
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +28,40 @@ import javax.servlet.http.HttpSession;
 public class PolyServlet extends HttpServlet
 {
 
+    
+    
+    
+        // VARIABLES
+    String username = "";
+    int myID = 0;
+    int ID = 0;
+    
+    // END OF VARIABLES
+    
+    DBConnector DBC = new DBConnector();
+    Connection conn;
+        
+        @Override
+    public void init(ServletConfig conf) throws ServletException 
+    {
+
+            try
+            {
+                java.lang.Class.forName(conf.getInitParameter("jdbcDriver"));
+            }
+            catch (ClassNotFoundException ex) 
+            {
+                Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, ex );
+            }
+      
+            
+        super.init(conf);
+        
+        DBC.setDbURL("jdbc:mysql://localhost:3306/WriteNameHereDoods");
+        DBC.setDbUsername("root");
+        DBC.setDbPassword("");
+
+    }  
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -72,8 +113,108 @@ public class PolyServlet extends HttpServlet
         {
              forward(request, response, "/index.html");
         }
+        else 
+            switch (do_this) 
+                {
+
+                   case "Login":
+
+                       conn = DBC.getConnection();
+
+                       if(request.getParameter("Username").equals("") || request.getParameter("Password").equals("") )
+                       {
+                           forward(request, response, "/index.jsp");
+                       }
+                       else
+                       {
+                           String sql = "SELECT * FROM users WHERE username =? and password =?";
+                           try (PreparedStatement ps = conn.prepareStatement(sql))
+                           {
+
+                               ps.setString( 1, request.getParameter("Username") );
+                               ps.setString( 2, request.getParameter("Password") );
+                               ResultSet rs = ps.executeQuery();
+
+                                   if(rs.next())
+                                   {
+                                     //  session.setAttribute("user", UB);  -- Bean doesn't exist yet.
+                                       myID = rs.getInt("userID");                                                     
+                                   }
+                                   else
+                                   {
+                                      //besked
+                                   }
+
+                               ps.close();
+                               forward(request, response, "/WEB-INF/webshop.jsp");
+
+                           }
+                           catch(Exception e)
+                           {
+                               Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e);
+                                forward(request, response, "/index.jsp");
+                           }
+                       }
+
+                   break;   
+
+                   case "NewUser":
+
+                       ID = 0;
+                       conn = DBC.getConnection();
+                       PreparedStatement ps = null;
+
+                       try (Statement st = conn.createStatement()) 
+                       {
+                           // Creating a user                      
+                           st.executeQuery("SELECT userid, username FROM users");
+                           ResultSet rs = st.getResultSet();
+
+                           while(rs.next())
+                           {
+                               ID = rs.getInt("userID") + 1; // Sørger for at den nye user har sit eget ID.
+
+                               if( rs.getString("username").equals(request.getParameter("Username")))
+                               {
+                                   //besked
+                                   st.close();
+                                     forward(request, response, "/index.jsp");
+                               }
+
+                           }
+
+
+                           // Her indsætter vi vores nye user ind i databasen.
+                               ps = conn.prepareStatement("insert into users(userID,Username,Password) values(?,?,?)");
+
+                               ps.setInt(1, ID);
+                               ps.setString( 2, request.getParameter("Username") ); 
+                               ps.setString( 3, request.getParameter("Password") ); 
+
+                               st.close();   
+
+                               int i = ps.executeUpdate();
+                               if( i > 0 )
+                               {
+                                  // UB.setUserName(username); -- Bean doesn't exist yet.
+                               }
+                                   else
+                                   {
+                                       //besked
+                                   }    
+
+                               ps.close();
+                               forward(request, response, "/WEB-INF/webshop.jsp");        
+                       } 
+                       catch (SQLException e) 
+                       {
+                           Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e);
+                           forward(request, response, "/index.jsp"); 
+                       }
+      
+                   break;
         
-        
+            }
         
         processRequest(request, response);
     } // end of doPost
