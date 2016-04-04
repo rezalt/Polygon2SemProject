@@ -3,6 +3,10 @@
     <servlet>
         <servlet-name>PolyServlet</servlet-name>
         <servlet-class>PolyServlet</servlet-class>
+        <init-param>
+            <param-name>jdbcDriver</param-name>
+            <param-value>com.mysql.jdbc.Driver</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>PolyServlet</servlet-name>

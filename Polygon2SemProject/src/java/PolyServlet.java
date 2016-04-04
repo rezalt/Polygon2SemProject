@@ -123,7 +123,7 @@ public class PolyServlet extends HttpServlet
 
                        if(request.getParameter("Username").equals("") || request.getParameter("Password").equals("") )
                        {
-                           forward(request, response, "/index.jsp");
+                           forward(request, response, "/index.html");
                        }
                        else
                        {
@@ -146,13 +146,13 @@ public class PolyServlet extends HttpServlet
                                    }
 
                                ps.close();
-                               forward(request, response, "/WEB-INF/webshop.jsp");
+                               forward(request, response, "/index.html");
 
                            }
                            catch(Exception e)
                            {
-                               Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e);
-                                forward(request, response, "/index.jsp");
+                               Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "WHAT");
+                                forward(request, response, "/index.html");
                            }
                        }
 
@@ -178,7 +178,7 @@ public class PolyServlet extends HttpServlet
                                {
                                    //besked
                                    st.close();
-                                     forward(request, response, "/index.jsp");
+                                     forward(request, response, "/index.html");
                                }
 
                            }
@@ -204,12 +204,12 @@ public class PolyServlet extends HttpServlet
                                    }    
 
                                ps.close();
-                               forward(request, response, "/WEB-INF/webshop.jsp");        
+                               forward(request, response, "/index.html");        
                        } 
                        catch (SQLException e) 
                        {
-                           Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e);
-                           forward(request, response, "/index.jsp"); 
+                           Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "new user");
+                           forward(request, response, "/index.html"); 
                        }
       
                    break;
