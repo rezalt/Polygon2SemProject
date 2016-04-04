@@ -176,7 +176,7 @@ public class PolyServlet extends HttpServlet
        
                            while(rs.next())
                            {
-                               ID = rs.getInt("userId") + 1; // Sørger for at den nye user har sit eget ID.
+                               
                                
                                if( rs.getString("name").equals(request.getParameter("Username")))
                                {
@@ -186,8 +186,7 @@ public class PolyServlet extends HttpServlet
                                         forward(request, response, "/CreateUser.jsp");
                                }
                                
-
-                               
+                               ID = rs.getInt("userid") + 1; // Sørger for at den nye user har sit eget ID.
                            }
                             // Makes sure we don't show a meaningless error messages.
                                 session.setAttribute("text", " ");
@@ -208,17 +207,21 @@ public class PolyServlet extends HttpServlet
                                }
                                    else
                                    {
-                                       //besked
+                                        session.setAttribute("text", "Error creating user");
+                                        ps.close();
+                                        forward(request, response, "/CreateUser.jsp");
                                    }    
                              
+                               session.setAttribute("text", ""+i);
                                ps.close();
-                               forward(request, response, "/index.html");        
+                               forward(request, response, "/CreateUser.jsp");        
                             } 
                            
                        catch (SQLException e) 
                        {
                            Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "new user");
-                           forward(request, response, "/index.html"); 
+                           session.setAttribute("text", "" +e);
+                           forward(request, response, "/CreateUser.jsp"); 
                        }
       
                    break;
