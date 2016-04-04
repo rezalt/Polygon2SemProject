@@ -1,7 +1,10 @@
 body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
+   background: url("http://i.imgur.com/HgflTDf.jpg") 50% fixed;
+  background-size: cover;
 }
+
 
 @keyframes spinner {
   0% {
@@ -117,6 +120,6 @@ footer {
   font-size: 0.8em;
 }
 footer a, footer a:link {
-  color: #fff;
+  color: black;
   text-decoration: none;
 }

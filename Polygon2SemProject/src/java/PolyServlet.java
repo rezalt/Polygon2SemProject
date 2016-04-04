@@ -160,8 +160,14 @@ public class PolyServlet extends HttpServlet
 
                    case "NewUser":
 
-   
-                       ID = 1;
+                       
+                       if( request.getParameter("Username").isEmpty() || request.getParameter("Password").isEmpty() )
+                       {
+
+                            session.setAttribute("text", "You need to enter a username and password.");
+                                forward(request, response, "/CreateUser.jsp");
+                       }
+
                        conn = DBC.getConnection();
                        PreparedStatement ps = null;
 
@@ -173,30 +179,28 @@ public class PolyServlet extends HttpServlet
                            st.executeQuery("SELECT userid, name FROM user");
                            ResultSet rs = st.getResultSet();
 
-       
                            while(rs.next())
                            {
-                               
-                               
+
                                if( rs.getString("name").equals(request.getParameter("Username")))
                                {
                                    
-                                   session.setAttribute("text", "User already exists");
+                                    session.setAttribute("text", "Username already exists");
                                         st.close();
                                         forward(request, response, "/CreateUser.jsp");
                                }
+
                                
-                               ID = rs.getInt("userid") + 1; // Sørger for at den nye user har sit eget ID.
                            }
                             // Makes sure we don't show a meaningless error messages.
                                 session.setAttribute("text", " ");
                                 st.close(); 
+                                
                            // Her indsætter vi vores nye user ind i databasen.
-                               ps = conn.prepareStatement("insert into user(userId,name,password) values(?,?,?)");
+                               ps = conn.prepareStatement("insert into user(name,password) values(?,?)");
 
-                               ps.setInt(1, ID);
-                               ps.setString( 2, request.getParameter("Username") ); 
-                               ps.setString( 3, request.getParameter("Password") ); 
+                               ps.setString( 1, request.getParameter("Username") ); 
+                               ps.setString( 2, request.getParameter("Password") ); 
 
                                 
 
@@ -211,10 +215,9 @@ public class PolyServlet extends HttpServlet
                                         ps.close();
                                         forward(request, response, "/CreateUser.jsp");
                                    }    
-                             
-                               session.setAttribute("text", ""+i);
+                               
                                ps.close();
-                               forward(request, response, "/CreateUser.jsp");        
+                               forward(request, response, "/index.html");        
                             } 
                            
                        catch (SQLException e) 

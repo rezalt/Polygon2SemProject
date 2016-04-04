@@ -16,12 +16,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-       
+       <body background=color: black;>
          <div class="wrapper">  
-   
+             
             <h1>Hello and welcome, please insert your user settings.</h1>
       
-            <form class="login" NAME="form1" action="PolyServlet" method="POST">
+            <form class="login" NAME="form1" action="PolyServlet" method="POST"> <img src="Logo.JPG" alt="Logo"> <br>
                     <input type="hidden" name="user" value="" />
                     <p class="title">Create user</p>
                         <input type="text" placeholder="Username" name="Username"  autofocus/>
