@@ -57,9 +57,9 @@ public class PolyServlet extends HttpServlet
             
         super.init(conf);
         
-        DBC.setDbURL("jdbc:mysql://localhost:3306/WriteNameHereDoods");
-        DBC.setDbUsername("root");
-        DBC.setDbPassword("");
+        DBC.setDbURL("jdbc:mysql://91.100.100.141:3360/polygondb");
+        DBC.setDbUsername("Admin");
+        DBC.setDbPassword("CBAmoria");
 
     }  
     /**
@@ -107,7 +107,7 @@ public class PolyServlet extends HttpServlet
     {
         HttpSession session = request.getSession(true);
         
-        String do_this = request.getParameter("do_this");     
+        String do_this = request.getParameter("user");     
         
         if (do_this == null)
         {
@@ -127,12 +127,12 @@ public class PolyServlet extends HttpServlet
                        }
                        else
                        {
-                           String sql = "SELECT * FROM users WHERE username =? and password =?";
+                           String sql = "SELECT * FROM user WHERE name =? and password =?";
                            try (PreparedStatement ps = conn.prepareStatement(sql))
                            {
 
-                               ps.setString( 1, request.getParameter("Username") );
-                               ps.setString( 2, request.getParameter("Password") );
+                               ps.setString( 1, request.getParameter("name") );
+                               ps.setString( 2, request.getParameter("password") );
                                ResultSet rs = ps.executeQuery();
 
                                    if(rs.next())
@@ -160,38 +160,48 @@ public class PolyServlet extends HttpServlet
 
                    case "NewUser":
 
-                       ID = 0;
+                       ID = 1;
                        conn = DBC.getConnection();
                        PreparedStatement ps = null;
 
                        try (Statement st = conn.createStatement()) 
                        {
                            // Creating a user                      
-                           st.executeQuery("SELECT userid, username FROM users");
+                           st.executeQuery("SELECT userid, name FROM user");
                            ResultSet rs = st.getResultSet();
 
                            while(rs.next())
                            {
-                               ID = rs.getInt("userID") + 1; // Sørger for at den nye user har sit eget ID.
-
-                               if( rs.getString("username").equals(request.getParameter("Username")))
+                               ID = rs.getInt("userId") + 1; // Sørger for at den nye user har sit eget ID.
+                               
+                               if( request.getParameter("Username").isEmpty() || request.getParameter("Password").isEmpty())
                                {
-                                   //besked
-                                   st.close();
-                                     forward(request, response, "/index.html");
+                                    session.setAttribute("text", "You need to enter a username and password.");
+                                        st.close();
+                                        forward(request, response, "/CreateUser.jsp");
                                }
+                               
+                               if( rs.getString("name").equals(request.getParameter("Username")))
+                               {
+                                   
+                                   session.setAttribute("text", "User already exists");
+                                        st.close();
+                                        forward(request, response, "/CreateUser.jsp");
+                               }
+                               
+                               // Makes sure we don't show a meaningless error messages.
+                               session.setAttribute("text", " ");
 
                            }
 
-
                            // Her indsætter vi vores nye user ind i databasen.
-                               ps = conn.prepareStatement("insert into users(userID,Username,Password) values(?,?,?)");
+                               ps = conn.prepareStatement("insert into user(userId,name,password) values(?,?,?)");
 
                                ps.setInt(1, ID);
                                ps.setString( 2, request.getParameter("Username") ); 
                                ps.setString( 3, request.getParameter("Password") ); 
 
-                               st.close();   
+                                
 
                                int i = ps.executeUpdate();
                                if( i > 0 )
@@ -202,10 +212,11 @@ public class PolyServlet extends HttpServlet
                                    {
                                        //besked
                                    }    
-
+                               st.close();  
                                ps.close();
                                forward(request, response, "/index.html");        
-                       } 
+                            } 
+                           
                        catch (SQLException e) 
                        {
                            Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "new user");

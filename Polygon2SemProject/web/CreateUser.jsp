@@ -24,10 +24,18 @@
             <form class="login" NAME="form1" action="PolyServlet" method="POST">
                     <input type="hidden" name="user" value="" />
                     <p class="title">Create user</p>
-                        <input type="text" placeholder="Username" autofocus/>
+                        <input type="text" placeholder="Username" name="Username"  autofocus/>
                         <i class="fa fa-user"></i>
-                        <input type="password" placeholder="Password" />
+                        <input type="password" placeholder="Password" name="Password" />
                         <i class="fa fa-key"></i>
+                        <%
+                        String text = (String)session.getAttribute("text");
+                            if(text==null)
+                            {
+                              session.setAttribute("text", "");
+                            }
+                         %>
+                        <%=session.getAttribute("text")%>
                         <button type="submit" onclick="myFunction()">
                           <i class="spinner"></i>
                           <span class="state">Submit</span> 
