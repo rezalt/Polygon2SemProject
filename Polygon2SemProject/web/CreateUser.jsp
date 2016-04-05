@@ -20,7 +20,7 @@
              
             <h1>Hello and welcome, please insert your user settings.</h1>
       
-            <form class="login" NAME="form1" action="PolyServlet" method="POST"> <img src="Logo.JPG" alt="Logo">
+            <form class="login" NAME="form1" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
                     <input type="hidden" name="user" value="" />
                     <p class="title">Create user</p>
                         <input type="text" placeholder="Username" name="Username"  autofocus/>
@@ -35,27 +35,31 @@
                             }
                          %>
                         <%=session.getAttribute("text")%>
-                        <table>
-                            <tr>
-                                <td>
-                                    <button type="submit" id="button1" value="NewUser">
-                                    Submit
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <button type="submit" id="button2" value="Login">
-                                    Login
-                                    </button>
-                                </td>
-                            </tr>
-                        </table>
+                     
+                        <button type="submit" id="button1" value="NewUser" onclick="myFunction()">
+                        Submit
+                        </button>
+
+                        <button type="submit" id="button2" value="Login" onclick="myFunction2()">
+                        Login
+                        </button>
+                                
                 </form>
 
               <footer><a target="blank"> Gruppe 4 - A </a></footer>
               </p>
         </div> 
-
+                        
+             <script>
+             function myFunction() 
+             {
+                 document.form1.user.value='NewUser';
+             }
+             function myFunction2() 
+             {
+                 document.form1.user.value='Login';
+             }
+         </script>
+         
     </body>
 </html>

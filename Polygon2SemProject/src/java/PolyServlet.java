@@ -130,24 +130,21 @@ public class PolyServlet extends HttpServlet
                        
                        conn = DBC.getConnection();
 
-                       if(request.getParameter("Username").equals("") || request.getParameter("Password").equals("") )
-                       {
-                           forward(request, response, "/index.html");
-                       }
-                       else
                        {
                            String sql = "SELECT * FROM user WHERE name =? and password =?";
                            try (PreparedStatement ps = conn.prepareStatement(sql))
                            {
 
-                               ps.setString( 1, request.getParameter("name") );
-                               ps.setString( 2, request.getParameter("password") );
+                               ps.setString( 1, request.getParameter("Username") );
+                               ps.setString( 2, request.getParameter("Password") );
                                ResultSet rs = ps.executeQuery();
 
                                    if(rs.next())
                                    {
                                      //  session.setAttribute("user", UB);  -- Bean doesn't exist yet.
-                                       myID = rs.getInt("userID");                                                     
+                                       myID = rs.getInt("userId");   
+                                       ps.close();
+                                       forward(request, response, "/CreateBuilding.jsp");
                                    }
                                    else
                                    {
@@ -155,7 +152,7 @@ public class PolyServlet extends HttpServlet
                                    }
 
                                ps.close();
-                               forward(request, response, "/CreateBuilding.jsp");
+                               forward(request, response, "/index.html");
 
                            }
                            catch(Exception e)
@@ -226,7 +223,7 @@ public class PolyServlet extends HttpServlet
                                    }    
                                
                                ps.close();
-                               forward(request, response, "/index.html");        
+                               forward(request, response, "/CreateBuilding.jsp");        
                             } 
                            
                        catch (SQLException e) 
