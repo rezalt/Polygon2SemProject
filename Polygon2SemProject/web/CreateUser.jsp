@@ -53,11 +53,11 @@
              <script>
              function myFunction() 
              {
-                 document.form1.user.value='NewUser';
+                document.form1.user.value='NewUser';
              }
              function myFunction2() 
              {
-                 document.form1.user.value='Login';
+                document.form1.user.value='Login';
              }
          </script>
          
