@@ -32,7 +32,7 @@ body {
   border-radius: 2px 2px 5px 5px;
   padding: 10px 20px 20px 20px;
   width: 90%;
-  max-width: 320px;
+  max-width: 420px;
   background: #ffffff;
   position: relative;
   padding-bottom: 80px;
@@ -62,7 +62,7 @@ body {
   outline: none;
   color: #444;
   border-color: #2196F3;
-  border-left-width: 35px;
+  border-left-width: 15px;
 }
 .login input:focus + i.fa {
   opacity: 1;

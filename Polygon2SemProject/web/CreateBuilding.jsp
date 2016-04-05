@@ -5,105 +5,66 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
+        
+        <link href="<c:url value="/Resources/Building/building.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         
-        <style>
-        label
-        {
-            display: inline-block;
-            float: left;
-            clear: left;
-            width: 125px;
-            text-align: left;
-        }
-        
-        input 
-        {
-            display: inline-block;
-            float: left;
-        }
-        
-        .container 
-        {
-            position: relative;
-            width:500px;
-            margin:0 auto;
-            margin-left: 25px;
-            padding:5px;
-            border:3px solid #02AEF0;
-            background:#ffffff; 
-            height:400px;
-        }
-        
-        div.inside
-        {
-            margin:0 0 0 0;
-            margin-left: 82px;
-            padding:10px 5px 10px 5px;
-            width:320px;
-            border:1px solid #02AEF0;
-        }
-        
-         </style>
-         
-         
     </head>
     <body>
         
-        <div class="container">
+        <div class="wrapper">
       
             
                 <h1>
-                    <img src="Logo.JPG" alt="Logo"> <br>
                     Please insert building info.
                 </h1>
 
-            <div class="inside"
-            
-                <form action="PolyServlet" method="post">
+                <form class="login" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
+                   
+                    <p class="title">Create building</p>
                     <table border="0">
                         <tr>  
                             <td>
-                                <label>Name:</label>
-                                <input type="text" name="buildingName">
+                                <input type="text" placeholder="Building name" name="buildingName">
+                            </td>                       
+                            <td>
+                                <input type="text" placeholder="Owner" name="buildingOwner">
                             </td>
                         </tr>
                         <tr>  
                             <td>
-                                <label>Owner:</label>
-                                <input type="text" name="buildingOwner">
+                                <input type="text" placeholder="Address" name="address">
+                            </td>
+                            <td>
+                                <input type="number" placeholder="Zipcode" name="Zip">
+                            </td>
+                        </tr>
+                        <tr>  
+                             <td>
+                                <input type="number" placeholder="ParcelNo" name="parcelNo">
+                            </td>
+                            <td>
+                                <input type="number" placeholder="buildingCondition" name="buildingCondition" min="0" max="4">
                             </td>
                         </tr>
                         <tr>  
                             <td>
-                                <label>Address:</label>
-                                <input type="text" name="address">
+                                <button type="submit" name="submit" value="CREATE">
+                                    <i class="spinner"></i>
+                                    <span class="state">Submit</span>                  
                             </td>
                         </tr>
-                        <tr>  
-                            <td>
-                                <label>ParcelNo:</label>
-                                <input type="text" name="parcelNo">
-                            </td>
-                        </tr>
-                        <tr>  
-                            <td>
-                                <label>Condition:</label>
-                                <input type="text" name="buildingCondition">
-                            </td>
-                        </tr>
-                        <tr>  
-                            <td>
-                                <input type="submit" name="submit" value="CREATE">
-                            </td>
-                        </tr>
+                    </table>  
                 </form>
-            </div>
+                   <footer><a target="blank"> Gruppe 4 - A </a></footer>
+                </p>
+                  
         </div> 
-
+          
     </body>
 </html>

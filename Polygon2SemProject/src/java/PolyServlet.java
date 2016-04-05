@@ -146,7 +146,7 @@ public class PolyServlet extends HttpServlet
                                    }
 
                                ps.close();
-                               forward(request, response, "/index.html");
+                               forward(request, response, "/CreateBuilding.jsp");
 
                            }
                            catch(Exception e)
