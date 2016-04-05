@@ -35,23 +35,27 @@
                             }
                          %>
                         <%=session.getAttribute("text")%>
-                        <button type="submit" onclick="myFunction()">
-                          <i class="spinner"></i>
-                          <span class="state">Submit</span> 
-                        </button>
+                        <table>
+                            <tr>
+                                <td>
+                                    <button type="submit" id="button1" value="NewUser">
+                                    Submit
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button type="submit" id="button2" value="Login">
+                                    Login
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
                 </form>
 
               <footer><a target="blank"> Gruppe 4 - A </a></footer>
               </p>
         </div> 
-
-        
-        <script>
-            function myFunction() 
-            {
-                document.form1.user.value='NewUser';
-            }
-        </script>
 
     </body>
 </html>

@@ -119,6 +119,15 @@ public class PolyServlet extends HttpServlet
 
                    case "Login":
 
+                       
+                       if( request.getParameter("Username").isEmpty() || request.getParameter("Password").isEmpty() )
+                       {
+
+                            session.setAttribute("text", "You need to enter a username and password.");
+                                forward(request, response, "/CreateUser.jsp");
+                       }
+                       
+                       
                        conn = DBC.getConnection();
 
                        if(request.getParameter("Username").equals("") || request.getParameter("Password").equals("") )
