@@ -120,7 +120,7 @@ public class buildingServlet extends HttpServlet
                    case "create":
 
                        
-                       if( request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty() )
+                       if( request.getParameter("name").isEmpty() || request.getParameter("address").isEmpty() )
                        {
 
                             session.setAttribute("text", "You need to fill out all the fields.");
@@ -135,13 +135,13 @@ public class buildingServlet extends HttpServlet
                        {
                            
                            // Creating a building                     
-                           st.executeQuery("SELECT name FROM building");
+                           st.executeQuery("SELECT id, name FROM building");
                            ResultSet rs = st.getResultSet();
 
                            while(rs.next())
                            {
 
-                               if( rs.getString("name").equals(request.getParameter("buildingName")))
+                               if( rs.getString("name").equals(request.getParameter("name")))
                                {
                                    
                                     session.setAttribute("text", "Building already exists");
@@ -151,22 +151,22 @@ public class buildingServlet extends HttpServlet
 
                                
                            }
-                            // Makes sure we don't show a meaningless error messages.
+                            // Makes sure we don't show a meaningless error message.
                                 session.setAttribute("text", " ");
                                 st.close(); 
                                 
                            // Inserting our new building to the database.
-                               ps1 = conn.prepareStatement("insert into building(id, name, address, condition, owner, parcelNo) values(?,?,?,?,?,?)");
+                               ps1 = conn.prepareStatement("insert into building(name, address, condition, owner, parcelNr, Size, Zipcode) values(?,?,?,?,?,?,?)");
 
-                               ps1.setString( 1, request.getParameter("id") ); 
-                               ps1.setString( 2, request.getParameter("buildingName") );
-                               ps1.setString( 3, request.getParameter("address") );
-                               ps1.setString( 4, request.getParameter("buildingCondition") );
-                               ps1.setString( 5, request.getParameter("buildingOwner") );
-                               ps1.setString( 6, request.getParameter("parcelNo") );
+                               ps1.setString( 1, request.getParameter("name") );
+                               ps1.setString( 2, request.getParameter("address") );
+                               ps1.setInt( 3, Integer.parseInt(request.getParameter("condition") ));
+                               ps1.setString( 4, request.getParameter("owner") );
+                               ps1.setInt( 5, Integer.parseInt(request.getParameter("parcelNr") ) );
+                               ps1.setInt( 6, Integer.parseInt(request.getParameter("Size") ) );
+                               ps1.setInt( 7, Integer.parseInt(request.getParameter("Zipcode") ) );
 
                                 
-
                                int i = ps1.executeUpdate();
                                if( i > 0 )
                                {
