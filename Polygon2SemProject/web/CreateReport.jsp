@@ -19,14 +19,12 @@
         
         <div class="wrapper">
       
-            
                 <h1>
                     Please fill the report.
                 </h1>
 
-                <form class="login" action="PolyServlet" method="POST"> <img src="Logo.JPG" id="Image1" alt="Logo">  <img src="SB.JPG" id="Image2" alt="SB">
-                    
-
+                <form class="login" name="form2" action="reportServlet" method="POST"> <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
+                       <input type="hidden" name="report" value="" />
                     <p class="title">
                         
                     <table id="rTable0">
@@ -56,8 +54,7 @@
                             <td>
                                 <input type="text" placeholder="Adresse" name="address">
                             </td>
-                            <td>
-
+                            <td>            
                             </td>
                             <td>
                                 <label id="smallFont">
@@ -660,7 +657,7 @@
                     <table>
                         <tr>  
                             <td>
-                                <button type="submit" name="submit" value="CREATE">
+                                <button type="submit" name="submit" value="create" onclick="myFunction()">
                                     <i class="spinner"></i>
                                     <span class="state">Submit</span>                  
                             </td>
@@ -687,5 +684,14 @@ Den bygningsansvarlige skal udlevere plantegning over bygningen inden bygningsge
                   
         </div> 
           
+        
+        <script>
+             function myFunction() 
+             {
+                 document.form3.report.value='create';
+             }
+         </script>
+         
+        
     </body>
 </html>
