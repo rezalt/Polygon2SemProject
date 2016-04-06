@@ -61,6 +61,7 @@ public class Report
         Room tempRoom = new Room(roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage, repairs, moisture, sponge, mold, fire, otherDamage, moistureDesctription, spongeDescription, moldDescription, fireDescription, otherDamageDescription);
         rooms.add(tempRoom);
     }
+    
 
     public int getReportId()
     {
