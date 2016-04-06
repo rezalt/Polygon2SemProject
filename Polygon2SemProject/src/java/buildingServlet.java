@@ -51,7 +51,7 @@ public class buildingServlet extends HttpServlet
             }
             catch (ClassNotFoundException ex) 
             {
-                Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, ex );
+                Logger.getLogger(buildingServlet.class.getName()).log(Level.SEVERE, null, ex );
             }
       
             
@@ -120,12 +120,13 @@ public class buildingServlet extends HttpServlet
                    case "create":
 
                        
-                       if( request.getParameter("name").isEmpty() || request.getParameter("address").isEmpty() )
+                       if( request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty() )
                        {
 
                             session.setAttribute("text", "You need to fill out all the fields.");
                                 forward(request, response, "/CreateBuilding.jsp");
                        }
+        
 
                        conn = DBC.getConnection();
                        PreparedStatement ps1 = null;
@@ -135,13 +136,13 @@ public class buildingServlet extends HttpServlet
                        {
                            
                            // Creating a building                     
-                           st.executeQuery("SELECT id, name FROM building");
+                           st.executeQuery("SELECT buildingId, buildingName FROM building");
                            ResultSet rs = st.getResultSet();
 
                            while(rs.next())
                            {
 
-                               if( rs.getString("name").equals(request.getParameter("name")))
+                               if( rs.getString("buildingName").equals(request.getParameter("buildingName")))
                                {
                                    
                                     session.setAttribute("text", "Building already exists");
@@ -156,12 +157,13 @@ public class buildingServlet extends HttpServlet
                                 st.close(); 
                                 
                            // Inserting our new building to the database.
-                               ps1 = conn.prepareStatement("insert into building(name, address, condition, owner, parcelNr, size, zipcode) values(?,?,?,?,?,?,?)");
+                               ps1 = conn.prepareStatement("insert into building(buildingName, address, buildingCondition, buildingOwner, parcelNr, size, zipcode) values(?,?,?,?,?,?,?)");
 
-                               ps1.setString(1, request.getParameter("name") );
+                               
+                               ps1.setString(1, request.getParameter("buildingName") );
                                ps1.setString( 2, request.getParameter("address") );
-                               ps1.setInt( 3, Integer.parseInt(request.getParameter("condition") ));
-                               ps1.setString( 4, request.getParameter("owner") );
+                               ps1.setInt( 3, Integer.parseInt(request.getParameter("buildingCondition") ));
+                               ps1.setString( 4, request.getParameter("buildingOwner") );
                                ps1.setInt( 5, Integer.parseInt(request.getParameter("parcelNr") ) );
                                ps1.setInt( 6, Integer.parseInt(request.getParameter("Size") ) );
                                ps1.setInt( 7, Integer.parseInt(request.getParameter("Zipcode") ) );
@@ -185,7 +187,7 @@ public class buildingServlet extends HttpServlet
                            
                        catch (SQLException e) 
                        {
-                           Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "new building");
+                           Logger.getLogger(buildingServlet.class.getName()).log(Level.SEVERE, null, e + "new building");
                            session.setAttribute("text", "" +e);
                            forward(request, response, "/CreateBuilding.jsp"); 
                        }

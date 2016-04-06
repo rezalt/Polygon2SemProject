@@ -30,7 +30,7 @@
                     <table border="0">
                         <tr>  
                             <td>
-                                <input type="text" placeholder="Building name" name="name">
+                                <input type="text" placeholder="Building name" name="buildingName">
                             </td>                       
                             <td>
                                 <input type="text" placeholder="Address" name="address">
@@ -38,10 +38,10 @@
                         </tr>
                         <tr>  
                             <td>
-                                <input type="number" placeholder="buildingCondition" name="condition" min="0" max="3">
+                                <input type="number" placeholder="buildingCondition" name="buildingCondition" min="0" max="3">
                             </td>
                             <td>
-                                <input type="text" placeholder="Owner" name="owner">
+                                <input type="text" placeholder="Owner" name="buildingOwner">
                             </td>
                         </tr>
                         <tr>  
