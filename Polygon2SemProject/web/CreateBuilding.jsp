@@ -30,46 +30,61 @@
                     <table border="0">
                         <tr>  
                             <td>
-                                <input type="text" placeholder="Building name" name="buildingName">
+                                <input type="text" placeholder="Building name" name="name">
                             </td>                       
                             <td>
-                                <input type="text" placeholder="Owner" name="buildingOwner">
+                                <input type="text" placeholder="Address" name="address">
                             </td>
                         </tr>
                         <tr>  
                             <td>
-                                <input type="text" placeholder="Address" name="address">
+                                <input type="number" placeholder="buildingCondition" name="condition" min="0" max="3">
                             </td>
                             <td>
-                                <input type="number" placeholder="Zipcode" name="Zip">
+                                <input type="text" placeholder="Owner" name="owner">
                             </td>
                         </tr>
                         <tr>  
                              <td>
-                                <input type="number" placeholder="ParcelNo" name="parcelNo">
+                                <input type="number" placeholder="parcelNr" name="parcelNr">
                             </td>
                             <td>
-                                <input type="number" placeholder="buildingCondition" name="buildingCondition" min="0" max="4">
+                                <input type="number" placeholder="Size in m3" name="Size">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" placeholder="Zipcode" name="Zipcode">
                             </td>
                         </tr>
                         <tr>  
                             <td>
-                                <button type="submit" name="submit" value="create" onclick="myFunction()">
+                                <button type="submit" id="button3" value="create" onclick="myFunction()">
                                     <i class="spinner"></i>
-                                    <span class="state">Submit</span>                  
+                                    <span class="state">Submit</span> 
+                                 </button> 
                             </td>
                         </tr>
                     </table>  
-                        </button>                </form>
+                                     
+                   </form>
                    <footer><a target="blank"> Gruppe 4 - A </a></footer>
                 </p>
                   
+                        <%
+                        String text = (String)session.getAttribute("text");
+                            if(text==null)
+                            {
+                              session.setAttribute("text", "");
+                            }
+                         %>
+                        <%=session.getAttribute("text")%>
         </div> 
           
         <script>
              function myFunction() 
              {
-                 document.form1.user.value='create';
+                 document.form2.building.value='create';
              }
          </script>
     </body>

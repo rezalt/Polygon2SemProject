@@ -8,9 +8,21 @@
             <param-value>com.mysql.jdbc.Driver</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>buildingServlet</servlet-name>
+        <servlet-class>buildingServlet</servlet-class>
+                <init-param>
+            <param-name>jdbcDriver</param-name>
+            <param-value>com.mysql.jdbc.Driver</param-value>
+        </init-param>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PolyServlet</servlet-name>
         <url-pattern>/PolyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>buildingServlet</servlet-name>
+        <url-pattern>/buildingServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
