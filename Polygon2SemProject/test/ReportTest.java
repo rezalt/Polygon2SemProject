@@ -72,9 +72,15 @@ public class ReportTest
         
     
         instance.addRoom(roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage, repairs, moisture, sponge, mold, fire, otherDamage, moistureDesctription, spongeDescription, moldDescription, fireDescription, otherDamageDescription);
-        // TODO review the generated test code and remove the default call to fail.
-        System.out.println(instance.getRooms().get(0).getFire());
+       System.out.println(instance.getRooms().get(0).getFire());
         assertEquals(instance.getRooms().get(0).getFire(), true);
+        
+        fire=false;
+        
+        instance.addRoom(roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage, repairs, moisture, sponge, mold, fire, otherDamage, moistureDesctription, spongeDescription, moldDescription, fireDescription, otherDamageDescription);
+
+        System.out.println(instance.getRooms().get(1).getFire());
+        assertEquals(instance.getRooms().get(1).getFire(), false);
     }
 
     /**
