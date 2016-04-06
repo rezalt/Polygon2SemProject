@@ -24,8 +24,8 @@
                     Please insert building info.
                 </h1>
 
-                <form class="login" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
-                   
+                <form class="login" name="form2" action="buildingServlet" method="get"> <img src="Logo.JPG" alt="Logo">
+                   <input type="hidden" name="building" value="" />
                     <p class="title">Create building</p>
                     <table border="0">
                         <tr>  
@@ -54,17 +54,23 @@
                         </tr>
                         <tr>  
                             <td>
-                                <button type="submit" name="submit" value="CREATE">
+                                <button type="submit" name="submit" value="create" onclick="myFunction()">
                                     <i class="spinner"></i>
                                     <span class="state">Submit</span>                  
                             </td>
                         </tr>
                     </table>  
-                </form>
+                        </button>                </form>
                    <footer><a target="blank"> Gruppe 4 - A </a></footer>
                 </p>
                   
         </div> 
           
+        <script>
+             function myFunction() 
+             {
+                 document.form1.user.value='create';
+             }
+         </script>
     </body>
 </html>
