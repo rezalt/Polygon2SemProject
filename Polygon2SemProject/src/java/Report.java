@@ -34,7 +34,7 @@ public class Report
     String coWriter;
     int condition;
 
-    public Report(int reportId, String nameOfBuilding, String date, String adress, String zipCode, String yearBuild, int buildingSizeInSquareMetres, String buildingPurpose, Boolean roofNoticeBoolean, Boolean roofPictureBoolean, String roofNotice, Boolean wallNoticeBoolean, Boolean wallPictureBoolean, String wallNotice, ArrayList<Room> rooms, String writer, String coWriter, int condition)
+    public Report(int reportId, String nameOfBuilding, String date, String adress, String zipCode, String yearBuild, int buildingSizeInSquareMetres, String buildingPurpose, Boolean roofNoticeBoolean, Boolean roofPictureBoolean, String roofNotice, Boolean wallNoticeBoolean, Boolean wallPictureBoolean, String wallNotice, String writer, String coWriter, int condition)
     {
         this.reportId = reportId;
         this.nameOfBuilding = nameOfBuilding;
@@ -50,7 +50,8 @@ public class Report
         this.wallNoticeBoolean = wallNoticeBoolean;
         this.wallPictureBoolean = wallPictureBoolean;
         this.wallNotice = wallNotice;
-        this.rooms = rooms;
+        rooms= new ArrayList();
+
         this.writer = writer;
         this.coWriter = coWriter;
         this.condition = condition;

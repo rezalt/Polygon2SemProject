@@ -68,7 +68,7 @@ public class ReportTest
         String fireDescription = "";
         String otherDamageDescription = "";
         ArrayList<Room> rooms = new ArrayList();
-        Report instance = new Report(1, "john", "23", "23e", "4000", "2000", 123, "johnbuildin", false, false, "roofnotice", false, false, "no", rooms, "johnbørge", null, 2);
+        Report instance = new Report(1, "john", "23", "23e", "4000", "2000", 123, "johnbuildin", false, false, "roofnotice", false, false, "no", "johnbørge", null, 2);
         
     
         instance.addRoom(roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage, repairs, moisture, sponge, mold, fire, otherDamage, moistureDesctription, spongeDescription, moldDescription, fireDescription, otherDamageDescription);
