@@ -33,6 +33,28 @@ public class Report
     String writer;
     String coWriter;
     int condition;
+
+    public Report(int reportId, String nameOfBuilding, String date, String adress, String zipCode, String yearBuild, int buildingSizeInSquareMetres, String buildingPurpose, Boolean roofNoticeBoolean, Boolean roofPictureBoolean, String roofNotice, Boolean wallNoticeBoolean, Boolean wallPictureBoolean, String wallNotice, ArrayList<Room> rooms, String writer, String coWriter, int condition)
+    {
+        this.reportId = reportId;
+        this.nameOfBuilding = nameOfBuilding;
+        this.date = date;
+        this.adress = adress;
+        this.zipCode = zipCode;
+        this.yearBuild = yearBuild;
+        this.buildingSizeInSquareMetres = buildingSizeInSquareMetres;
+        this.buildingPurpose = buildingPurpose;
+        this.roofNoticeBoolean = roofNoticeBoolean;
+        this.roofPictureBoolean = roofPictureBoolean;
+        this.roofNotice = roofNotice;
+        this.wallNoticeBoolean = wallNoticeBoolean;
+        this.wallPictureBoolean = wallPictureBoolean;
+        this.wallNotice = wallNotice;
+        this.rooms = rooms;
+        this.writer = writer;
+        this.coWriter = coWriter;
+        this.condition = condition;
+    }
     
     public void addRoom(String roomName, Boolean notices, Boolean damagedRoom, String dateOfDamage, String descriptionOfLocation, String explanationOfDamage, String repairs, Boolean moisture, Boolean sponge, Boolean mold, Boolean fire, Boolean otherDamage, String moistureDesctription, String spongeDescription, String moldDescription, String fireDescription, String otherDamageDescription)
     {
