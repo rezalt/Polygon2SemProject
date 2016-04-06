@@ -156,9 +156,9 @@ public class buildingServlet extends HttpServlet
                                 st.close(); 
                                 
                            // Inserting our new building to the database.
-                               ps1 = conn.prepareStatement("insert into building(name, address, condition, owner, parcelNr, Size, Zipcode) values(?,?,?,?,?,?,?)");
+                               ps1 = conn.prepareStatement("insert into building(name, address, condition, owner, parcelNr, size, zipcode) values(?,?,?,?,?,?,?)");
 
-                               ps1.setString( 1, request.getParameter("name") );
+                               ps1.setString(1, request.getParameter("name") );
                                ps1.setString( 2, request.getParameter("address") );
                                ps1.setInt( 3, Integer.parseInt(request.getParameter("condition") ));
                                ps1.setString( 4, request.getParameter("owner") );
