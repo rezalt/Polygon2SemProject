@@ -220,20 +220,17 @@ public class reportServlet extends HttpServlet
                                    }    
                                
                                ps1.close();
-                            
-                           
-                                      
-                            
-                       
+
                             ps2 = conn.prepareStatement("insert into " 
                                + "room( roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage,"
-                               + "repairs, moisture, sponge, mold, fire, otherDamage, moistureDescription, spongeDescription, moldDescription,"
-                               + "fireDescription, otherDamageDescription)"
-                               + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                               + "repairs, moisture, sponge, mold, fire, otherDamage,"
+                               + "otherDamageDescription)"
+                               + " values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
                            
                                ps2.setString(1, request.getParameter("roomNr")) ;
                                ps2.setInt( 2, tryParse(request.getParameter("bemærkning")) );
                                ps2.setInt( 3, tryParse(request.getParameter("skadeJa")) );
+                              
                                try
                                     {
                                         date = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("skadeDato"));
@@ -242,6 +239,7 @@ public class reportServlet extends HttpServlet
                                         Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
                                     }
                                ps2.setDate(4, new java.sql.Date(date.getTime()) );
+                               
                                ps2.setString( 5, request.getParameter("skadeHvor")) ;
                                ps2.setString( 6, request.getParameter("hvadErDerSket")) ;
                                ps2.setString( 7, request.getParameter("HvadErReperaret")) ;
@@ -273,10 +271,9 @@ public class reportServlet extends HttpServlet
                              Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
                          }
     
-                      
+                      forward(request, response, "/CreateReport.jsp");   
                 break;
             }
-        processRequest(request, response);
     } // end of doPost
     
     
