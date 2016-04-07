@@ -167,7 +167,7 @@ public class reportServlet extends HttpServlet
                     
                                ps1.setInt( 1, tryParse(request.getParameter("rapportNr")) );
                                ps1.setString( 2, request.getParameter("buildingName"));
-                                    
+                               
                                Date date = null;
                                     try
                                     {
@@ -194,7 +194,11 @@ public class reportServlet extends HttpServlet
                                ps1.setString(17, request.getParameter("textSamarbejdeMed"));
                                ps1.setInt(18, tryParse(request.getParameter("tilstand0")) );
                              
-
+                                PreparedStatement ps2 = conn.prepareStatement("insert into " 
+                               + "room(roomId, roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage,"
+                               + "repairs, moisture, sponge, mold, fire, otherDamage, moistureDescription, spongeDescription, moldDescription,"
+                               + "fireDescription, otherDamageDescription)"
+                               + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                  
                                int i = ps1.executeUpdate();
                                if( i > 0 )
