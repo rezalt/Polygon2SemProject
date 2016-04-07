@@ -243,7 +243,7 @@ public class reportServlet extends HttpServlet
                                     }
                                ps2.setDate(4, new java.sql.Date(date.getTime()) );
                                ps2.setString( 5, request.getParameter("skadeHvor")) ;
-                               ps2.setString( 5, request.getParameter("hvadErDerSket")) ;
+                               ps2.setString( 6, request.getParameter("hvadErDerSket")) ;
                                ps2.setString( 7, request.getParameter("HvadErReperaret")) ;
                                ps2.setInt( 8, tryParse(request.getParameter("skadeFugt")) );
                                ps2.setInt( 9, tryParse(request.getParameter("skadeRåd")) );

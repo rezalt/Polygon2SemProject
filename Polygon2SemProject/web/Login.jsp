@@ -18,19 +18,15 @@
     <body>
          <div class="wrapper">  
              
-            <h1>Please fill out this user creation form.</h1>
+            <h1>Hello, and welcome.</h1>
       
             <form class="login" NAME="form1" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
                     <input type="hidden" name="user" value="" />
-                    <p class="title">Create user</p>
-                        <input type="text" placeholder="Brugernavn" name="Username"  autofocus/>
+                    <p class="title">Customer login</p>
+                        <input type="text" placeholder="Username" name="Username"  autofocus/>
                         <i class="fa fa-user"></i>
-                        <input type="password" placeholder="Adgangskode" name="Password" />
+                        <input type="password" placeholder="Password" name="Password" />
                         <i class="fa fa-key"></i>
-                        <input type="text" placeholder="Firmanavn" name="companyName" />
-                        <input type="text" placeholder="Adresse" name="companyAddress" />
-                        <input type="number" placeholder="Postnr." name="Zip" />
-                        
                         <%
                         String text = (String)session.getAttribute("text");
                             if(text==null)
@@ -39,20 +35,21 @@
                             }
                          %>
                         <%=session.getAttribute("text")%>
-                     
-                        <button type="submit" id="button1" value="NewUser" onclick="myFunction()">
-                        Submit
-                        </button>             
-             </form>
+                    
+                        <button type="submit" id="button1" value="Login" onclick="myFunction()">
+                        Login
+                        </button>
+                                
+                </form>
 
-        <footer><a target="blank"> Gruppe 4 - A </a></footer>
+              <footer><a target="blank"> Gruppe 4 - A </a></footer>
               </p>
-        </div>
+        </div> 
                         
              <script>
              function myFunction() 
              {
-                document.form1.user.value='NewUser';
+                document.form1.user.value='Login';
              }
          </script>
          

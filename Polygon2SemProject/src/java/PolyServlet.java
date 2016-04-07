@@ -204,12 +204,16 @@ public class PolyServlet extends HttpServlet
                                 st.close(); 
                                 
                            // Her indsætter vi vores nye user ind i databasen.
-                               ps = conn.prepareStatement("insert into user(name,password) values(?,?)");
+                               ps = conn.prepareStatement("insert into user(name,password,"
+                                                        + "companyName,companyAddress,Zip) "
+                                                        + "values(?,?,?,?,?)");
 
                                ps.setString( 1, request.getParameter("Username") ); 
                                ps.setString( 2, request.getParameter("Password") ); 
+                               ps.setString( 3, request.getParameter("companyName") ); 
+                               ps.setString( 4, request.getParameter("companyAddress") ); 
+                               ps.setString( 5, request.getParameter("Zip") ); 
 
-                                
 
                                int i = ps.executeUpdate();
                                if( i > 0 )
@@ -224,7 +228,7 @@ public class PolyServlet extends HttpServlet
                                    }    
                                
                                ps.close();
-                               forward(request, response, "/CreateBuilding.jsp");        
+                               forward(request, response, "/index.html");        
                             } 
                            
                        catch (SQLException e) 
