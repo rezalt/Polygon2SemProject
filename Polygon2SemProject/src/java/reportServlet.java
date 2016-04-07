@@ -132,6 +132,8 @@ public class reportServlet extends HttpServlet
 
                        conn = DBC.getConnection();
                        PreparedStatement ps1 = null;
+                       PreparedStatement ps2 = null;
+                       
 
   
                        try (Statement st = conn.createStatement()) 
@@ -157,13 +159,24 @@ public class reportServlet extends HttpServlet
                             // Makes sure we don't show a meaningless error message.
                                 session.setAttribute("text", " ");
                                 st.close(); 
-                                
-                           // Inserting our new report to the database.
-                               ps1 = conn.prepareStatement("insert into "
-                                + "report(reportNr, nameOfBuilding, rDate, address, zipCode, yearBuild, buildingSizeInSquareMeters,"
-                                         + "buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean,"
-                                       + "wallPictureBoolean, WallNotice, roomId, writer, coWriter, buildingCondition)"
-                                + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                       }
+                        catch (SQLException e) 
+                       {
+                           Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, e + "new building");
+                           session.setAttribute("text", "" +e);
+                           forward(request, response, "/CreateReport.jsp"); 
+                       }
+        
+                            try
+                            {
+                                // Inserting our new report to the database.
+                                ps1 = conn.prepareStatement("insert into "
+                                        + "report(reportNr, nameOfBuilding, rDate, address, zipCode, yearBuild, buildingSizeInSquareMeters,"
+                                        + "buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean,"
+                                        + "wallPictureBoolean, WallNotice, roomId, writer, coWriter, buildingCondition)"
+                                        + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                           
+        
                     
                                ps1.setInt( 1, tryParse(request.getParameter("rapportNr")) );
                                ps1.setString( 2, request.getParameter("buildingName"));
@@ -193,13 +206,7 @@ public class reportServlet extends HttpServlet
                                ps1.setString(16, request.getParameter("textGenForetagetAf"));
                                ps1.setString(17, request.getParameter("textSamarbejdeMed"));
                                ps1.setInt(18, tryParse(request.getParameter("tilstand0")) );
-                             
-                                PreparedStatement ps2 = conn.prepareStatement("insert into " 
-                               + "room(roomId, roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage,"
-                               + "repairs, moisture, sponge, mold, fire, otherDamage, moistureDescription, spongeDescription, moldDescription,"
-                               + "fireDescription, otherDamageDescription)"
-                               + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-                 
+
                                int i = ps1.executeUpdate();
                                if( i > 0 )
                                {
@@ -213,23 +220,64 @@ public class reportServlet extends HttpServlet
                                    }    
                                
                                ps1.close();
-                               forward(request, response, "/CreateReport.jsp");        
-                            } 
+                            
                            
-                       catch (SQLException e) 
-                       {
-                           Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, e + "new building");
-                           session.setAttribute("text", "" +e);
-                           forward(request, response, "/CreateReport.jsp"); 
-                       }
-                        break;
+                                      
+                            
+                       
+                            ps2 = conn.prepareStatement("insert into " 
+                               + "room( roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage,"
+                               + "repairs, moisture, sponge, mold, fire, otherDamage, moistureDescription, spongeDescription, moldDescription,"
+                               + "fireDescription, otherDamageDescription)"
+                               + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                           
+                               ps2.setInt( 1, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 2, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 3, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 4, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 5, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 6, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 7, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 8, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 9, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 10, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 11, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 12, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 13, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 14, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 15, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 16, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 17, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setInt( 18, tryParse(request.getParameter("rapportNr")) );
+
+                               int i2 = ps2.executeUpdate();
+                               if( i2 > 0 )
+                               {
+                                  // UB.setUserName(username); -- Bean doesn't exist yet.
+                               }
+                                   else
+                                   {
+                                        session.setAttribute("text", "Error creating report");
+                                        ps2.close();
+                                        forward(request, response, "/CreateReport.jsp");
+                                   }    
+                               
+                               ps2.close();
+                               forward(request, response, "/CreateReport.jsp");        
+                         }     
+                        catch (SQLException ex)
+                         {
+                             Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+    
+                      
+                break;
             }
-        
         processRequest(request, response);
     } // end of doPost
     
     
-    private void forward(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException 
+    public  void forward(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException 
     {
         ServletContext sc = getServletContext();
         RequestDispatcher rd = sc.getRequestDispatcher(path);
