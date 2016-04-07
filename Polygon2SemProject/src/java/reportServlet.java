@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -20,6 +22,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
+
 
 /**
  *
@@ -28,9 +32,7 @@ import javax.servlet.http.HttpSession;
 public class reportServlet extends HttpServlet
 {
 
-    
-    
-    
+
         // VARIABLES
     String username = "";
     int myID = 0;
@@ -107,7 +109,7 @@ public class reportServlet extends HttpServlet
     {
         HttpSession session = request.getSession(true);
         
-        String do_this = request.getParameter("building");     
+        String do_this = request.getParameter("report");     
         
         if (do_this == null)
         {
@@ -120,10 +122,10 @@ public class reportServlet extends HttpServlet
                    case "create":
 
                        
-                       if( request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty() )
+                       if( request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty() || request.getParameter("dato").isEmpty() )
                        {
 
-                            session.setAttribute("text", "You need to fill out all the fields.");
+                            session.setAttribute("text", "You need to fill out name, address and date.");
                                 forward(request, response, "/CreateReport.jsp");
                        }
         
@@ -136,16 +138,16 @@ public class reportServlet extends HttpServlet
                        {
                            
                            // Creating a building                     
-                           st.executeQuery("SELECT buildingId, buildingName FROM building");
+                           st.executeQuery("SELECT reportId, reportNr FROM report");
                            ResultSet rs = st.getResultSet();
 
                            while(rs.next())
                            {
 
-                               if( rs.getString("buildingName").equals(request.getParameter("buildingName")))
+                               if( rs.getString("reportNr").equals(request.getParameter("rapportNr")))
                                {
-                                   
-                                    session.setAttribute("text", "Building already exists");
+                                  
+                                    session.setAttribute("text", "report  already exists");
                                         st.close();
                                         forward(request, response, "/CreateReport.jsp");
                                }
@@ -156,19 +158,44 @@ public class reportServlet extends HttpServlet
                                 session.setAttribute("text", " ");
                                 st.close(); 
                                 
-                           // Inserting our new building to the database.
-                               ps1 = conn.prepareStatement("insert into building(buildingName, address, buildingCondition, buildingOwner, parcelNr, size, zipcode) values(?,?,?,?,?,?,?)");
+                           // Inserting our new report to the database.
+                               ps1 = conn.prepareStatement("insert into "
+                                + "report(reportNr, nameOfBuilding, rDate, address, zipCode, yearBuild, buildingSizeInSquareMeters,"
+                                         + "buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean,"
+                                       + "wallPictureBoolean, WallNotice, roomId, writer, coWriter, buildingCondition)"
+                                + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    
+                               ps1.setInt( 1, tryParse(request.getParameter("rapportNr")) );
+                               ps1.setString( 2, request.getParameter("buildingName"));
+                                    
+                               Date date = null;
+                                    try
+                                    {
+                                        date = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("dato"));
+                                    } catch (ParseException ex)
+                                    {
+                                        Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                               ps1.setDate(3, new java.sql.Date(date.getTime()) );
+                              
+                               ps1.setString(4, request.getParameter("address"));
+                               ps1.setInt(5, tryParse(request.getParameter("Zip")) );
+                               ps1.setInt(6, tryParse(request.getParameter("byggeår")) ); 
+                               ps1.setInt(7, tryParse(request.getParameter("size")) );
+                               ps1.setString(8, request.getParameter("bygningBrugesTil"));
+                               ps1.setInt(9, tryParse(request.getParameter("tagBemærkning")) );
+                               ps1.setInt(10, tryParse(request.getParameter("tagBillede")) );
+                               ps1.setString(11, request.getParameter("textTagBemærkning"));
+                               ps1.setInt(12, tryParse(request.getParameter("vægBemærkning")) );
+                               ps1.setInt(13, tryParse(request.getParameter("vægBillede")) );
+                               ps1.setString(14, request.getParameter("textYdreVægBemærkning"));
+                               ps1.setInt(15, tryParse(request.getParameter("roomNr")) );
+                               ps1.setString(16, request.getParameter("textGenForetagetAf"));
+                               ps1.setString(17, request.getParameter("textSamarbejdeMed"));
+                               ps1.setInt(18, tryParse(request.getParameter("tilstand0")) );
+                             
 
-                               
-                               ps1.setString(1, request.getParameter("buildingName") );
-                               ps1.setString( 2, request.getParameter("address") );
-                               ps1.setInt( 3, Integer.parseInt(request.getParameter("buildingCondition") ));
-                               ps1.setString( 4, request.getParameter("buildingOwner") );
-                               ps1.setInt( 5, Integer.parseInt(request.getParameter("parcelNr") ) );
-                               ps1.setInt( 6, Integer.parseInt(request.getParameter("Size") ) );
-                               ps1.setInt( 7, Integer.parseInt(request.getParameter("Zipcode") ) );
-
-                                
+                 
                                int i = ps1.executeUpdate();
                                if( i > 0 )
                                {
@@ -176,7 +203,7 @@ public class reportServlet extends HttpServlet
                                }
                                    else
                                    {
-                                        session.setAttribute("text", "Error creating building");
+                                        session.setAttribute("text", "Error creating report");
                                         ps1.close();
                                         forward(request, response, "/CreateReport.jsp");
                                    }    
@@ -203,6 +230,18 @@ public class reportServlet extends HttpServlet
         ServletContext sc = getServletContext();
         RequestDispatcher rd = sc.getRequestDispatcher(path);
         rd.forward(request, response);
+    }
+    
+    public static Integer tryParse(String text) 
+    {
+        try 
+        {
+            return Integer.parseInt(text);   
+        } 
+        catch (NumberFormatException e) 
+        {
+                return 0;
+        }
     }
 
     /**

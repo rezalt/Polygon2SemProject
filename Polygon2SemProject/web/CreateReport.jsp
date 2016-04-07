@@ -19,11 +19,22 @@
         
         <div class="wrapper">
       
+            
+                <%
+                        String text = (String)session.getAttribute("text");
+                            if(text==null)
+                            {
+                              session.setAttribute("text", "");
+                            }
+                         %>
+                        <%=session.getAttribute("text")%>
+                        
+                        
                 <h1>
                     Please fill the report.
                 </h1>
 
-                <form class="login" name="form2" action="reportServlet" method="POST"> <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
+                <form class="login" name="form3" action="reportServlet" method="POST"> <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
                        <input type="hidden" name="report" value="" />
                     <p class="title">
                         
@@ -89,12 +100,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="number" min="1000" placeholder="Byggeår" name="Byggeår">
+                                <input type="number" min="1000" placeholder="Byggeår" name="byggeår">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="number" placeholder="Bygningsareal i m2 (hver etage tælles separat)" name="Byggeår">
+                                <input type="number" placeholder="Bygningsareal i m2 (hver etage tælles separat)" name="size">
                             </td>
                         </tr>
                         <tr>
@@ -145,15 +156,15 @@
                             </td>
                             <td id="rTdBorderRight">
                                 Bemærkninger
-                                 <input type="checkbox" name="bemærkning" value="tagBemærkning">
+                                 <input type="checkbox" name="bemærkning" value="vægBemærkning">
                             </td>
                             <td id="rTdBorderRight">
                                 Ingen bemærkninger
-                                <input type="checkbox" name="ingenBemærkning" value="tagIngenBemærkning">
+                                <input type="checkbox" name="ingenBemærkning" value="vægIngenBemærkning">
                             </td>
                             <td>
                                 Billede
-                                <input type="checkbox" name="billede" value="tagBillede">
+                                <input type="checkbox" name="billede" value="vægBillede">
                             </td>
                     </table>
                     <table>
@@ -547,7 +558,7 @@
                                 Bygningsgennemgangen er foretaget af
                             </td>
                             <td width="50%">
-                                <input type="text" name="textgenForetagetAf">
+                                <input type="text" name="textGenForetagetAf">
                             </td>
                             <td>
                                 ,Polygon
@@ -657,9 +668,10 @@
                     <table>
                         <tr>  
                             <td>
-                                <button type="submit" name="submit" value="create" onclick="myFunction()">
+                                <button type="submit" id="button4" value="create" onclick="myFunction()">
                                     <i class="spinner"></i>
-                                    <span class="state">Submit</span>                  
+                                    <span class="state">Submit</span>         
+                                </button>
                             </td>
                         </tr>
                     </table>
@@ -683,8 +695,6 @@ Den bygningsansvarlige skal udlevere plantegning over bygningen inden bygningsge
                 </p>
                   
         </div> 
-          
-        
         <script>
              function myFunction() 
              {
