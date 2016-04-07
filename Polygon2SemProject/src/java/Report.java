@@ -16,7 +16,7 @@ public class Report
     int reportId;
     String nameOfBuilding;
     String date;
-    String adress;
+    String address;
     String zipCode;
     //General info
     String yearBuild;
@@ -34,12 +34,12 @@ public class Report
     String coWriter;
     int condition;
 
-    public Report(int reportId, String nameOfBuilding, String date, String adress, String zipCode, String yearBuild, int buildingSizeInSquareMetres, String buildingPurpose, Boolean roofNoticeBoolean, Boolean roofPictureBoolean, String roofNotice, Boolean wallNoticeBoolean, Boolean wallPictureBoolean, String wallNotice, String writer, String coWriter, int condition)
+    public Report(int reportId, String nameOfBuilding, String date, String address, String zipCode, String yearBuild, int buildingSizeInSquareMetres, String buildingPurpose, Boolean roofNoticeBoolean, Boolean roofPictureBoolean, String roofNotice, Boolean wallNoticeBoolean, Boolean wallPictureBoolean, String wallNotice, String writer, String coWriter, int condition)
     {
         this.reportId = reportId;
         this.nameOfBuilding = nameOfBuilding;
         this.date = date;
-        this.adress = adress;
+        this.address = address;
         this.zipCode = zipCode;
         this.yearBuild = yearBuild;
         this.buildingSizeInSquareMetres = buildingSizeInSquareMetres;
@@ -94,14 +94,14 @@ public class Report
         this.date = date;
     }
 
-    public String getAdress()
+    public String getAddress()
     {
-        return adress;
+        return address;
     }
 
-    public void setAdress(String adress)
+    public void setAddress(String address)
     {
-        this.adress = adress;
+        this.address = address;
     }
 
     public String getZipCode()
