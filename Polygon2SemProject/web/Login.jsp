@@ -19,7 +19,7 @@
          <div class="wrapper">  
              
             <h1>Hello, and welcome.</h1>
-      
+        
             <form class="login" NAME="form1" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
                     <input type="hidden" name="user" value="" />
                     <p class="title">Customer login</p>
