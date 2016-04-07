@@ -231,24 +231,27 @@ public class reportServlet extends HttpServlet
                                + "fireDescription, otherDamageDescription)"
                                + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
                            
-                               ps2.setInt( 1, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 2, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 3, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 4, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 5, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 6, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 7, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 8, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 9, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 10, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 11, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 12, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 13, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 14, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 15, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 16, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 17, tryParse(request.getParameter("rapportNr")) );
-                               ps2.setInt( 18, tryParse(request.getParameter("rapportNr")) );
+                               ps2.setString(1, request.getParameter("roomNr")) ;
+                               ps2.setInt( 2, tryParse(request.getParameter("bemærkning")) );
+                               ps2.setInt( 3, tryParse(request.getParameter("skadeJa")) );
+                               try
+                                    {
+                                        date = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("skadeDato"));
+                                    } catch (ParseException ex)
+                                    {
+                                        Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                               ps2.setDate(4, new java.sql.Date(date.getTime()) );
+                               ps2.setString( 5, request.getParameter("skadeHvor")) ;
+                               ps2.setString( 5, request.getParameter("hvadErDerSket")) ;
+                               ps2.setString( 7, request.getParameter("HvadErReperaret")) ;
+                               ps2.setInt( 8, tryParse(request.getParameter("skadeFugt")) );
+                               ps2.setInt( 9, tryParse(request.getParameter("skadeRåd")) );
+                               ps2.setInt( 10, tryParse(request.getParameter("skadeSkimmel")) );
+                               ps2.setInt( 11, tryParse(request.getParameter("skadeBrand")) );
+                               ps2.setInt( 12, tryParse(request.getParameter("skadeAnden")) );
+                               ps2.setString( 13, request.getParameter("skadeAndenText")) ;
+                               
 
                                int i2 = ps2.executeUpdate();
                                if( i2 > 0 )
