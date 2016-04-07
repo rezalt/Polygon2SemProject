@@ -20,13 +20,13 @@ public class Building
     String address;
     int condition;
     String owner;
-    String ParcelNo;
+    String parcelNo;
     ArrayList<Report> reports = new ArrayList();
     
     
-    public void addReport(int reportId, String nameOfBuilding, String date, String adress, String zipCode, String yearBuild, int buildingSizeInSquareMetres, String buildingPurpose, Boolean roofNoticeBoolean, Boolean roofPictureBoolean, String roofNotice, Boolean wallNoticeBoolean, Boolean wallPictureBoolean, String wallNotice, String writer, String coWriter, int condition)
+    public void addReport(int reportId, String nameOfBuilding, String date, String address, String zipCode, String yearBuild, int buildingSizeInSquareMetres, String buildingPurpose, Boolean roofNoticeBoolean, Boolean roofPictureBoolean, String roofNotice, Boolean wallNoticeBoolean, Boolean wallPictureBoolean, String wallNotice, String writer, String coWriter, int condition)
     {
-        Report tempReport= new Report(reportId, nameOfBuilding, date, adress, zipCode, yearBuild, buildingSizeInSquareMetres, buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean, wallPictureBoolean, wallNotice, writer, coWriter, condition);
+        Report tempReport= new Report(reportId, nameOfBuilding, date, address, zipCode, yearBuild, buildingSizeInSquareMetres, buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean, wallPictureBoolean, wallNotice, writer, coWriter, condition);
         reports.add(tempReport);
     }
     public ArrayList<Report> getReports()
@@ -85,12 +85,12 @@ public class Building
 
     public String getParcelNo()
     {
-        return ParcelNo;
+        return parcelNo;
     }
     
-    public void setParcelNo(String ParcelNo)
+    public void setParcelNo(String parcelNo)
     {
-        this.ParcelNo = ParcelNo;
+        this.parcelNo = parcelNo;
     }
 
     public Building()
@@ -98,14 +98,14 @@ public class Building
         
     }
     
-    public Building(int ID, String name, String address, int condition, String owner, String ParcelNo)
+    public Building(int ID, String name, String address, int condition, String owner, String parcelNo)
     {
         this.ID = ID;
         this.name = name;
         this.address = address;
         this.condition = condition;
         this.owner = owner;
-        this.ParcelNo = ParcelNo;
+        this.parcelNo = parcelNo;
     }
     
     

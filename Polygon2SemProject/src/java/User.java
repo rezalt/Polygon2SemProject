@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,7 +16,14 @@ public class User
     int id;
     String username;
     String password;
-
+    ArrayList<Building> buildings = new ArrayList();
+    
+    public void addBuilding(int ID, String name, String address, int condition, String owner, String parcelNo)
+    {
+        Building tempBuilding=new Building(ID, name, address, condition, owner, parcelNo);
+        buildings.add(tempBuilding);
+    }
+    
     public int getId()
     {
         return id;
