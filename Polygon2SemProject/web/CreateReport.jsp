@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <link href="<c:url value="/Resources/Theme/Index.css"/>" rel="stylesheet">
         <link href="<c:url value="/Resources/Report/Report.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -19,7 +19,11 @@
         
         <div class="wrapper">
       
-            
+        <ul>
+            <li><a href="Login.jsp">Login</a></li>
+            <li><a href="CreateUser.jsp">CreateUser</a></li>
+            <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
+        </ul>    
                 <%
                         String text = (String)session.getAttribute("text");
                             if(text==null)

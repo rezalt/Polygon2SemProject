@@ -10,6 +10,7 @@
 <html>
     <head>
         
+        <link href="<c:url value="/Resources/Theme/Index.css"/>" rel="stylesheet">
         <link href="<c:url value="/Resources/Customer/Customer.css"/>" rel="stylesheet">
          
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,6 +18,12 @@
     </head>
     <body>
          <div class="wrapper">  
+        
+        <ul>
+            <li><a href="CreateUser.jsp">CreateUser</a></li>
+            <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
+            <li><a href="CreateReport.jsp">CreateReport</a></li>
+        </ul>
              
             <h1>Hello, and welcome.</h1>
         

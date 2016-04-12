@@ -127,8 +127,7 @@ public class PolyServlet extends HttpServlet
                             session.setAttribute("text", "You need to enter a username and password.");
                                 forward(request, response, "/CreateUser.jsp");
                        }
-                       
-                       
+
                        conn = DBC.getConnection();
 
                        {

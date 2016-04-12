@@ -10,13 +10,25 @@
 <html>
     <head>
         
+        
+ 
+        <link href="<c:url value="/Resources/Theme/Index.css"/>" rel="stylesheet">
         <link href="<c:url value="/Resources/Customer/Customer.css"/>" rel="stylesheet">
          
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-         <div class="wrapper">  
+        
+
+
+        <div class="wrapper">  
+            
+        <ul>
+            <li><a href="Login.jsp">Login</a></li>
+            <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
+            <li><a href="CreateReport.jsp">CreateReport</a></li>
+        </ul>
              
             <h1>Please fill out this user creation form.</h1>
       
