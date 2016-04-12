@@ -29,6 +29,9 @@ CREATE TABLE `Building` (
   `Size` int(11) DEFAULT NULL,
   `parcelNr` int(11) DEFAULT NULL,
   PRIMARY KEY (`userId`)
+  FOREIGN KEY (`userId`) 
+  REFERENCES User(`userId`)
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,7 +55,12 @@ CREATE TABLE `User` (
   `name` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `userId` int(11) NOT NULL,
-  PRIMARY KEY (`userId`)
+  `userType` varchar(45) NOT NULL,
+  `companyName` varchar(45) NOT NULL,
+  `tlfNr` int(11) NOT NULL,
+  `contactNr` int(11) NOT NULL,
+  `emailAddress` varchar(45) NOT NULL,
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
