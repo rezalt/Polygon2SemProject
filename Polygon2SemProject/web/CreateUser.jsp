@@ -49,11 +49,11 @@
               </p>
         </div>
                         
-             <script>
-             function myFunction() 
-             {
-                document.form1.user.value='NewUser';
-             }
+         <script>
+         function myFunction() 
+         {
+            document.form1.user.value='NewUser';
+         }
          </script>
          
     </body>

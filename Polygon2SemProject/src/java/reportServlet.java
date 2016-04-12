@@ -119,161 +119,17 @@ public class reportServlet extends HttpServlet
             switch (do_this) 
                 {
 
-                   case "create":
+                    case "create":
                        createReport(request, response, session);
-                        
-//                       if( request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty() || request.getParameter("dato").isEmpty() )
-//                       {
-//
-//                            session.setAttribute("text", "You need to fill out name, address and date.");
-//                                forward(request, response, "/CreateReport.jsp");
-//                       }
-//        
-//
-//                       conn = DBC.getConnection();
-//                       PreparedStatement ps1 = null;
-//                       PreparedStatement ps2 = null;
-//                       
-//
-//  
-//                       try (Statement st = conn.createStatement()) 
-//                       {
-//                           
-//                           // Creating a building                     
-//                           st.executeQuery("SELECT reportId, reportNr FROM report");
-//                           ResultSet rs = st.getResultSet();
-//
-//                           while(rs.next())
-//                           {
-//
-//                               if( rs.getString("reportNr").equals(request.getParameter("rapportNr")))
-//                               {
-//                                  
-//                                    session.setAttribute("text", "report  already exists");
-//                                        st.close();
-//                                        forward(request, response, "/CreateReport.jsp");
-//                               }
-//
-//                               
-//                           }
-//                            // Makes sure we don't show a meaningless error message.
-//                                session.setAttribute("text", " ");
-//                                st.close(); 
-//                       }
-//                        catch (SQLException e) 
-//                       {
-//                           Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, e + "new building");
-//                           session.setAttribute("text", "" +e);
-//                           forward(request, response, "/CreateReport.jsp"); 
-//                       }
-//        
-//                            try
-//                            {
-//                                // Inserting our new report to the database.
-//                                ps1 = conn.prepareStatement("insert into "
-//                                        + "report(reportNr, nameOfBuilding, rDate, address, zipCode, yearBuild, buildingSizeInSquareMeters,"
-//                                        + "buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean,"
-//                                        + "wallPictureBoolean, WallNotice, roomId, writer, coWriter, buildingCondition)"
-//                                        + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-//                           
-//        
-//                    
-//                               ps1.setInt( 1, tryParse(request.getParameter("rapportNr")) );
-//                               ps1.setString( 2, request.getParameter("buildingName"));
-//                               
-//                               Date date = null;
-//                                    try
-//                                    {
-//                                        date = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("dato"));
-//                                    } catch (ParseException ex)
-//                                    {
-//                                        Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
-//                                    }
-//                               ps1.setDate(3, new java.sql.Date(date.getTime()) );
-//                              
-//                               ps1.setString(4, request.getParameter("address"));
-//                               ps1.setInt(5, tryParse(request.getParameter("Zip")) );
-//                               ps1.setInt(6, tryParse(request.getParameter("byggeår")) ); 
-//                               ps1.setInt(7, tryParse(request.getParameter("size")) );
-//                               ps1.setString(8, request.getParameter("bygningBrugesTil"));
-//                               ps1.setInt(9, tryParse(request.getParameter("tagBemærkning")) );
-//                               ps1.setInt(10, tryParse(request.getParameter("tagBillede")) );
-//                               ps1.setString(11, request.getParameter("textTagBemærkning"));
-//                               ps1.setInt(12, tryParse(request.getParameter("vægBemærkning")) );
-//                               ps1.setInt(13, tryParse(request.getParameter("vægBillede")) );
-//                               ps1.setString(14, request.getParameter("textYdreVægBemærkning"));
-//                               ps1.setInt(15, tryParse(request.getParameter("roomNr")) );
-//                               ps1.setString(16, request.getParameter("textGenForetagetAf"));
-//                               ps1.setString(17, request.getParameter("textSamarbejdeMed"));
-//                               ps1.setInt(18, tryParse(request.getParameter("tilstand0")) );
-//
-//                               int i = ps1.executeUpdate();
-//                               if( i > 0 )
-//                               {
-//                                  // UB.setUserName(username); -- Bean doesn't exist yet.
-//                               }
-//                                   else
-//                                   {
-//                                        session.setAttribute("text", "Error creating report");
-//                                        ps1.close();
-//                                        forward(request, response, "/CreateReport.jsp");
-//                                   }    
-//                               
-//                               ps1.close();
-//
-//                            ps2 = conn.prepareStatement("insert into " 
-//                               + "room( roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage,"
-//                               + "repairs, moisture, sponge, mold, fire, otherDamage,"
-//                               + "otherDamageDescription)"
-//                               + " values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
-//                           
-//                               ps2.setString(1, request.getParameter("roomNr")) ;
-//                               ps2.setInt( 2, tryParse(request.getParameter("bemærkning")) );
-//                               ps2.setInt( 3, tryParse(request.getParameter("skadeJa")) );
-//                              
-//                               try
-//                                    {
-//                                        date = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("skadeDato"));
-//                                    } catch (ParseException ex)
-//                                    {
-//                                        Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
-//                                    }
-//                               ps2.setDate(4, new java.sql.Date(date.getTime()) );
-//                               
-//                               ps2.setString( 5, request.getParameter("skadeHvor")) ;
-//                               ps2.setString( 6, request.getParameter("hvadErDerSket")) ;
-//                               ps2.setString( 7, request.getParameter("HvadErReperaret")) ;
-//                               ps2.setInt( 8, tryParse(request.getParameter("skadeFugt")) );
-//                               ps2.setInt( 9, tryParse(request.getParameter("skadeRåd")) );
-//                               ps2.setInt( 10, tryParse(request.getParameter("skadeSkimmel")) );
-//                               ps2.setInt( 11, tryParse(request.getParameter("skadeBrand")) );
-//                               ps2.setInt( 12, tryParse(request.getParameter("skadeAnden")) );
-//                               ps2.setString( 13, request.getParameter("skadeAndenText")) ;
-//                               
-//
-//                               int i2 = ps2.executeUpdate();
-//                               if( i2 > 0 )
-//                               {
-//                                  // UB.setUserName(username); -- Bean doesn't exist yet.
-//                               }
-//                                   else
-//                                   {
-//                                        session.setAttribute("text", "Error creating report");
-//                                        ps2.close();
-//                                        forward(request, response, "/CreateReport.jsp");
-//                                   }    
-//                               
-//                               ps2.close();
-//                               forward(request, response, "/CreateReport.jsp");        
-//                         }     
-//                        catch (SQLException ex)
-//                         {
-//                             Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
-//                         }
-    
-                      forward(request, response, "/CreateReport.jsp");   
-                break;
-            }
+ 
+                       forward(request, response, "/CreateReport.jsp");   
+                    break;
+                    
+                    default:   
+                       forward(request, response, "/index.html");   
+                    break;
+                       
+                }
     } // end of doPost
     
     
@@ -385,7 +241,7 @@ public class reportServlet extends HttpServlet
             ps1.setInt(15, tryParse(request.getParameter("roomNr")) );
             ps1.setString(16, request.getParameter("textGenForetagetAf"));
             ps1.setString(17, request.getParameter("textSamarbejdeMed"));
-            ps1.setInt(18, tryParse(request.getParameter("tilstand0")) );
+            ps1.setInt(18, tryParse(request.getParameter("tilstand")) );
 
             int i = ps1.executeUpdate();
             if( i > 0 )
@@ -410,7 +266,7 @@ public class reportServlet extends HttpServlet
 
             ps2.setString(1, request.getParameter("roomNr")) ;
             ps2.setInt( 2, tryParse(request.getParameter("bemærkning")) );
-            ps2.setInt( 3, tryParse(request.getParameter("skadeJa")) );
+            ps2.setInt( 3, tryParse(request.getParameter("skadet")) );
 
             try
             {

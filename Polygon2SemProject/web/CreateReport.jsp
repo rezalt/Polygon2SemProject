@@ -116,26 +116,23 @@
                         <tr>
                             
                         </tr>
-                    </table>    
-                    <table>
                         <tr>
                             <td>
                                 <b>Gennemgang af bygningen udvendig</b>
                             </td>
                         </tr>
+                    </table>    
+                    <table>
+
                         <tr>
-                            <td width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            <td width="70%" id="rTdBorderRight" bgcolor="#E6E6E6">
                                 &nbsp Tag
                             </td>
                             <td id="rTdBorderRight">
                                 Bemærkninger
                                  <input type="checkbox" name="bemærkning" value="tagBemærkning">
                             </td>
-                            <td id="rTdBorderRight">
-                                Ingen bemærkninger
-                                <input type="checkbox" name="ingenBemærkning" value="tagIngenBemærkning">
-                            </td>
-                            <td>
+                            <td id="rTdCenter">
                                 Billede
                                 <input type="checkbox" name="billede" value="tagBillede">
                             </td>
@@ -151,16 +148,12 @@
                         <tr>
                         </tr>
                         <tr>
-                            <td width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            <td width="70%" id="rTdBorderRight" bgcolor="#E6E6E6">
                                 &nbsp Ydervægge 
                             </td>
                             <td id="rTdBorderRight">
                                 Bemærkninger
                                  <input type="checkbox" name="bemærkning" value="vægBemærkning">
-                            </td>
-                            <td id="rTdBorderRight">
-                                Ingen bemærkninger
-                                <input type="checkbox" name="ingenBemærkning" value="vægIngenBemærkning">
                             </td>
                             <td>
                                 Billede
@@ -184,35 +177,28 @@
                     </table>
                     <table>
                         <tr>
-                            <td >
+                            <td width="70%" >
                                 &nbsp <input type="number" name="roomNr" placeholder="Lokale"> 
                             </td>
-                            <td width="20%">
-                                
-                            </td>
-                            <td id="rTdBorderRight">
+                            <td>
                                 Bemærkninger
                                 <input type="checkbox" name="bemærkning" value="lokaleBemærkning">
-                            </td>
-                            <td>
-                                Ingen bemærkninger
-                                <input type="checkbox" name="ingenBemærkning" value="lokaleIngenBemærkning">
                             </td>
                         </tr>
                     </table>
   
                     <table>
                         <tr>
-                             <td  width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                             <td width="85%" id="rTdBorderRight" bgcolor="#E6E6E6">
                                 Har der været skade i lokalet? 
                             </td>
-                            <td width="50px" id="rTdBorderRight">
+                            <td style="padding-right:20px" id="rTdBorderRight">
                                 Ja
-                                <input type="checkbox" name="skadeJa" value="skadeJa">    
+                                <input type="radio" name="skadet" value="skadeJa">    
                             </td>
-                            <td width="40px" id="rTdCenter"> 
+                            <td id="rTdCenter"> 
                                 Nej
-                                <input type="checkbox" name="skadeNej" value="skadeNej"> 
+                                <input type="radio" name="skadet" value="skadeNej"> 
                             </td>
                         </tr>
                     </table>
@@ -304,16 +290,12 @@
                         <tr>
                         </tr>
                         <tr>
-                            <td width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
                                 &nbsp Vægge 
                             </td>
                             <td id="rTdBorderRight">
                                 Bemærkninger
                                 <input type="checkbox" name="genVBemærkning" value="genVBemærkning">
-                            </td>
-                            <td id="rTdBorderRight">
-                                Ingen bemærkninger
-                                <input type="checkbox" name="genVIngenBemærkning" value="genVIngenBemærkning">
                             </td>
                             <td>
                                 Billede
@@ -331,16 +313,12 @@
                         <tr>
                         </tr>
                         <tr>
-                            <td width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
                                 &nbsp Loft 
                             </td>
                             <td id="rTdBorderRight">
                                 Bemærkninger
                                  <input type="checkbox" name="genLoftBemærkning" value="genLoftBemærkning">
-                            </td>
-                            <td id="rTdBorderRight">
-                                Ingen bemærkninger
-                                <input type="checkbox" name="genLoftIngenBemærkning" value="genLoftIngenBemærkning">
                             </td>
                             <td>
                                 Billede
@@ -358,16 +336,12 @@
                         <tr>
                         </tr>
                         <tr>
-                            <td width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
                                 &nbsp Gulv 
                             </td>
                             <td id="rTdBorderRight">
                                 Bemærkninger
                                  <input type="checkbox" name="genGulvBemærkning" value="genGulvBemærkning">
-                            </td>
-                            <td id="rTdBorderRight">
-                                Ingen bemærkninger
-                                <input type="checkbox" name="genGulvIngenBemærkning" value="genGulvIngenBemærkning">
                             </td>
                             <td>
                                 Billede
@@ -385,16 +359,12 @@
                         <tr>
                         </tr>
                         <tr>
-                            <td width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
                                 &nbsp Vinduer/døre 
                             </td>
                             <td id="rTdBorderRight">
                                 Bemærkninger
                                  <input type="checkbox" name="genVDBemærkning" value="genVDBemærkning">
-                            </td>
-                            <td id="rTdBorderRight">
-                                Ingen bemærkninger
-                                <input type="checkbox" name="genVDIngenBemærkning" value="genVDIngenBemærkning">
                             </td>
                             <td>
                                 Billede
@@ -412,16 +382,12 @@
                         <tr>
                         </tr>
                         <tr>
-                            <td width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
                                 <input type="text" placeholder="Udfyld hvis mere" name="genExtra1Des">
                             </td>
                             <td id="rTdBorderRight">
                                 Bemærkninger
                                  <input type="checkbox" name="genExtra1Bemærkning" value="genExtra1Bemærkning">
-                            </td>
-                            <td id="rTdBorderRight">
-                                Ingen bemærkninger
-                                <input type="checkbox" name="genExtra1Bemærkning" value="genExtra1Bemærkning">
                             </td>
                             <td>
                                 Billede
@@ -453,11 +419,11 @@
                             </td>
                             <td width="50px" id="rTdBorderRight">
                                 Ja
-                                <input type="checkbox" name="fugtScanJa" value="fugtScanJa">    
+                                <input type="radio" name="fugtScan" value="fugtScanJa">    
                             </td>
                             <td width="40px" id="rTdCenter"> 
                                 Nej
-                                <input type="checkbox" name="fugtScanNej" value="fugtScanNej"> 
+                                <input type="radio" name="fugtScan" value="fugtScanNej"> 
                             </td>
                         </tr>
                     </table>
@@ -604,7 +570,7 @@
                                 beskrevet
                             </td>
                             <td id="rTdBorderRight">
-                                <input type="checkbox" name="tilstand0" value="tilstand0">
+                                <input type="radio" name="tilstand" value="tilstand0">
                             </td>
                         </tr>
                         <tr>
@@ -621,7 +587,7 @@
                                 beskrevet
                             </td>
                             <td id="rTdBorderRight">
-                                <input type="checkbox" name="tilstand1" value="tilstand1">
+                                <input type="radio" name="tilstand" value="tilstand1">
                             </td>
                         </tr>
                         <tr>
@@ -637,7 +603,7 @@
                                 fare for følgeskader
                             </td>
                             <td id="rTdBorderRight">
-                                <input type="checkbox" name="tilstand2" value="tilstand2">
+                                <input type="radio" name="tilstand" value="tilstand2">
                             </td>
                         </tr>             
                         <tr>
@@ -653,7 +619,7 @@
                                 fare for følgeskader
                             </td>
                             <td id="rTdBorderRight">
-                                <input type="checkbox" name="tilstand3" value="tilstand3">
+                                <input type="radio" name="tilstand" value="tilstand3">
                             </td>
                         </tr>
                         

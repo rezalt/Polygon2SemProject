@@ -26,7 +26,7 @@
 
                 <form class="login" name="form2" action="buildingServlet" method="get"> <img src="Logo.JPG" alt="Logo">
                    <input type="hidden" name="building" value="" />
-                    <p class="title">Create building</p>
+                    <p class="title">Create building
                     <table border="0">
                         <tr>  
                             <td>
