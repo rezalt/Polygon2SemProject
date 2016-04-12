@@ -150,10 +150,10 @@ public class PolyServlet extends HttpServlet
                                    else
                                    {
                                       //besked
+                                       ps.close();
+                                       forward(request, response, "/index.html");
                                    }
 
-                               ps.close();
-                               forward(request, response, "/index.html");
 
                            }
                            catch(Exception e)

@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `Building`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Building` (
+    `buildingId` 
   `userId` int(11) NOT NULL,
   `adresseNr` int(11) DEFAULT NULL,
   `Condition` varchar(45) DEFAULT NULL,

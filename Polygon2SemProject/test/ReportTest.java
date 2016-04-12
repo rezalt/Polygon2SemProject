@@ -72,7 +72,7 @@ public class ReportTest
         
     
         instance.addRoom(roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage, repairs, moisture, sponge, mold, fire, otherDamage, moistureDesctription, spongeDescription, moldDescription, fireDescription, otherDamageDescription);
-       System.out.println(instance.getRooms().get(0).getFire());
+        System.out.println(instance.getRooms().get(0).getFire());
         assertEquals(instance.getRooms().get(0).getFire(), true);
         
         fire=false;
@@ -82,7 +82,7 @@ public class ReportTest
         System.out.println(instance.getRooms().get(1).getFire());
         assertEquals(instance.getRooms().get(1).getFire(), false);
     }
-
+    
     /**
      * Test of getReportId method, of class Report.
      */
