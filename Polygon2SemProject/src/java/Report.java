@@ -6,13 +6,13 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author JAJAJABLESES
  */
 public class Report
 {
+
     int reportId;
     String nameOfBuilding;
     String date;
@@ -50,19 +50,18 @@ public class Report
         this.wallNoticeBoolean = wallNoticeBoolean;
         this.wallPictureBoolean = wallPictureBoolean;
         this.wallNotice = wallNotice;
-        rooms= new ArrayList();
+        rooms = new ArrayList();
 
         this.writer = writer;
         this.coWriter = coWriter;
         this.condition = condition;
     }
-    
+
     public void addRoom(String roomName, Boolean notices, Boolean damagedRoom, String dateOfDamage, String descriptionOfLocation, String explanationOfDamage, String repairs, Boolean moisture, Boolean sponge, Boolean mold, Boolean fire, Boolean otherDamage, String moistureDesctription, String spongeDescription, String moldDescription, String fireDescription, String otherDamageDescription)
     {
         Room tempRoom = new Room(roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage, repairs, moisture, sponge, mold, fire, otherDamage, moistureDesctription, spongeDescription, moldDescription, fireDescription, otherDamageDescription);
         rooms.add(tempRoom);
     }
-    
 
     public int getReportId()
     {
@@ -243,5 +242,5 @@ public class Report
     {
         this.condition = condition;
     }
-    
+
 }

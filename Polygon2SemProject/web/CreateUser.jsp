@@ -9,64 +9,64 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
-        
- 
+
+
+
         <link href="<c:url value="/Resources/Theme/Index.css"/>" rel="stylesheet">
         <link href="<c:url value="/Resources/Customer/Customer.css"/>" rel="stylesheet">
-         
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        
+
 
 
         <div class="wrapper">  
-            
-        <ul>
-            <li><a href="Login.jsp">Login</a></li>
-            <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
-            <li><a href="CreateReport.jsp">CreateReport</a></li>
-        </ul>
-             
-            <h1>Please fill out this user creation form.</h1>
-      
-            <form class="login" NAME="form1" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
-                    <input type="hidden" name="user" value="" />
-                    <p class="title">Create user</p>
-                        <input type="text" placeholder="Brugernavn" name="Username"  autofocus/>
-                        <i class="fa fa-user"></i>
-                        <input type="password" placeholder="Adgangskode" name="Password" />
-                        <i class="fa fa-key"></i>
-                        <input type="text" placeholder="Firmanavn" name="companyName" />
-                        <input type="text" placeholder="Adresse" name="companyAddress" />
-                        <input type="number" placeholder="Postnr." name="Zip" />
-                        
-                        <%
-                        String text = (String)session.getAttribute("text");
-                            if(text==null)
-                            {
-                              session.setAttribute("text", "");
-                            }
-                         %>
-                        <%=session.getAttribute("text")%>
-                     
-                        <button type="submit" id="button1" value="NewUser" onclick="myFunction()">
-                        Submit
-                        </button>             
-             </form>
 
-        <footer><a target="blank"> Gruppe 4 - A </a></footer>
-              </p>
-        </div>
-                        
-         <script>
-         function myFunction() 
-         {
-            document.form1.user.value='NewUser';
-         }
-         </script>
-         
-    </body>
+            <ul>
+                <li><a href="Login.jsp">Login</a></li>
+                <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
+                <li><a href="CreateReport.jsp">CreateReport</a></li>
+            </ul>
+
+            <h1>Please fill out this user creation form.</h1>
+
+            <form class="login" NAME="form1" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
+                <input type="hidden" name="user" value="" />
+                <p class="title">Create user</p>
+                <input type="text" placeholder="Brugernavn" name="Username"  autofocus/>
+                <i class="fa fa-user"></i>
+                <input type="password" placeholder="Adgangskode" name="Password" />
+                <i class="fa fa-key"></i>
+                <input type="text" placeholder="Firmanavn" name="companyName" />
+                <input type="text" placeholder="Adresse" name="companyAddress" />
+                <input type="number" placeholder="Postnr." name="Zip" />
+
+                <%
+                    String text = (String) session.getAttribute("text");
+                    if (text == null)
+                    {
+                        session.setAttribute("text", "");
+                    }
+                %>
+                <%=session.getAttribute("text")%>
+
+                <button type="submit" id="button1" value="NewUser" onclick="myFunction()">
+                    Submit
+                </button>             
+            </form>
+
+            <footer><a target="blank"> Gruppe 4 - A </a></footer>
+        </p>
+    </div>
+
+    <script>
+        function myFunction()
+        {
+            document.form1.user.value = 'NewUser';
+        }
+    </script>
+
+</body>
 </html>

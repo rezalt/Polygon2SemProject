@@ -28,40 +28,36 @@ import javax.servlet.http.HttpSession;
 public class buildingServlet extends HttpServlet
 {
 
-    
-    
-    
-        // VARIABLES
+    // VARIABLES
     String username = "";
     int myID = 0;
     int ID = 0;
-    
+
     // END OF VARIABLES
-    
     DBConnector DBC = new DBConnector();
     Connection conn;
-        
-        @Override
-    public void init(ServletConfig conf) throws ServletException 
+
+    @Override
+    public void init(ServletConfig conf) throws ServletException
     {
 
-            try
-            {
-                java.lang.Class.forName(conf.getInitParameter("jdbcDriver"));
-            }
-            catch (ClassNotFoundException ex) 
-            {
-                Logger.getLogger(buildingServlet.class.getName()).log(Level.SEVERE, null, ex );
-            }
-      
-            
+        try
+        {
+            java.lang.Class.forName(conf.getInitParameter("jdbcDriver"));
+        }
+        catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(buildingServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         super.init(conf);
-        
+
         DBC.setDbURL("jdbc:mysql://91.100.100.141:3360/polygondb");
         DBC.setDbUsername("Admin");
         DBC.setDbPassword("CBAmoria");
 
-    }  
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -72,10 +68,10 @@ public class buildingServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException
-        {
-            response.setContentType("text/html;charset=UTF-8");
-        }
+            throws ServletException, IOException
+    {
+        response.setContentType("text/html;charset=UTF-8");
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -106,99 +102,94 @@ public class buildingServlet extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession(true);
-        
-        String do_this = request.getParameter("building");     
-        
+
+        String do_this = request.getParameter("building");
+
         if (do_this == null)
         {
-             forward(request, response, "/index.html");
+            forward(request, response, "/index.html");
         }
-        else 
-            switch (do_this) 
-                {
+        else
+        {
+            switch (do_this)
+            {
 
-                   case "create":
+                case "create":
 
-                       
-                       if( request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty() )
-                       {
+                    if (request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty())
+                    {
 
-                            session.setAttribute("text", "You need to fill out all the fields.");
+                        session.setAttribute("text", "You need to fill out all the fields.");
+                        forward(request, response, "/CreateBuilding.jsp");
+                    }
+
+                    conn = DBC.getConnection();
+                    PreparedStatement ps1 = null;
+
+                    try (Statement st = conn.createStatement())
+                    {
+
+                        // Creating a building                     
+                        st.executeQuery("SELECT buildingId, buildingName FROM building");
+                        ResultSet rs = st.getResultSet();
+
+                        while (rs.next())
+                        {
+
+                            if (rs.getString("buildingName").equals(request.getParameter("buildingName")))
+                            {
+
+                                session.setAttribute("text", "Building already exists");
+                                st.close();
                                 forward(request, response, "/CreateBuilding.jsp");
-                       }
-        
+                            }
 
-                       conn = DBC.getConnection();
-                       PreparedStatement ps1 = null;
+                        }
+                        // Makes sure we don't show a meaningless error message.
+                        session.setAttribute("text", " ");
+                        st.close();
 
-  
-                       try (Statement st = conn.createStatement()) 
-                       {
-                           
-                           // Creating a building                     
-                           st.executeQuery("SELECT buildingId, buildingName FROM building");
-                           ResultSet rs = st.getResultSet();
+                        // Inserting our new building to the database.
+                        ps1 = conn.prepareStatement("insert into building(buildingName, address, buildingCondition, buildingOwner, parcelNr, size, zipcode) values(?,?,?,?,?,?,?)");
 
-                           while(rs.next())
-                           {
+                        ps1.setString(1, request.getParameter("buildingName"));
+                        ps1.setString(2, request.getParameter("address"));
+                        ps1.setInt(3, Integer.parseInt(request.getParameter("buildingCondition")));
+                        ps1.setString(4, request.getParameter("buildingOwner"));
+                        ps1.setInt(5, Integer.parseInt(request.getParameter("parcelNr")));
+                        ps1.setInt(6, Integer.parseInt(request.getParameter("Size")));
+                        ps1.setInt(7, Integer.parseInt(request.getParameter("Zipcode")));
 
-                               if( rs.getString("buildingName").equals(request.getParameter("buildingName")))
-                               {
-                                   
-                                    session.setAttribute("text", "Building already exists");
-                                        st.close();
-                                        forward(request, response, "/CreateBuilding.jsp");
-                               }
+                        int i = ps1.executeUpdate();
+                        if (i > 0)
+                        {
+                            // UB.setUserName(username); -- Bean doesn't exist yet.
+                        }
+                        else
+                        {
+                            session.setAttribute("text", "Error creating building");
+                            ps1.close();
+                            forward(request, response, "/CreateBuilding.jsp");
+                        }
 
-                               
-                           }
-                            // Makes sure we don't show a meaningless error message.
-                                session.setAttribute("text", " ");
-                                st.close(); 
-                                
-                           // Inserting our new building to the database.
-                               ps1 = conn.prepareStatement("insert into building(buildingName, address, buildingCondition, buildingOwner, parcelNr, size, zipcode) values(?,?,?,?,?,?,?)");
+                        ps1.close();
+                        forward(request, response, "/CreateBuilding.jsp");
+                    }
 
-                               
-                               ps1.setString(1, request.getParameter("buildingName") );
-                               ps1.setString( 2, request.getParameter("address") );
-                               ps1.setInt( 3, Integer.parseInt(request.getParameter("buildingCondition") ));
-                               ps1.setString( 4, request.getParameter("buildingOwner") );
-                               ps1.setInt( 5, Integer.parseInt(request.getParameter("parcelNr") ) );
-                               ps1.setInt( 6, Integer.parseInt(request.getParameter("Size") ) );
-                               ps1.setInt( 7, Integer.parseInt(request.getParameter("Zipcode") ) );
-
-                                
-                               int i = ps1.executeUpdate();
-                               if( i > 0 )
-                               {
-                                  // UB.setUserName(username); -- Bean doesn't exist yet.
-                               }
-                                   else
-                                   {
-                                        session.setAttribute("text", "Error creating building");
-                                        ps1.close();
-                                        forward(request, response, "/CreateBuilding.jsp");
-                                   }    
-                               
-                               ps1.close();
-                               forward(request, response, "/CreateBuilding.jsp");        
-                            } 
-                           
-                       catch (SQLException e) 
-                       {
-                           Logger.getLogger(buildingServlet.class.getName()).log(Level.SEVERE, null, e + "new building");
-                           session.setAttribute("text", "" +e);
-                           forward(request, response, "/CreateBuilding.jsp"); 
-                       }
-                        break;
+                    catch (SQLException e)
+                    {
+                        Logger.getLogger(buildingServlet.class.getName()).log(Level.SEVERE, null, e + "new building");
+                        session.setAttribute("text", "" + e);
+                        forward(request, response, "/CreateBuilding.jsp");
+                    }
+                    break;
             }
-        
+        }
+
         processRequest(request, response);
     } // end of doPost
-    
-    
-    private void forward(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException 
+
+    private void forward(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException
     {
         ServletContext sc = getServletContext();
         RequestDispatcher rd = sc.getRequestDispatcher(path);

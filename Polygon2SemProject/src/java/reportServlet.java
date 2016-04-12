@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
-
 /**
  *
  * @author JAJAJABLESES
@@ -32,38 +31,36 @@ import java.util.Date;
 public class reportServlet extends HttpServlet
 {
 
-
-        // VARIABLES
+    // VARIABLES
     String username = "";
     int myID = 0;
     int ID = 0;
-    
+
     // END OF VARIABLES
-    
     DBConnector DBC = new DBConnector();
     Connection conn;
-        
-        @Override
-    public void init(ServletConfig conf) throws ServletException 
+
+    @Override
+    public void init(ServletConfig conf) throws ServletException
     {
 
-            try
-            {
-                java.lang.Class.forName(conf.getInitParameter("jdbcDriver"));
-            }
-            catch (ClassNotFoundException ex) 
-            {
-                Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex );
-            }
-      
-            
+        try
+        {
+            java.lang.Class.forName(conf.getInitParameter("jdbcDriver"));
+        }
+        catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         super.init(conf);
-        
+
         DBC.setDbURL("jdbc:mysql://91.100.100.141:3360/polygondb");
         DBC.setDbUsername("Admin");
         DBC.setDbPassword("CBAmoria");
 
-    }  
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -74,10 +71,10 @@ public class reportServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException
-        {
-            response.setContentType("text/html;charset=UTF-8");
-        }
+            throws ServletException, IOException
+    {
+        response.setContentType("text/html;charset=UTF-8");
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -108,79 +105,77 @@ public class reportServlet extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession(true);
-        
-        String do_this = request.getParameter("report");     
-        
+
+        String do_this = request.getParameter("report");
+
         if (do_this == null)
         {
-             forward(request, response, "/index.html");
+            forward(request, response, "/index.html");
         }
-        else 
-            switch (do_this) 
-                {
+        else
+        {
+            switch (do_this)
+            {
 
-                    case "create":
-                       createReport(request, response, session);
- 
-                       forward(request, response, "/CreateReport.jsp");   
+                case "create":
+                    createReport(request, response, session);
+
+                    forward(request, response, "/CreateReport.jsp");
                     break;
-                    
-                    default:   
-                       forward(request, response, "/index.html");   
+
+                default:
+                    forward(request, response, "/index.html");
                     break;
-                       
-                }
+
+            }
+        }
     } // end of doPost
-    
-    
-    public  void forward(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException 
+
+    public void forward(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException
     {
         ServletContext sc = getServletContext();
         RequestDispatcher rd = sc.getRequestDispatcher(path);
         rd.forward(request, response);
     }
-    
-    public static Integer tryParse(String text) 
+
+    public static Integer tryParse(String text)
     {
-        try 
+        try
         {
-            return Integer.parseInt(text);   
-        } 
-        catch (NumberFormatException e) 
+            return Integer.parseInt(text);
+        }
+        catch (NumberFormatException e)
         {
-                return 0;
+            return 0;
         }
     }
-    
+
     public void createReport(HttpServletRequest request, HttpServletResponse response, HttpSession session)
     {
-        
-        if( request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty() || request.getParameter("dato").isEmpty() )
+
+        if (request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty() || request.getParameter("dato").isEmpty())
         {
 
             session.setAttribute("text", "You need to fill out name, address and date.");
-                //forward(request, response, "/CreateReport.jsp");
-                return;
+            //forward(request, response, "/CreateReport.jsp");
+            return;
         }
-        
 
-       conn = DBC.getConnection();
-       PreparedStatement ps1 = null;
-       PreparedStatement ps2 = null;
+        conn = DBC.getConnection();
+        PreparedStatement ps1 = null;
+        PreparedStatement ps2 = null;
 
-
-
-        try (Statement st = conn.createStatement()) 
+        try (Statement st = conn.createStatement())
         {
 
-           // Creating a building                     
-           st.executeQuery("SELECT reportId, reportNr FROM report");
-           ResultSet rs = st.getResultSet();
+            // Creating a building                     
+            st.executeQuery("SELECT reportId, reportNr FROM report");
+            ResultSet rs = st.getResultSet();
 
-            while(rs.next())
+            while (rs.next())
             {
 
-                if( rs.getString("reportNr").equals(request.getParameter("rapportNr")))
+                if (rs.getString("reportNr").equals(request.getParameter("rapportNr")))
                 {
 
                     session.setAttribute("text", "report  already exists");
@@ -189,18 +184,17 @@ public class reportServlet extends HttpServlet
                     return;
                 }
 
-
             }
             // Makes sure we don't show a meaningless error message.
-                session.setAttribute("text", " ");
-                st.close(); 
+            session.setAttribute("text", " ");
+            st.close();
         }
-       catch (SQLException e) 
-       {
-           Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, e + "new building");
-           session.setAttribute("text", "" +e);
-           //forward(request, response, "/CreateReport.jsp");
-           return;
+        catch (SQLException e)
+        {
+            Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, e + "new building");
+            session.setAttribute("text", "" + e);
+            //forward(request, response, "/CreateReport.jsp");
+            return;
         }
 
         try
@@ -212,41 +206,40 @@ public class reportServlet extends HttpServlet
                     + "wallPictureBoolean, WallNotice, roomId, writer, coWriter, buildingCondition)"
                     + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-
-
-            ps1.setInt( 1, tryParse(request.getParameter("rapportNr")) );
-            ps1.setString( 2, request.getParameter("buildingName"));
+            ps1.setInt(1, tryParse(request.getParameter("rapportNr")));
+            ps1.setString(2, request.getParameter("buildingName"));
 
             Date date = null;
             try
             {
                 date = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("dato"));
-            } catch (ParseException ex)
+            }
+            catch (ParseException ex)
             {
                 Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ps1.setDate(3, new java.sql.Date(date.getTime()) );
+            ps1.setDate(3, new java.sql.Date(date.getTime()));
 
             ps1.setString(4, request.getParameter("address"));
-            ps1.setInt(5, tryParse(request.getParameter("Zip")) );
-            ps1.setInt(6, tryParse(request.getParameter("byggeår")) ); 
-            ps1.setInt(7, tryParse(request.getParameter("size")) );
+            ps1.setInt(5, tryParse(request.getParameter("Zip")));
+            ps1.setInt(6, tryParse(request.getParameter("byggeår")));
+            ps1.setInt(7, tryParse(request.getParameter("size")));
             ps1.setString(8, request.getParameter("bygningBrugesTil"));
-            ps1.setInt(9, tryParse(request.getParameter("tagBemærkning")) );
-            ps1.setInt(10, tryParse(request.getParameter("tagBillede")) );
+            ps1.setInt(9, tryParse(request.getParameter("tagBemærkning")));
+            ps1.setInt(10, tryParse(request.getParameter("tagBillede")));
             ps1.setString(11, request.getParameter("textTagBemærkning"));
-            ps1.setInt(12, tryParse(request.getParameter("vægBemærkning")) );
-            ps1.setInt(13, tryParse(request.getParameter("vægBillede")) );
+            ps1.setInt(12, tryParse(request.getParameter("vægBemærkning")));
+            ps1.setInt(13, tryParse(request.getParameter("vægBillede")));
             ps1.setString(14, request.getParameter("textYdreVægBemærkning"));
-            ps1.setInt(15, tryParse(request.getParameter("roomNr")) );
+            ps1.setInt(15, tryParse(request.getParameter("roomNr")));
             ps1.setString(16, request.getParameter("textGenForetagetAf"));
             ps1.setString(17, request.getParameter("textSamarbejdeMed"));
-            ps1.setInt(18, tryParse(request.getParameter("tilstand")) );
+            ps1.setInt(18, tryParse(request.getParameter("tilstand")));
 
             int i = ps1.executeUpdate();
-            if( i > 0 )
+            if (i > 0)
             {
-             // UB.setUserName(username); -- Bean doesn't exist yet.
+                // UB.setUserName(username); -- Bean doesn't exist yet.
             }
             else
             {
@@ -254,45 +247,44 @@ public class reportServlet extends HttpServlet
                 ps1.close();
                 //forward(request, response, "/CreateReport.jsp");
                 return;
-            }    
+            }
 
             ps1.close();
 
-            ps2 = conn.prepareStatement("insert into " 
-                + "room( roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage,"
-                + "repairs, moisture, sponge, mold, fire, otherDamage,"
-                + "otherDamageDescription)"
-                + " values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps2 = conn.prepareStatement("insert into "
+                    + "room( roomName, notices, damagedRoom, dateOfDamage, descriptionOfLocation, explanationOfDamage,"
+                    + "repairs, moisture, sponge, mold, fire, otherDamage,"
+                    + "otherDamageDescription)"
+                    + " values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-            ps2.setString(1, request.getParameter("roomNr")) ;
-            ps2.setInt( 2, tryParse(request.getParameter("bemærkning")) );
-            ps2.setInt( 3, tryParse(request.getParameter("skadet")) );
+            ps2.setString(1, request.getParameter("roomNr"));
+            ps2.setInt(2, tryParse(request.getParameter("bemærkning")));
+            ps2.setInt(3, tryParse(request.getParameter("skadet")));
 
             try
             {
                 date = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("skadeDato"));
-            } 
+            }
             catch (ParseException ex)
             {
                 Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ps2.setDate(4, new java.sql.Date(date.getTime()) );
+            ps2.setDate(4, new java.sql.Date(date.getTime()));
 
-            ps2.setString( 5, request.getParameter("skadeHvor")) ;
-            ps2.setString( 6, request.getParameter("hvadErDerSket")) ;
-            ps2.setString( 7, request.getParameter("HvadErReperaret")) ;
-            ps2.setInt( 8, tryParse(request.getParameter("skadeFugt")) );
-            ps2.setInt( 9, tryParse(request.getParameter("skadeRåd")) );
-            ps2.setInt( 10, tryParse(request.getParameter("skadeSkimmel")) );
-            ps2.setInt( 11, tryParse(request.getParameter("skadeBrand")) );
-            ps2.setInt( 12, tryParse(request.getParameter("skadeAnden")) );
-            ps2.setString( 13, request.getParameter("skadeAndenText")) ;
-
+            ps2.setString(5, request.getParameter("skadeHvor"));
+            ps2.setString(6, request.getParameter("hvadErDerSket"));
+            ps2.setString(7, request.getParameter("HvadErReperaret"));
+            ps2.setInt(8, tryParse(request.getParameter("skadeFugt")));
+            ps2.setInt(9, tryParse(request.getParameter("skadeRåd")));
+            ps2.setInt(10, tryParse(request.getParameter("skadeSkimmel")));
+            ps2.setInt(11, tryParse(request.getParameter("skadeBrand")));
+            ps2.setInt(12, tryParse(request.getParameter("skadeAnden")));
+            ps2.setString(13, request.getParameter("skadeAndenText"));
 
             int i2 = ps2.executeUpdate();
-            if( i2 > 0 )
+            if (i2 > 0)
             {
-              // UB.setUserName(username); -- Bean doesn't exist yet.
+                // UB.setUserName(username); -- Bean doesn't exist yet.
             }
             else
             {
@@ -300,17 +292,18 @@ public class reportServlet extends HttpServlet
                 ps2.close();
                 //forward(request, response, "/CreateReport.jsp");
                 return;
-            }    
+            }
 
-                ps2.close();
-                //forward(request, response, "/CreateReport.jsp");        
-                return;
-        }     
+            ps2.close();
+            //forward(request, response, "/CreateReport.jsp");        
+            return;
+        }
         catch (SQLException ex)
         {
             Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Returns a short description of the servlet.
      *

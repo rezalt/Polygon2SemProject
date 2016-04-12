@@ -6,8 +6,6 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 /**
  *
  * @author Henrik
@@ -22,22 +20,23 @@ public class Building
     String owner;
     String parcelNo;
     ArrayList<Report> reports = new ArrayList();
-    
-    
+
     public void addReport(int reportId, String nameOfBuilding, String date, String address, String zipCode, String yearBuild, int buildingSizeInSquareMetres, String buildingPurpose, Boolean roofNoticeBoolean, Boolean roofPictureBoolean, String roofNotice, Boolean wallNoticeBoolean, Boolean wallPictureBoolean, String wallNotice, String writer, String coWriter, int condition)
     {
-        Report tempReport= new Report(reportId, nameOfBuilding, date, address, zipCode, yearBuild, buildingSizeInSquareMetres, buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean, wallPictureBoolean, wallNotice, writer, coWriter, condition);
+        Report tempReport = new Report(reportId, nameOfBuilding, date, address, zipCode, yearBuild, buildingSizeInSquareMetres, buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean, wallPictureBoolean, wallNotice, writer, coWriter, condition);
         reports.add(tempReport);
     }
+
     public ArrayList<Report> getReports()
     {
         return reports;
     }
+
     public int getID()
     {
         return ID;
     }
-      
+
     public void setID(int ID)
     {
         this.ID = ID;
@@ -47,7 +46,7 @@ public class Building
     {
         return name;
     }
-    
+
     public void setName(String name)
     {
         this.name = name;
@@ -57,12 +56,12 @@ public class Building
     {
         return address;
     }
-    
+
     public void setAddress(String address)
     {
         this.address = address;
     }
-    
+
     public int getCondition()
     {
         return condition;
@@ -72,7 +71,7 @@ public class Building
     {
         this.condition = condition;
     }
-    
+
     public String getOwner()
     {
         return owner;
@@ -87,7 +86,7 @@ public class Building
     {
         return parcelNo;
     }
-    
+
     public void setParcelNo(String parcelNo)
     {
         this.parcelNo = parcelNo;
@@ -95,9 +94,9 @@ public class Building
 
     public Building()
     {
-        
+
     }
-    
+
     public Building(int ID, String name, String address, int condition, String owner, String parcelNo)
     {
         this.ID = ID;
@@ -107,6 +106,5 @@ public class Building
         this.owner = owner;
         this.parcelNo = parcelNo;
     }
-    
-    
+
 }

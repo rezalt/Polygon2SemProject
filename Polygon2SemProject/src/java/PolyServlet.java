@@ -28,40 +28,36 @@ import javax.servlet.http.HttpSession;
 public class PolyServlet extends HttpServlet
 {
 
-    
-    
-    
-        // VARIABLES
+    // VARIABLES
     String username = "";
     int myID = 0;
     int ID = 0;
-    
+
     // END OF VARIABLES
-    
     DBConnector DBC = new DBConnector();
     Connection conn;
-        
-        @Override
-    public void init(ServletConfig conf) throws ServletException 
+
+    @Override
+    public void init(ServletConfig conf) throws ServletException
     {
 
-            try
-            {
-                java.lang.Class.forName(conf.getInitParameter("jdbcDriver"));
-            }
-            catch (ClassNotFoundException ex) 
-            {
-                Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, ex );
-            }
-      
-            
+        try
+        {
+            java.lang.Class.forName(conf.getInitParameter("jdbcDriver"));
+        }
+        catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         super.init(conf);
-        
+
         DBC.setDbURL("jdbc:mysql://91.100.100.141:3360/polygondb");
         DBC.setDbUsername("Admin");
         DBC.setDbPassword("CBAmoria");
 
-    }  
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -72,10 +68,10 @@ public class PolyServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException
-        {
-            response.setContentType("text/html;charset=UTF-8");
-        }
+            throws ServletException, IOException
+    {
+        response.setContentType("text/html;charset=UTF-8");
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -106,146 +102,141 @@ public class PolyServlet extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession(true);
-        
-        String do_this = request.getParameter("user");     
-        
+
+        String do_this = request.getParameter("user");
+
         if (do_this == null)
         {
-             forward(request, response, "/index.html");
+            forward(request, response, "/index.html");
         }
-        else 
-            
-            switch (do_this) 
-                {
+        else
 
-                   case "Login":
+        {
+            switch (do_this)
+            {
 
-                       
-                       if( request.getParameter("Username").isEmpty() || request.getParameter("Password").isEmpty() )
-                       {
+                case "Login":
 
-                            session.setAttribute("text", "You need to enter a username and password.");
-                                forward(request, response, "/CreateUser.jsp");
-                       }
+                    if (request.getParameter("Username").isEmpty() || request.getParameter("Password").isEmpty())
+                    {
 
-                       conn = DBC.getConnection();
+                        session.setAttribute("text", "You need to enter a username and password.");
+                        forward(request, response, "/CreateUser.jsp");
+                    }
 
-                       {
-                           String sql = "SELECT * FROM user WHERE name =? and password =?";
-                           try (PreparedStatement ps = conn.prepareStatement(sql))
-                           {
+                    conn = DBC.getConnection();
 
-                               ps.setString( 1, request.getParameter("Username") );
-                               ps.setString( 2, request.getParameter("Password") );
-                               ResultSet rs = ps.executeQuery();
+                    {
+                        String sql = "SELECT * FROM user WHERE name =? and password =?";
+                        try (PreparedStatement ps = conn.prepareStatement(sql))
+                        {
 
-                                   if(rs.next())
-                                   {
-                                     //  session.setAttribute("user", UB);  -- Bean doesn't exist yet.
-                                       myID = rs.getInt("userId");   
-                                       ps.close();
-                                       forward(request, response, "/CreateBuilding.jsp");
-                                   }
-                                   else
-                                   {
-                                      //besked
-                                       ps.close();
-                                       forward(request, response, "/index.html");
-                                   }
+                            ps.setString(1, request.getParameter("Username"));
+                            ps.setString(2, request.getParameter("Password"));
+                            ResultSet rs = ps.executeQuery();
 
-
-                           }
-                           catch(Exception e)
-                           {
-                               Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "WHAT");
+                            if (rs.next())
+                            {
+                                //  session.setAttribute("user", UB);  -- Bean doesn't exist yet.
+                                myID = rs.getInt("userId");
+                                ps.close();
+                                forward(request, response, "/CreateBuilding.jsp");
+                            }
+                            else
+                            {
+                                //besked
+                                ps.close();
                                 forward(request, response, "/index.html");
-                           }
-                       }
+                            }
 
-                   break;   
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "WHAT");
+                            forward(request, response, "/index.html");
+                        }
+                    }
 
-                   case "NewUser":
+                    break;
 
-                       
-                       if( request.getParameter("Username").isEmpty() || request.getParameter("Password").isEmpty() )
-                       {
+                case "NewUser":
 
-                            session.setAttribute("text", "You need to enter a username and password.");
+                    if (request.getParameter("Username").isEmpty() || request.getParameter("Password").isEmpty())
+                    {
+
+                        session.setAttribute("text", "You need to enter a username and password.");
+                        forward(request, response, "/CreateUser.jsp");
+                    }
+
+                    conn = DBC.getConnection();
+                    PreparedStatement ps = null;
+
+                    try (Statement st = conn.createStatement())
+                    {
+
+                        // Creating a user                      
+                        st.executeQuery("SELECT userid, name FROM user");
+                        ResultSet rs = st.getResultSet();
+
+                        while (rs.next())
+                        {
+
+                            if (rs.getString("name").equals(request.getParameter("Username")))
+                            {
+
+                                session.setAttribute("text", "Username already exists");
+                                st.close();
                                 forward(request, response, "/CreateUser.jsp");
-                       }
+                            }
 
-                       conn = DBC.getConnection();
-                       PreparedStatement ps = null;
+                        }
+                        // Makes sure we don't show a meaningless error messages.
+                        session.setAttribute("text", " ");
+                        st.close();
 
-  
-                       try (Statement st = conn.createStatement()) 
-                       {
-                           
-                           // Creating a user                      
-                           st.executeQuery("SELECT userid, name FROM user");
-                           ResultSet rs = st.getResultSet();
+                        // Her indsætter vi vores nye user ind i databasen.
+                        ps = conn.prepareStatement("insert into user(name,password,"
+                                + "companyName,companyAddress,Zip) "
+                                + "values(?,?,?,?,?)");
 
-                           while(rs.next())
-                           {
+                        ps.setString(1, request.getParameter("Username"));
+                        ps.setString(2, request.getParameter("Password"));
+                        ps.setString(3, request.getParameter("companyName"));
+                        ps.setString(4, request.getParameter("companyAddress"));
+                        ps.setString(5, request.getParameter("Zip"));
 
-                               if( rs.getString("name").equals(request.getParameter("Username")))
-                               {
-                                   
-                                    session.setAttribute("text", "Username already exists");
-                                        st.close();
-                                        forward(request, response, "/CreateUser.jsp");
-                               }
+                        int i = ps.executeUpdate();
+                        if (i > 0)
+                        {
+                            // UB.setUserName(username); -- Bean doesn't exist yet.
+                        }
+                        else
+                        {
+                            session.setAttribute("text", "Error creating user");
+                            ps.close();
+                            forward(request, response, "/CreateUser.jsp");
+                        }
 
-                               
-                           }
-                            // Makes sure we don't show a meaningless error messages.
-                                session.setAttribute("text", " ");
-                                st.close(); 
-                                
-                           // Her indsætter vi vores nye user ind i databasen.
-                               ps = conn.prepareStatement("insert into user(name,password,"
-                                                        + "companyName,companyAddress,Zip) "
-                                                        + "values(?,?,?,?,?)");
+                        ps.close();
+                        forward(request, response, "/index.html");
+                    }
 
-                               ps.setString( 1, request.getParameter("Username") ); 
-                               ps.setString( 2, request.getParameter("Password") ); 
-                               ps.setString( 3, request.getParameter("companyName") ); 
-                               ps.setString( 4, request.getParameter("companyAddress") ); 
-                               ps.setString( 5, request.getParameter("Zip") ); 
+                    catch (SQLException e)
+                    {
+                        Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "new user");
+                        session.setAttribute("text", "" + e);
+                        forward(request, response, "/CreateUser.jsp");
+                    }
 
+                    break;
 
-                               int i = ps.executeUpdate();
-                               if( i > 0 )
-                               {
-                                  // UB.setUserName(username); -- Bean doesn't exist yet.
-                               }
-                                   else
-                                   {
-                                        session.setAttribute("text", "Error creating user");
-                                        ps.close();
-                                        forward(request, response, "/CreateUser.jsp");
-                                   }    
-                               
-                               ps.close();
-                               forward(request, response, "/index.html");        
-                            } 
-                           
-                       catch (SQLException e) 
-                       {
-                           Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "new user");
-                           session.setAttribute("text", "" +e);
-                           forward(request, response, "/CreateUser.jsp"); 
-                       }
-      
-                   break;
-        
             }
-        
+        }
+
         processRequest(request, response);
     } // end of doPost
-    
-    
-    private void forward(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException 
+
+    private void forward(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException
     {
         ServletContext sc = getServletContext();
         RequestDispatcher rd = sc.getRequestDispatcher(path);

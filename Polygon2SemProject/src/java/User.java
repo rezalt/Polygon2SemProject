@@ -6,24 +6,24 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author JAJAJABLESES
  */
 public class User
 {
+
     int id;
     String username;
     String password;
     ArrayList<Building> buildings = new ArrayList();
-    
+
     public void addBuilding(int ID, String name, String address, int condition, String owner, String parcelNo)
     {
-        Building tempBuilding=new Building(ID, name, address, condition, owner, parcelNo);
+        Building tempBuilding = new Building(ID, name, address, condition, owner, parcelNo);
         buildings.add(tempBuilding);
     }
-    
+
     public int getId()
     {
         return id;
@@ -53,13 +53,12 @@ public class User
     {
         this.password = password;
     }
-   
-    
+
     public User(int id, String username, String password)
     {
-        this.id=id;
-        this.password=password;
-        this.username=username;
-        
+        this.id = id;
+        this.password = password;
+        this.username = username;
+
     }
 }

@@ -13,138 +13,138 @@
         <link href="<c:url value="/Resources/Report/Report.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        
+
     </head>
     <body>
-        
-        <div class="wrapper">
-      
-        <ul>
-            <li><a href="Login.jsp">Login</a></li>
-            <li><a href="CreateUser.jsp">CreateUser</a></li>
-            <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
-        </ul>    
-                <%
-                        String text = (String)session.getAttribute("text");
-                            if(text==null)
-                            {
-                              session.setAttribute("text", "");
-                            }
-                         %>
-                        <%=session.getAttribute("text")%>
-                        
-                        
-                <h1>
-                    Please fill the report.
-                </h1>
 
-                <form class="login" name="form3" action="reportServlet" method="POST"> <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
-                       <input type="hidden" name="report" value="" />
-                    <p class="title">
-                        
-                    <table id="rTable0">
-                        <tr>
-                            <td>
-                                <input type="number" placeholder="Rapport nr.:" name="rapportNr">
-                            </td>
-                        </tr>
-                    </table>
-                    <h2>
-                        Bygningsgennemgang <br>
-                    </h2>
-                        
-                    <table border="0" id="rTable1">
-                        <tr>  
-                            <td>
-                                <input type="text" placeholder="Navn på bygning" name="buildingName">
-                            </td>  
-                            <td width="30%">
-                                
-                            </td>
-                            <td>
-                                <input type="date" placeholder="Dato" name="dato">
-                            </td>
-                        </tr>
-                        <tr>  
-                            <td>
-                                <input type="text" placeholder="Adresse" name="address">
-                            </td>
-                            <td>            
-                            </td>
-                            <td>
-                                <label id="smallFont">
-                                    Polygon<br>
-                                    Rypevang 5<br>
-                                    3450 Allerød
-                                </label>    
-                            </td>
-            
-                        </tr>
-                        <tr>  
-                            <td>
-                                <input type="number" min="100" placeholder="Postnr. / By" name="Zip">
-                            </td>
-                            <td>
-                                
-                            </td>
-                            <td>
-                                <label id="smallFont">
+        <div class="wrapper">
+
+            <ul>
+                <li><a href="Login.jsp">Login</a></li>
+                <li><a href="CreateUser.jsp">CreateUser</a></li>
+                <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
+            </ul>    
+            <%
+                String text = (String) session.getAttribute("text");
+                if (text == null)
+                {
+                    session.setAttribute("text", "");
+                }
+            %>
+            <%=session.getAttribute("text")%>
+
+
+            <h1>
+                Please fill the report.
+            </h1>
+
+            <form class="login" name="form3" action="reportServlet" method="POST"> <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
+                <input type="hidden" name="report" value="" />
+                <p class="title">
+
+                <table id="rTable0">
+                    <tr>
+                        <td>
+                            <input type="number" placeholder="Rapport nr.:" name="rapportNr">
+                        </td>
+                    </tr>
+                </table>
+                <h2>
+                    Bygningsgennemgang <br>
+                </h2>
+
+                <table border="0" id="rTable1">
+                    <tr>  
+                        <td>
+                            <input type="text" placeholder="Navn på bygning" name="buildingName">
+                        </td>  
+                        <td width="30%">
+
+                        </td>
+                        <td>
+                            <input type="date" placeholder="Dato" name="dato">
+                        </td>
+                    </tr>
+                    <tr>  
+                        <td>
+                            <input type="text" placeholder="Adresse" name="address">
+                        </td>
+                        <td>            
+                        </td>
+                        <td>
+                            <label id="smallFont">
+                                Polygon<br>
+                                Rypevang 5<br>
+                                3450 Allerød
+                            </label>    
+                        </td>
+
+                    </tr>
+                    <tr>  
+                        <td>
+                            <input type="number" min="100" placeholder="Postnr. / By" name="Zip">
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <label id="smallFont">
                                 Tlf. 4814 0555<br>
                                 sundebygninger@polygon.dk
-                                </label>
-                                
-                            </td>
-                        </tr>
-                    </table>
-                    <table id="rTable2">
-                        <tr>
-                            <td>
-                                <b>General information om bygningen</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="number" min="1000" placeholder="Byggeår" name="byggeår">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="number" placeholder="Bygningsareal i m2 (hver etage tælles separat)" name="size">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" placeholder="Hvad bruges bygningen til / Hvad har bygningen været brugt til?" name="bygningBrugesTil">
-                            </td>
-                        </tr>
-                        <tr>
-                            
-                        </tr>
-                        <tr>
-                            <td>
-                                <b>Gennemgang af bygningen udvendig</b>
-                            </td>
-                        </tr>
-                    </table>    
-                    <table>
+                            </label>
 
-                        <tr>
-                            <td width="70%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                &nbsp Tag
-                            </td>
-                            <td id="rTdBorderRight">
-                                Bemærkninger
-                                 <input type="checkbox" name="bemærkning" value="tagBemærkning">
-                            </td>
-                            <td id="rTdCenter">
-                                Billede
-                                <input type="checkbox" name="billede" value="tagBillede">
-                            </td>
-                    </table>
-                    <table>
-                        <tr> 
-                            <td>
-                             <TEXTAREA NAME="textTagBemærkning" ROWS="5" cols="50"></TEXTAREA>
+                        </td>
+                    </tr>
+                </table>
+                <table id="rTable2">
+                    <tr>
+                        <td>
+                            <b>General information om bygningen</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" min="1000" placeholder="Byggeår" name="byggeår">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" placeholder="Bygningsareal i m2 (hver etage tælles separat)" name="size">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" placeholder="Hvad bruges bygningen til / Hvad har bygningen været brugt til?" name="bygningBrugesTil">
+                        </td>
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Gennemgang af bygningen udvendig</b>
+                        </td>
+                    </tr>
+                </table>    
+                <table>
+
+                    <tr>
+                        <td width="70%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            &nbsp Tag
+                        </td>
+                        <td id="rTdBorderRight">
+                            Bemærkninger
+                            <input type="checkbox" name="bemærkning" value="tagBemærkning">
+                        </td>
+                        <td id="rTdCenter">
+                            Billede
+                            <input type="checkbox" name="billede" value="tagBillede">
+                        </td>
+                </table>
+                <table>
+                    <tr> 
+                        <td>
+                            <TEXTAREA NAME="textTagBemærkning" ROWS="5" cols="50"></TEXTAREA>
                             </td>
                         </tr>
                     </table>
@@ -662,11 +662,11 @@ Den bygningsansvarlige skal udlevere plantegning over bygningen inden bygningsge
                   
         </div> 
         <script>
-             function myFunction() 
-             {
-                 document.form3.report.value='create';
-             }
-         </script>
+        function myFunction()
+        {
+            document.form3.report.value = 'create';
+        }
+</script>
          
         
     </body>

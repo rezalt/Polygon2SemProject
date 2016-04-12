@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,55 +14,67 @@ import java.sql.SQLException;
  */
 public class DBConnector
 {
-    
+
     String URL;
     String Username;
     String Password;
-    
-    
-    public Connection getConnection() {
+
+    public Connection getConnection()
+    {
         Connection conn = null;
-        try {
-        conn = DriverManager.getConnection(getDbURL(), getDbUsername(), getDbPassword());
+        try
+        {
+            conn = DriverManager.getConnection(getDbURL(), getDbUsername(), getDbPassword());
         }
-        catch (SQLException e) {
-        System.out.println("Could not connect to DB: " + e.getMessage());
+        catch (SQLException e)
+        {
+            System.out.println("Could not connect to DB: " + e.getMessage());
         }
         return conn;
     }
-    
+
     public void putConnection(Connection conn)
     {
-        if (conn != null) 
+        if (conn != null)
         {
-            try { conn.close(); 
+            try
+            {
+                conn.close();
             }
-            catch (SQLException e) { }
+            catch (SQLException e)
+            {
+            }
         }
     }
 
-    public void setDbURL(String URL) {
+    public void setDbURL(String URL)
+    {
         this.URL = URL;
     }
 
-    public void setDbUsername(String Username) {
+    public void setDbUsername(String Username)
+    {
         this.Username = Username;
     }
 
-    public void setDbPassword(String Password) {
+    public void setDbPassword(String Password)
+    {
         this.Password = Password;
     }
 
-    public String getDbURL() {
+    public String getDbURL()
+    {
         return URL;
     }
 
-    public String getDbUsername() {
+    public String getDbUsername()
+    {
         return Username;
     }
 
-    public String getDbPassword() {
+    public String getDbPassword()
+    {
         return Password;
     }
-    
+
 }
