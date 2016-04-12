@@ -662,10 +662,10 @@ Den bygningsansvarlige skal udlevere plantegning over bygningen inden bygningsge
                   
         </div> 
         <script>
-        function myFunction()
-        {
-            document.form3.report.value = 'create';
-        }
+            function myFunction()
+            {
+                document.form3.report.value = 'create';
+            }
 </script>
          
         

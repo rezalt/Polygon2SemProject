@@ -19,5 +19,16 @@
             <li><a href="CreateReport.jsp">CreateReport</a></li>
         </ul>
         Hello mr 
+        <%
+            String name = (String) session.getAttribute("Name");
+            out.print(name);
+        %>
+        
+        You have the following buildings;
+        
+        <%
+            //ArrayList<String> buildingNames = session.getAttribute(buildingNames);
+        %>
+                    
     </body>
 </html>

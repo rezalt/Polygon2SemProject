@@ -130,17 +130,18 @@ public class PolyServlet extends HttpServlet
                         String sql = "SELECT * FROM user WHERE name =? and password =?";
                         try (PreparedStatement ps = conn.prepareStatement(sql))
                         {
-
+                            String tempUser = request.getParameter("Username");
                             ps.setString(1, request.getParameter("Username"));
                             ps.setString(2, request.getParameter("Password"));
                             ResultSet rs = ps.executeQuery();
 
                             if (rs.next())
                             {
+                                session.setAttribute("Name", tempUser);
                                 //  session.setAttribute("user", UB);  -- Bean doesn't exist yet.
                                 myID = rs.getInt("userId");
                                 ps.close();
-                                forward(request, response, "/CreateBuilding.jsp");
+                                forward(request, response, "/MainPage.jsp");
                             }
                             else
                             {
