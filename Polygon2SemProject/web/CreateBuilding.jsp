@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <link href="<c:url value="/Resources/Theme/Index.css"/>" rel="stylesheet">
         <link href="<c:url value="/Resources/Building/building.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -19,6 +19,11 @@
         
         <div class="wrapper">
       
+            <ul>
+                <li><a href="Login.jsp">Login</a></li>
+                <li><a href="CreateUser.jsp">CreateUser</a></li>
+                <li><a href="CreateReport.jsp">CreateReport</a></li>
+            </ul>
             
                 <h1>
                     Please insert building info.

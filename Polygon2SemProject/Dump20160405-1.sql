@@ -41,7 +41,10 @@ CREATE TABLE `Report` (
   `writer` varchar(45) NOT NULL,
   `coWriter` varchar(45) DEFAULT NULL,
   `condition` int(11) NOT NULL,
-  PRIMARY KEY (`reportId`)
+  `buildingId` int(11) NOT NULL,
+  PRIMARY KEY (`reportId`),
+  FOREIGN KEY(`buildingId`)
+  REFERENCES Room(`roomId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -62,6 +65,7 @@ DROP TABLE IF EXISTS `Room`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Room` (
+ `roomId` int(11) NOT NULL,
   `roomName` varchar(45) NOT NULL,
   `notices` bit(1) DEFAULT NULL,
   `damagedRoom` bit(1) NOT NULL,
@@ -79,8 +83,11 @@ CREATE TABLE `Room` (
   `moldDescription` varchar(45) DEFAULT NULL,
   `fireDescription` varchar(45) DEFAULT NULL,
   `otherDamageDescription` varchar(45) DEFAULT NULL,
-  `roomId` int(11) NOT NULL,
-  PRIMARY KEY (`roomId`)
+  `reportId` int(11) NOT NULL,
+  PRIMARY KEY (`roomId`),
+  FOREIGN KEY (`reportId') 
+  REFERENCES Report(`reportId`)
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
