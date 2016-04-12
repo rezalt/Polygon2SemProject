@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -137,7 +138,11 @@ public class PolyServlet extends HttpServlet
 
                             if (rs.next())
                             {
+                                ArrayList<String> buildingNames = new ArrayList();
+                                buildingNames.add("JohnHytten");
+                                buildingNames.add("Bygning nr fucking 2");
                                 session.setAttribute("Name", tempUser);
+                                session.setAttribute("buildingNames", buildingNames);
                                 //  session.setAttribute("user", UB);  -- Bean doesn't exist yet.
                                 myID = rs.getInt("userId");
                                 ps.close();

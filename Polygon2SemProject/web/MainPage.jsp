@@ -26,10 +26,16 @@
         %>
         
         You have the following buildings;
-        
+        <br>
+        <br>
         <%
             ArrayList<String> buildingNames = new ArrayList();
             buildingNames = (ArrayList<String>) session.getAttribute("buildingNames");
+            for(int i = 0; i < buildingNames.size(); i++)
+            {
+                out.print(buildingNames.get(i)+"<br>");
+                
+            }
         %>
                     
     </body>
