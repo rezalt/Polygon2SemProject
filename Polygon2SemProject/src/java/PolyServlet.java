@@ -127,54 +127,56 @@ public class PolyServlet extends HttpServlet
 
                     conn = DBC.getConnection();
 
-                     {
-                        int type;
-                        String sql = "SELECT * FROM user WHERE name =? and password =?";
-                        try (PreparedStatement ps = conn.prepareStatement(sql))
-                        {
-                            String tempUser = request.getParameter("Username");
-                            ps.setString(1, request.getParameter("Username"));
-                            ps.setString(2, request.getParameter("Password"));
-                            ResultSet rs = ps.executeQuery();
+                    int type;
+                    String sql = "SELECT * FROM user WHERE name =? and password =?";
+                    try (PreparedStatement ps = conn.prepareStatement(sql))
+                    {
+                        String tempUser = request.getParameter("Username");
+                        ps.setString(1, request.getParameter("Username"));
+                        ps.setString(2, request.getParameter("Password"));
+                        ResultSet rs = ps.executeQuery();
 
-                            if (rs.next())
+                        if (rs.next())
+                        {
+                            type = rs.getInt(7);
+                            if (type == 2)
                             {
-                                type=rs.getInt(7);                  
-                                if(type == 2)
-                                {              
-                                    session.setAttribute("loggedIn", "admin");
-                                    
-                                    ArrayList<String> buildingNames = new ArrayList();
-                                    buildingNames.add("JohnHytten");
-                                    buildingNames.add("Bygning nr fucking 2");
-                                    session.setAttribute("Name", tempUser);
-                                    session.setAttribute("buildingNames", buildingNames);
-                                    myID = rs.getInt("userId");
-                                    ps.close();
-                                    forward(request, response, "/MainPage.jsp");
-                                }
-                                else
-                                {
-                                    ps.close();
-                                    session.setAttribute("loggedIn", "user");
-                                    RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");
-                                    rd.include(request, response);
-                                }
+
+                                session.setAttribute("loggedIn", "admin");
+
+                                ArrayList<String> buildingNames = new ArrayList();
+                                //buildingNames.add("JohnHytten");
+                                //buildingNames.add("Bygning nr fucking 2");
                                 
+                                buildingNames = getUsersBuildingNames(request, response, tempUser);
+                                
+                                session.setAttribute("Name", tempUser);
+                                session.setAttribute("buildingNames", buildingNames);
+                                myID = rs.getInt("userId");
+                                ps.close();
+                                forward(request, response, "/MainPage.jsp");
                             }
                             else
                             {
-                                //besked
                                 ps.close();
-                                forward(request, response, "/index.html");
+                                session.setAttribute("loggedIn", "user");
+                                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                                rd.include(request, response);
                             }
 
                         }
-                        catch (Exception e)
+                        else
                         {
-                            Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "WHAT");
+                            //besked
+                            ps.close();
                             forward(request, response, "/index.html");
                         }
+
+                    }
+                    catch (Exception e)
+                    {
+                        Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "WHAT");
+                        forward(request, response, "/index.html");
                     }
 
                     break;
@@ -255,6 +257,33 @@ public class PolyServlet extends HttpServlet
 
         processRequest(request, response);
     } // end of doPost
+
+    public ArrayList<String> getUsersBuildingNames(HttpServletRequest request, HttpServletResponse response, String username)throws IOException, ServletException
+    {
+        ArrayList<String> buildingNames = new ArrayList();
+        conn = DBC.getConnection();
+        String sql = "SELECT * FROM building WHERE buildingOwner =?";
+        try (PreparedStatement ps = conn.prepareStatement(sql))
+        {
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                buildingNames.add(rs.getString(2));
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "WHAT");
+            forward(request, response, "/index.html");
+            
+        }
+        
+        return buildingNames;
+    }
+
+    
 
     private void forward(HttpServletRequest request, HttpServletResponse response, String path) throws IOException, ServletException
     {
