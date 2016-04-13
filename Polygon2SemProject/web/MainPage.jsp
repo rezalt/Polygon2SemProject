@@ -19,6 +19,7 @@
             <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
             <li><a href="CreateReport.jsp">CreateReport</a></li>
         </ul>
+        
         Hello mr 
         <%
             String name = (String) session.getAttribute("Name");
@@ -33,8 +34,7 @@
             buildingNames = (ArrayList<String>) session.getAttribute("buildingNames");
             for(int i = 0; i < buildingNames.size(); i++)
             {
-                out.print(buildingNames.get(i)+"<br>");
-                
+                out.print(buildingNames.get(i)+"<br>");  
             }
         %>
                     

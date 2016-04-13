@@ -127,7 +127,8 @@ public class PolyServlet extends HttpServlet
 
                     conn = DBC.getConnection();
 
-                    {
+                     {
+                        int type;
                         String sql = "SELECT * FROM user WHERE name =? and password =?";
                         try (PreparedStatement ps = conn.prepareStatement(sql))
                         {
@@ -138,15 +139,28 @@ public class PolyServlet extends HttpServlet
 
                             if (rs.next())
                             {
-                                ArrayList<String> buildingNames = new ArrayList();
-                                buildingNames.add("JohnHytten");
-                                buildingNames.add("Bygning nr fucking 2");
-                                session.setAttribute("Name", tempUser);
-                                session.setAttribute("buildingNames", buildingNames);
-                                //  session.setAttribute("user", UB);  -- Bean doesn't exist yet.
-                                myID = rs.getInt("userId");
-                                ps.close();
-                                forward(request, response, "/MainPage.jsp");
+                                type=rs.getInt(7);                  
+                                if(type == 2)
+                                {              
+                                    session.setAttribute("loggedIn", "admin");
+                                    
+                                    ArrayList<String> buildingNames = new ArrayList();
+                                    buildingNames.add("JohnHytten");
+                                    buildingNames.add("Bygning nr fucking 2");
+                                    session.setAttribute("Name", tempUser);
+                                    session.setAttribute("buildingNames", buildingNames);
+                                    myID = rs.getInt("userId");
+                                    ps.close();
+                                    forward(request, response, "/MainPage.jsp");
+                                }
+                                else
+                                {
+                                    ps.close();
+                                    session.setAttribute("loggedIn", "user");
+                                    RequestDispatcher rd=request.getRequestDispatcher("Login.jsp");
+                                    rd.include(request, response);
+                                }
+                                
                             }
                             else
                             {
