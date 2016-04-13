@@ -122,7 +122,7 @@ public class PolyServlet extends HttpServlet
                     {
 
                         session.setAttribute("text", "You need to enter a username and password.");
-                        forward(request, response, "/CreateUser.jsp");
+                        forward(request, response, "/Login.jsp");
                     }
 
                     conn = DBC.getConnection();
@@ -160,7 +160,7 @@ public class PolyServlet extends HttpServlet
                             {
                                 ps.close();
                                 session.setAttribute("loggedIn", "user");
-                                RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+                                RequestDispatcher rd = request.getRequestDispatcher("CreateUser.jsp");
                                 rd.include(request, response);
                             }
 
@@ -169,14 +169,16 @@ public class PolyServlet extends HttpServlet
                         {
                             //besked
                             ps.close();
-                            forward(request, response, "/index.html");
+                            session.setAttribute("text", "Wrong username or password.");
+                            forward(request, response, "/Login.jsp");
                         }
 
                     }
                     catch (Exception e)
                     {
+                        session.setAttribute("text", e);
                         Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "WHAT");
-                        forward(request, response, "/index.html");
+                        forward(request, response, "/Login.jsp");
                     }
 
                     break;
