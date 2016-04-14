@@ -264,7 +264,7 @@ public class PolyServlet extends HttpServlet
     {
         ArrayList<String> buildingNames = new ArrayList();
         conn = DBC.getConnection();
-        String sql = "SELECT * FROM building WHERE buildingOwner =?";
+        String sql = "SELECT * FROM building WHERE buildingCompany =?";
         try (PreparedStatement ps = conn.prepareStatement(sql))
         {
             ps.setString(1, username);
@@ -279,7 +279,6 @@ public class PolyServlet extends HttpServlet
         {
             Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "WHAT");
             forward(request, response, "/index.html");
-            
         }
         
         return buildingNames;

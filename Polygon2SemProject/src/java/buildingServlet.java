@@ -150,7 +150,7 @@ public class buildingServlet extends HttpServlet
                         st.close();
 
                         // Inserting our new building to the database.
-                        ps1 = conn.prepareStatement("insert into building(buildingName, address, buildingCondition, buildingOwner, parcelNr, size, zipcode) values(?,?,?,?,?,?,?)");
+                        ps1 = conn.prepareStatement("insert into building(buildingName, address, buildingCondition, buildingCompany, parcelNr, size, zipcode) values(?,?,?,?,?,?,?)");
 
                         ps1.setString(1, request.getParameter("buildingName"));
                         ps1.setString(2, request.getParameter("address"));

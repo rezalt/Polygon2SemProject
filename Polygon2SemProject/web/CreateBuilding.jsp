@@ -13,7 +13,6 @@
         <link href="<c:url value="/Resources/Building/building.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-
     </head>
     <body>
 
@@ -46,7 +45,7 @@
                             <input type="number" placeholder="buildingCondition" name="buildingCondition" min="0" max="3">
                         </td>
                         <td>
-                            <input type="text" placeholder="Owner" name="buildingOwner">
+                            <input type="text" placeholder="Owner" name="buildingCompany">
                         </td>
                     </tr>
                     <tr>  

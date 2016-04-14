@@ -22,6 +22,12 @@
         
         Hello mr 
         <%
+            out.print(session.getAttribute("loggedIn"));
+            if(session.getAttribute("loggedIn")== null)
+            {
+                response.sendRedirect("index.html");
+            }
+            
             String name = (String) session.getAttribute("Name");
             out.print(name);
         %>
@@ -30,11 +36,19 @@
         <br>
         <br>
         <%
-            ArrayList<String> buildingNames = new ArrayList();
-            buildingNames = (ArrayList<String>) session.getAttribute("buildingNames");
-            for(int i = 0; i < buildingNames.size(); i++)
+           out.print(session.getAttribute("username"));
+            if(session.getAttribute("loggedIn")== null)
             {
-                out.print(buildingNames.get(i)+"<br>");  
+                response.sendRedirect("index.html");
+            }
+            else
+            {
+                ArrayList<String> buildingNames = new ArrayList();
+                buildingNames = (ArrayList<String>) session.getAttribute("buildingNames");
+                for(int i = 0; i < buildingNames.size(); i++)
+                {
+                    out.print(buildingNames.get(i)+"<br>");  
+                }
             }
         %>
                     
