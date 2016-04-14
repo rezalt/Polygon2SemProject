@@ -35,7 +35,7 @@
         You have the following buildings;
         <br>
         <br>
-        <form action="BuildingJSP.jsp" method="POST">
+        <form action="buildingServ2" method="POST">
         <%
            //out.print(session.getAttribute("username"));
             if(session.getAttribute("loggedIn")== null)
@@ -50,6 +50,7 @@
                 {
                     out.print("<INPUT TYPE=\"SUBMIT\" name=\"buildingChosen\" value=\""+buildingNames.get(i)+"\"><br>");  
                 }
+                
             }
         %>
            

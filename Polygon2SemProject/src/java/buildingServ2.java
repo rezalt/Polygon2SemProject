@@ -61,8 +61,8 @@ public class buildingServ2 extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession(true);
-        String buildingName = (String) request.getAttribute("buildingChosen");
-        
+        String buildingName = (String) request.getParameter("buildingChosen");
+        System.out.println("-------->"+buildingName+"<---------");
         session.setAttribute("buildingChosen", buildingName);
         forward(request, response, "/BuildingJSP.jsp");
     }

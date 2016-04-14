@@ -15,7 +15,7 @@
         <h1>Hello World!</h1>
         the building is:
         <%
-            out.print(request.getAttribute("buildingChosen"));
+            out.print(session.getAttribute("buildingChosen"));
             %>
             GB yoyo
     </body>

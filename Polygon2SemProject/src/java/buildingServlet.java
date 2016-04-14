@@ -103,7 +103,7 @@ public class buildingServlet extends HttpServlet
     {
         HttpSession session = request.getSession(true);
 
-        String do_this = request.getParameter("building");
+        String do_this =(String) request.getParameter("building");
 //        String buildingChosen = request.getParameter("buildingChosen");
 //        if (buildingChosen!=null)
 //        {
