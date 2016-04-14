@@ -218,13 +218,12 @@ public class reportServlet extends HttpServlet
             
             // Inserting our new report to the database.
             ps1 = conn.prepareStatement("insert into "
-                    + "report (reportNr, nameOfBuilding, rDate, address, zipCode, yearBuild, buildingSizeInSquareMeters,"
+                    + "report (nameOfBuilding, rDate, address, zipCode, yearBuild, buildingSizeInSquareMeters,"
                     + "buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean,"
                     + "wallPictureBoolean, WallNotice, roomId, writer, coWriter, buildingCondition, roofPicture, wallPicture)"
-                    + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-            ps1.setInt(1, tryParse(request.getParameter("rapportNr")));
-            ps1.setString(2, request.getParameter("buildingName"));
+            ps1.setString(1, request.getParameter("buildingName"));
 
             Date date = null;
             try
@@ -235,33 +234,33 @@ public class reportServlet extends HttpServlet
             {
                 Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ps1.setDate(3, new java.sql.Date(date.getTime()));
+            ps1.setDate(2, new java.sql.Date(date.getTime()));
 
-            ps1.setString(4, request.getParameter("address"));
-            ps1.setInt(5, tryParse(request.getParameter("Zip")));
-            ps1.setInt(6, tryParse(request.getParameter("byggeår")));
-            ps1.setInt(7, tryParse(request.getParameter("size")));
-            ps1.setString(8, request.getParameter("bygningBrugesTil"));
-            ps1.setInt(9, tryParse(request.getParameter("tagBemærkning")));
-            ps1.setInt(10, tryParse(request.getParameter("tagBillede")));
-            ps1.setString(11, request.getParameter("textTagBemærkning"));
-            ps1.setInt(12, tryParse(request.getParameter("vægBemærkning")));
-            ps1.setInt(13, tryParse(request.getParameter("vægBillede")));
-            ps1.setString(14, request.getParameter("textYdreVægBemærkning"));
-            ps1.setInt(15, tryParse(request.getParameter("roomNr")));
-            ps1.setString(16, request.getParameter("textGenForetagetAf"));
-            ps1.setString(17, request.getParameter("textSamarbejdeMed"));
-            ps1.setInt(18, tryParse(request.getParameter("tilstand")));
+            ps1.setString(3, request.getParameter("address"));
+            ps1.setInt(4, tryParse(request.getParameter("Zip")));
+            ps1.setInt(5, tryParse(request.getParameter("byggeår")));
+            ps1.setInt(6, tryParse(request.getParameter("size")));
+            ps1.setString(7, request.getParameter("bygningBrugesTil"));
+            ps1.setInt(8, tryParse(request.getParameter("tagBemærkning")));
+            ps1.setInt(9, tryParse(request.getParameter("tagBillede")));
+            ps1.setString(10, request.getParameter("textTagBemærkning"));
+            ps1.setInt(11, tryParse(request.getParameter("vægBemærkning")));
+            ps1.setInt(12, tryParse(request.getParameter("vægBillede")));
+            ps1.setString(13, request.getParameter("textYdreVægBemærkning"));
+            ps1.setInt(14, tryParse(request.getParameter("roomNr")));
+            ps1.setString(15, request.getParameter("textGenForetagetAf"));
+            ps1.setString(16, request.getParameter("textSamarbejdeMed"));
+            ps1.setInt(17, tryParse(request.getParameter("tilstand")));
 
 
             if(iS1 != null)
             {  
-                ps1.setBinaryStream(19, iS1 );
+                ps1.setBinaryStream(18, iS1 );
             }
           
             if(iS2 != null)
             {
-                ps1.setBinaryStream(20, iS2 );
+                ps1.setBinaryStream(19, iS2 );
             }
             
             int i = ps1.executeUpdate();

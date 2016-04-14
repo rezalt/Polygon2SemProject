@@ -30,7 +30,7 @@
 
             <form class="login" NAME="form1" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
                 <input type="hidden" name="user" value="" />
-                <p class="title">Customer login</p>
+                <p class="title" >Customer login</p>
                 <input type="text" placeholder="Username" name="Username"  autofocus/>
                 <i class="fa fa-user"></i>
                 <input type="password" placeholder="Password" name="Password" />

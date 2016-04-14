@@ -36,11 +36,12 @@
             <form class="login" name="form2" action="buildingServlet" method="get"> <img src="Logo.JPG" alt="Logo">
                 <input type="hidden" name="building" value="" />
                 <p class="title">Create building
+                <div align="center">
                 <table border="0">
                     <tr>  
                         <td>
                             <input type="text" placeholder="Building name" name="buildingName">
-                        </td>                       
+                        </td>  
                         <td>
                             <input type="text" placeholder="Address" name="address">
                         </td>
@@ -75,7 +76,7 @@
                         </td>
                     </tr>
                 </table>  
-
+                </div>    
             </form>
             <footer><a target="blank"> Gruppe 4 - A </a></footer>
         </p>
