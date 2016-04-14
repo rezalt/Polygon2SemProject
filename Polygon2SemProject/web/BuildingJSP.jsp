@@ -13,10 +13,23 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        the building is:
+        the building:
         <%
             out.print(session.getAttribute("buildingChosen"));
             %>
-            GB yoyo
+        Has the following attributes;
+        <%
+            out.print("<br>The address is: "+session.getAttribute("address"));
+            out.print("<br>The buildings condtion is: "+session.getAttribute("buildingCondition"));
+            out.print("<br>The company owning the building is: "+session.getAttribute("buildingCompany"));
+            out.print("<br>The parcel nr for this building: "+session.getAttribute("parcelNr"));
+            out.print("<br>The size is: "+session.getAttribute("size")+"m2");
+            out.print("<br>The zipcode is: "+session.getAttribute("zipcode"));
+            
+            
+        %>
+            
+            
+            
     </body>
 </html>
