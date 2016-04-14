@@ -25,6 +25,7 @@
         
         Hello,
         <%
+            
             //out.print(session.getAttribute("loggedIn"));
             if(session.getAttribute("loggedIn")== null)
             {
@@ -43,6 +44,14 @@
         <form class="login" action="buildingServ2" method="POST"> 
             <img src="Logo.JPG" alt="Logo">
             <p class="title">Your company have the following buildings. <br> </p>
+            <%
+                String text = (String) session.getAttribute("text");
+                if (text == null)
+                {
+                    session.setAttribute("text", "");
+                }
+            %>
+            <%=session.getAttribute("text")%>
         <%
            //out.print(session.getAttribute("username"));
             if(session.getAttribute("loggedIn")== null)
