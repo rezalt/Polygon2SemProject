@@ -36,7 +36,7 @@
         <br>
         <br>
         <%
-           out.print(session.getAttribute("username"));
+           //out.print(session.getAttribute("username"));
             if(session.getAttribute("loggedIn")== null)
             {
                 response.sendRedirect("index.html");
