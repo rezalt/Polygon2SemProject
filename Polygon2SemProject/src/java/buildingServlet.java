@@ -155,7 +155,7 @@ public class buildingServlet extends HttpServlet
                         ps1.setString(1, request.getParameter("buildingName"));
                         ps1.setString(2, request.getParameter("address"));
                         ps1.setInt(3, Integer.parseInt(request.getParameter("buildingCondition")));
-                        ps1.setString(4, request.getParameter("buildingOwner"));
+                        ps1.setString(4, request.getParameter("buildingCompany"));
                         ps1.setInt(5, Integer.parseInt(request.getParameter("parcelNr")));
                         ps1.setInt(6, Integer.parseInt(request.getParameter("Size")));
                         ps1.setInt(7, Integer.parseInt(request.getParameter("Zipcode")));

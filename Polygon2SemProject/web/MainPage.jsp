@@ -22,7 +22,7 @@
         
         Hello mr 
         <%
-            out.print(session.getAttribute("loggedIn"));
+            //out.print(session.getAttribute("loggedIn"));
             if(session.getAttribute("loggedIn")== null)
             {
                 response.sendRedirect("index.html");

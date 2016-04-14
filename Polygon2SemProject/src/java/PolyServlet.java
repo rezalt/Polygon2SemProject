@@ -275,7 +275,7 @@ public class PolyServlet extends HttpServlet
             
             while(rs.next())
             {
-                buildingNames.add(rs.getString(4));
+                buildingNames.add(rs.getString(2));
             }
         }
         catch (Exception e)
