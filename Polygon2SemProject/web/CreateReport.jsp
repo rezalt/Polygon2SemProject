@@ -63,7 +63,7 @@
 
                         </td>
                         <td>
-                            <input type="date" placeholder="Dato" name="dato">
+                            <input type="date" placeholder="Dato" name="dato" required="">
                         </td>
                     </tr>
                     <tr>  

@@ -10,17 +10,20 @@
 <html>
     <head>
         <link href="<c:url value="/Resources/Theme/Index.css"/>" rel="stylesheet">
+        <link href="<c:url value="/Resources/Theme/main.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        <img src="Logo.JPG" alt="Logo">
+        
+       <div class="wrapper">
+        
         <ul>
             <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
             <li><a href="CreateReport.jsp">CreateReport</a></li>
         </ul>
         
-        Hello mr. 
+        Hello,
         <%
             //out.print(session.getAttribute("loggedIn"));
             if(session.getAttribute("loggedIn")== null)
@@ -32,10 +35,14 @@
             out.print(name + ".");
         %>
         
-        You have the following buildings;
+      
         <br>
         <br>
-        <form action="buildingServ2" method="POST">
+     
+            
+        <form class="login" action="buildingServ2" method="POST"> 
+            <img src="Logo.JPG" alt="Logo">
+            <p class="title">Your company have the following buildings. <br> </p>
         <%
            //out.print(session.getAttribute("username"));
             if(session.getAttribute("loggedIn")== null)
@@ -52,8 +59,10 @@
                 }
                 
             }
-        %>
-           
+        %>          
+              
+            
         </form>
+        </div>
     </body>
 </html>

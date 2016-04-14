@@ -90,7 +90,7 @@
                 <table id="rTable1">
                     <tr>
                         <td>
-                            <input type="date" placeholder="Dato" name="skadeDato">
+                            <input type="date" placeholder="Dato" name="skadeDato" required="">
                         </td>
                         <td width="30%">
 
