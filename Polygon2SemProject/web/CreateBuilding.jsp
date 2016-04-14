@@ -25,8 +25,9 @@
 
             <ul>
                 <li><a href="Login.jsp">Login</a></li>
-                <li><a href="CreateUser.jsp">CreateUser</a></li>
+                <li><a href="MainPage.jsp">MainPage</a></li>
                 <li><a href="CreateReport.jsp">CreateReport</a></li>
+                <li><a href="CreateUser.jsp">CreateUser</a></li>
             </ul>
 
             <h1>

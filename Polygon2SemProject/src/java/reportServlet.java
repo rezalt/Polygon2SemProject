@@ -116,6 +116,7 @@ public class reportServlet extends HttpServlet
         {
             forward(request, response, "/index.html");
         }
+        
         else
         {
             switch (do_this)

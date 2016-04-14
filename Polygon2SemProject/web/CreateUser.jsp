@@ -26,8 +26,6 @@
 
             <ul>
                 <li><a href="Login.jsp">Login</a></li>
-                <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
-                <li><a href="CreateReport.jsp">CreateReport</a></li>
             </ul>
 
             <h1>Please fill out this user creation form.</h1>

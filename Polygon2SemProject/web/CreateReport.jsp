@@ -31,10 +31,11 @@
 
             <ul>
                 <li><a href="Login.jsp">Login</a></li>
-                <li><a href="CreateUser.jsp">CreateUser</a></li>
+                <li><a href="MainPage.jsp">MainPage</a></li>
                 <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
+                <li><a href="CreateUser.jsp">CreateUser</a></li>
             </ul>   
-            
+
             <%
                 String text = (String) session.getAttribute("text");
                 if (text == null)
@@ -47,18 +48,17 @@
 
             <h1>
                 Please fill the report.
-               
             </h1>
-
+          
             <form class="login" name="form3" action="reportServlet" enctype="multipart/form-data" method="POST" > <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
                 <input type="hidden" name="report" value="" />
                 <p class="title">
-                    
                 <h2>
                     Bygningsgennemgang <br>
                       
                 </h2>
-
+                
+                 
                 <table border="0" id="rTable1">
                     <tr>  
                         <td>          
@@ -140,11 +140,11 @@
                         </td>
                         <td id="rTdBorderRight">
                             Bemærkninger
-                            <input type="checkbox" name="bemærkning" value="tagBemærkning">
+                            <input type="checkbox" name="tagBemærkningCheck" value="">
                         </td>
                         <td id="rTdCenter">
                             Billede
-                            <input type="checkbox" name="billede" value="roofPicture">
+                            <input type="checkbox" name="roofPictureCheck" value="">
                         </td>
                 </table>
                 <table>
@@ -168,11 +168,11 @@
                         </td>
                         <td id="rTdBorderRight">
                             Bemærkninger
-                             <input type="checkbox" name="bemærkning" value="vægBemærkning">
+                             <input type="checkbox" name="vægBemærkningCheck" value="">
                         </td>
                         <td>
                             Billede
-                            <input type="checkbox" name="billede" value="wallPicture">
+                            <input type="checkbox" name="wallPictureCheck" value="">
                         </td>
                 </table>
                 <table>
@@ -189,10 +189,6 @@
 
                 </table>
  
-                
-
-
-
                  <table id="rTable1">
                     <tr>
                         <td>
@@ -303,9 +299,6 @@
                             <input type="radio" name="tilstand" value="tilstand3">
                         </td>
                     </tr>
-
-
-
                 </table>
 
                 <table>
@@ -321,7 +314,7 @@
                     
                     
                     
-                      <footer>Denne rapport og bygningsgennemgang er lavet for at klarlægge umiddelbare visuelle problemstillinger. Vores formål er at sikre, at
+    <footer>Denne rapport og bygningsgennemgang er lavet for at klarlægge umiddelbare visuelle problemstillinger. Vores formål er at sikre, at
 bygningens anvendelse kan opretholdes. Vi udbedrer ikke skader som en del af bygningsgennemgangen/rapporten. 
 <br> <br> 
 Gennemgangen af bygningen indeholder ikke fugtmålinger af hele bygningen, men vi kan foretage fugtscanninger enkelte steder i bygningen, hvis vi
@@ -334,17 +327,82 @@ indgreb, skal dette først godkendes af de bygningsansvarlige. Destruktive indgr
 bygningsgennemgang.
 Den bygningsansvarlige skal udlevere plantegning over bygningen inden bygningsgennemgangen kan foretages.</footer>
                 </form>
-                  
+          
                 </p>
-                  
+            
         </div> 
-         
-    <script>
+   
+    <script type="text/javascript">
+        
+     function getCookie(name)
+    {
+      var re = new RegExp(name + "=([^;]+)");
+      var value = re.exec(document.cookie);
+      return (value != null) ? unescape(value[1]) : null;
+    }
+
+    if(buildingName = getCookie("buildingName")) document.form3.buildingName.value = buildingName;
+    if(dato = getCookie("dato")) document.form3.dato.value = dato;
+    if(address = getCookie("address")) document.form3.address.value = address;
+    if(Zip = getCookie("Zip")) document.form3.Zip.value = Zip;
+    if(byggeår = getCookie("byggeår")) document.form3.byggeår.value = byggeår;
+    if(size = getCookie("size")) document.form3.size.value = size;
+    if(bygningBrugesTil = getCookie("bygningBrugesTil")) document.form3.bygningBrugesTil.value = bygningBrugesTil;
+    if(tagBemærkningCheck = getCookie("tagBemærkningCheck")) document.form3.tagBemærkningCheck.value = tagBemærkningCheck;
+    if(roofPictureCheck = getCookie("roofPictureCheck")) document.form3.roofPictureCheck.value = roofPictureCheck;
+    if(roofPicture = getCookie("roofPicture")) document.form3.roofPicture.value = roofPicture;
+    if(textTagBemærkning = getCookie("textTagBemærkning")) document.form3.textTagBemærkning.value = textTagBemærkning;
+    if(vægBemærkningCheck = getCookie("vægBemærkningCheck")) document.form3.vægBemærkningCheck.value = vægBemærkningCheck;
+    if(wallPicture = getCookie("wallPicture")) document.form3.wallPicture.value = wallPicture;
+    if(textGenForetagetAf = getCookie("textGenForetagetAf")) document.form3.textGenForetagetAf.value = textGenForetagetAf;
+    if(textSamarbejdeMed = getCookie("textSamarbejdeMed")) document.form3.textSamarbejdeMed.value = textSamarbejdeMed;
+    if(tilstand = getCookie("tilstand")) document.form3.tilstand.value = tilstand;
+  
+    </script>       
+            
+            
+            
+    <script type="text/javascript">
         function myFunction()
         {
+            
             document.form3.report.value = 'create';
+            
+            var expired = new Date(today.getTime() - 24 * 3600 * 1000); // less than 24 hours
+            document.cookie=name + "=null; path=/; expires=" + expired.toGMTString();
+            
         }
+        
+        function saveCookies(form3)
+        {
+            
+             var today = new Date();
+             var expiry = new Date(today.getTime() + 1 * 3600 * 1000); // plus 1 hour
+  
+                setCookie("buildingName", form3.buildingName.value);
+                setCookie("dato", form3.dato.value);
+                setCookie("address", form3.address.value);
+                setCookie("Zip", form3.Zip.value);
+                setCookie("byggeår", form3.byggeår.value);
+                setCookie("size", form3.size.value);
+                setCookie("bygningBrugesTil", form3.bygningBrugesTil.value);
+                setCookie("tagBemærkningCheck", form3.tagBemærkningCheck.value);
+                setCookie("roofPictureCheck", form3.roofPictureCheck.value);
+                setCookie("roofPicture", form3.roofPicture.value);
+                setCookie("textTagBemærkning", form3.textTagBemærkning.value);
+                setCookie("vægBemærkningCheck", form3.vægBemærkningCheck.value);
+                setCookie("wallPicture", form3.textYdreVægBemærkning.value);
+                setCookie("textGenForetagetAf", form3.textGenForetagetAf.value);
+                setCookie("textSamarbejdeMed", form3.textSamarbejdeMed.value);
+                setCookie("tilstand", form3.tilstand.value); 
+                 return true;
+        }
+        
+        
+        
+        
     </script>
+
         
     </body>
 </html>

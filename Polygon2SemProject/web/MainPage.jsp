@@ -57,7 +57,7 @@
                 {
                     out.print("<INPUT TYPE=\"SUBMIT\" name=\"buildingChosen\" value=\""+buildingNames.get(i)+"\"><br>");  
                 }
-                
+       
             }
         %>          
               
