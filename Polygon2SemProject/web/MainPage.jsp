@@ -20,7 +20,7 @@
             <li><a href="CreateReport.jsp">CreateReport</a></li>
         </ul>
         
-        Hello mr 
+        Hello mr. 
         <%
             //out.print(session.getAttribute("loggedIn"));
             if(session.getAttribute("loggedIn")== null)
@@ -29,7 +29,7 @@
             }
             
             String name = (String) session.getAttribute("Name");
-            out.print(name);
+            out.print(name + ".");
         %>
         
         You have the following buildings;
