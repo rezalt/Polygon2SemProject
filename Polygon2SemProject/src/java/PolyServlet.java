@@ -143,7 +143,7 @@ public class PolyServlet extends HttpServlet
                             if (type == 2)
                             {
 
-                                session.setAttribute("loggedIn", "admin");
+                                session.setAttribute("loggedIn", "Admin");
 
                                 ArrayList<String> buildingNames = new ArrayList();
                                 //buildingNames.add("JohnHytten");
