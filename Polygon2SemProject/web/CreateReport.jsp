@@ -20,6 +20,11 @@
         {
             response.sendRedirect("Login.jsp");
         }
+     else if(session.getAttribute("loggedIn")!= "Admin")
+     {
+        session.setAttribute("text", "You need to be a Polygon A/S employee to create a report.");
+        response.sendRedirect("Login.jsp");
+     }
      %>
          
         <div class="wrapper">
