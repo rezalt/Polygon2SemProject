@@ -20,17 +20,55 @@
             out.print(session.getAttribute("buildingChosen"));
             %>
         Has the following attributes;
+        
+        <table style ="width:50%">
         <%
+            
+            
+            //out.print("<td>The address is: <td"+);
+            
+            out.print("<tr><td>The address is: </td><td>"+session.getAttribute("address")+"</td></tr>");
+            String strOut = "<tr><td>";
+            
+            out.print("<tr><td>The company owning the building is: </td><td>"+session.getAttribute("buildingCompany")+"</td></tr>");
+            out.print("<tr><td>The parcel nr for this building: </td><td>"+session.getAttribute("parcelNr")+"</td></tr>");
+            out.print("<tr><td>The size is: </td><td>"+session.getAttribute("size")+"m2</td></tr>");
+            out.print("<tr><td>The zipcode is: </td><td>"+session.getAttribute("zipcode")+"</td></tr>");
+            
+            String buildingCondition = ""+session.getAttribute("buildingCondition");
+            if(buildingCondition.equals("0"))
+            {
+            out.print("<tr><td>The buildings condtion is: </td><td>"+"Bygningsdelen er ny og som bygget, og Funktionen er som beskrevet "+"</td></tr>");
+                
+            }
+            else if(buildingCondition.equals("1"))
+            {
+            out.print("<tr><td>The buildings condtion is: </td><td>"+"Bygningsdelen er intakt, men med begyndende slid og synlige skader (kun kosmetiske skader), og Funktionen er som beskrevet"+"</td></tr>");
+                
+            }
+            else if(buildingCondition.equals("2"))
+            {
+            out.print("<tr><td>The buildings condtion is: </td><td>"+"Bygningsdelen er begyndt at forfalde, med enkelte defekte komponenter, og Funktionen er nedsat – fare for følgeskader"+"</td></tr>");
+                
+            }
+            else if(buildingCondition.equals("3"))
+            {
+            out.print("<tr><td>The buildings condtion is: </td><td>"+"Bygningsdelen er nedbrudt og skal udskiftes, og Funktionen er ophørt – fare for følgeskader"+"</td></tr>");
+                
+            }
+            /*
+            
+            
             out.print("<br>The address is: "+session.getAttribute("address"));
             out.print("<br>The buildings condtion is: "+session.getAttribute("buildingCondition"));
             out.print("<br>The company owning the building is: "+session.getAttribute("buildingCompany"));
             out.print("<br>The parcel nr for this building: "+session.getAttribute("parcelNr"));
             out.print("<br>The size is: "+session.getAttribute("size")+"m2");
             out.print("<br>The zipcode is: "+session.getAttribute("zipcode"));
-            
+            */
             
         %>
-            
+        </table>
             
             
     </body>
