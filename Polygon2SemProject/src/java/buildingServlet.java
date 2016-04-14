@@ -104,6 +104,11 @@ public class buildingServlet extends HttpServlet
         HttpSession session = request.getSession(true);
 
         String do_this = request.getParameter("building");
+//        String buildingChosen = request.getParameter("buildingChosen");
+//        if (buildingChosen!=null)
+//        {
+//            forward(request, response, "/BuildingJSP.jsp");
+//        }
 
         if (do_this == null)
         {
@@ -185,6 +190,7 @@ public class buildingServlet extends HttpServlet
                     break;
             }
         }
+       
 
         processRequest(request, response);
     } // end of doPost

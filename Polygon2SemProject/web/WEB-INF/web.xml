@@ -24,6 +24,10 @@
             <param-value>com.mysql.jdbc.Driver</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>buildingServ2</servlet-name>
+        <servlet-class>buildingServ2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PolyServlet</servlet-name>
         <url-pattern>/PolyServlet</url-pattern>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>reportServlet</servlet-name>
         <url-pattern>/reportServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>buildingServ2</servlet-name>
+        <url-pattern>/buildingServ2</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
