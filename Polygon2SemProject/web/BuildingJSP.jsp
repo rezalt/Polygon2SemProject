@@ -5,14 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
+         <link href="<c:url value="/Resources/Theme/Index.css"/>" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        
+        <ul><li><a href="MainPage.jsp">Main page</a></li></ul>
         the building:
         <%
             out.print(session.getAttribute("buildingChosen"));
