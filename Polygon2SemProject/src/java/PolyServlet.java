@@ -37,7 +37,7 @@ public class PolyServlet extends HttpServlet
     // END OF VARIABLES
     DBConnector DBC = new DBConnector();
     Connection conn;
-
+    String company;
     @Override
     public void init(ServletConfig conf) throws ServletException
     {
@@ -139,6 +139,7 @@ public class PolyServlet extends HttpServlet
                         if (rs.next())
                         {
                             type = rs.getInt(7);
+                            company = rs.getString(4);
                             if (type == 2)
                             {
 
@@ -264,15 +265,17 @@ public class PolyServlet extends HttpServlet
     {
         ArrayList<String> buildingNames = new ArrayList();
         conn = DBC.getConnection();
+        
         String sql = "SELECT * FROM building WHERE buildingCompany =?";
+        
         try (PreparedStatement ps = conn.prepareStatement(sql))
         {
-            ps.setString(1, username);
+            ps.setString(1, company);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next())
             {
-                buildingNames.add(rs.getString(2));
+                buildingNames.add(rs.getString(4));
             }
         }
         catch (Exception e)
