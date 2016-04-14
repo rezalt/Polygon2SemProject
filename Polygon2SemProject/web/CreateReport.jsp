@@ -63,7 +63,7 @@
 
                         </td>
                         <td>
-                            <input type="date" placeholder="Dato" name="dato">
+                            <input type="date" placeholder="Dato" name="dato" required="">
                         </td>
                     </tr>
                     <tr>  
@@ -173,7 +173,7 @@
                 <table>
                     <tr>
                         <td>
-                            <input type="file" name="wallPicture" size="40" required="" />
+                            <input type="file" name="wallPicture" size="40"/>
                         </td>
                     </tr>
                     <tr> 
@@ -189,31 +189,7 @@
 
                 </table>
  
-                <table>
-                    <tr>
-                        <td width="50%">
-                            <b>Konklusion</b>
-                        </td>
-                    </tr>
-                </table>
-
-                <table id="rTable1">
-                    <tr>
-                        <td width="20%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                            &nbsp Lokale
-                        </td>
-                        <td width="80%" bgcolor="#E6E6E6">
-                            &nbsp Anbefalinger
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="number" name="konLokale1" >
-                        </td>
-                        <td>
-                            <input type="text" name ="konAnbefaling1">
-                        </td>
-                </table>
+                
 
 
 
