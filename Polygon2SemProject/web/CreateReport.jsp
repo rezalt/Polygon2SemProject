@@ -16,7 +16,13 @@
 
     </head>
     <body>
-
+     <%
+     if(session.getAttribute("loggedIn")== null)
+        {
+            response.sendRedirect("Login.jsp");
+        }
+     %>
+         
         <div class="wrapper">
 
             <ul>
@@ -45,6 +51,7 @@
                 <table id="rTable0">
                     <tr>
                         <td>
+                            
                             <input type="number" placeholder="Rapport nr.:" name="rapportNr">
                         </td>
                     </tr>
@@ -55,7 +62,7 @@
 
                 <table border="0" id="rTable1">
                     <tr>  
-                        <td>
+                        <td>          
                             <input type="text" placeholder="Navn på bygning" name="buildingName">
                         </td>  
                         <td width="30%">
@@ -143,6 +150,9 @@
                 </table>
                 <table>
                     <tr> 
+                        <td>
+                            <input type="file" name="photo" size="20"/>
+                        </td>
                         <td>
                             <TEXTAREA NAME="textTagBemærkning" ROWS="5" cols="50"></TEXTAREA>
                             </td>

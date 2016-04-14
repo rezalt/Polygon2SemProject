@@ -15,7 +15,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-
+        <%
+         if(session.getAttribute("loggedIn")== null)
+            {
+                response.sendRedirect("Login.jsp");
+            }
+         %>
         <div class="wrapper">
 
             <ul>

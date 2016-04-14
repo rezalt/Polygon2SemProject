@@ -25,7 +25,8 @@
                 <li><a href="CreateReport.jsp">CreateReport</a></li>
             </ul>
 
-            <h1>Hello, and welcome.</h1>
+            <h1>Hello, and welcome. <br>
+            Please login.</h1>
 
             <form class="login" NAME="form1" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
                 <input type="hidden" name="user" value="" />
