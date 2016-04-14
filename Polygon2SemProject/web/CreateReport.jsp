@@ -181,11 +181,6 @@
                          <TEXTAREA NAME="textYdreVægBemærkning" ROWS="5" cols="50"></TEXTAREA>
                         </td>
                     </tr>
-                    <tr>
-                        <td width="50%">
-                            <b>Lokale skader og reperationer</b>
-                        </td>
-                    </tr>
 
                 </table>
  
