@@ -44,7 +44,7 @@
                 Please fill the report.
             </h1>
 
-            <form class="login" name="form3" action="reportServlet" method="POST"> <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
+            <form class="login" name="form3" action="reportServlet" enctype="multipart/form-data" method="POST" > <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
                 <input type="hidden" name="report" value="" />
                 <p class="title">
 
@@ -145,512 +145,519 @@
                         </td>
                         <td id="rTdCenter">
                             Billede
-                            <input type="checkbox" name="billede" value="tagBillede">
+                            <input type="checkbox" name="billede" value="roofPicture">
+                        </td>
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                           <input type="file" name="roofPicture" size="40" />
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td>
+                            <TEXTAREA NAME="textTagBemærkning" ROWS="5" cols="50"></TEXTAREA>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td width="70%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            &nbsp Ydervægge 
+                        </td>
+                        <td id="rTdBorderRight">
+                            Bemærkninger
+                             <input type="checkbox" name="bemærkning" value="vægBemærkning">
+                        </td>
+                        <td>
+                            Billede
+                            <input type="checkbox" name="billede" value="wallPicture">
+                        </td>
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="file" name="wallPicture" size="40" required="" />
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td>
+                         <TEXTAREA NAME="textYdreVægBemærkning" ROWS="5" cols="50"></TEXTAREA>
+                        </td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <td width="50%">
+                            <b>Skade og reperation</b>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td width="70%" >
+                            &nbsp <input type="number" name="roomNr" placeholder="Lokale"> 
+                        </td>
+                        <td>
+                            Bemærkninger
+                            <input type="checkbox" name="bemærkning" value="lokaleBemærkning">
+                        </td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                         <td width="85%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            Har der været skade i lokalet? 
+                        </td>
+                        <td style="padding-right:20px" id="rTdBorderRight">
+                            Ja
+                            <input type="radio" name="skadet" value="skadeJa">    
+                        </td>
+                        <td id="rTdCenter"> 
+                            Nej
+                            <input type="radio" name="skadet" value="skadeNej"> 
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table id="rTable1">
+                    <tr>
+                        <td>
+                            <input type="date" placeholder="Dato" name="skadeDato">
+                        </td>
+                        <td width="30%">
+
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Hvor" name="skadeHvor">
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                            <TEXTAREA NAME="hvadErDerSket" placeholder="Hvad er der sket?" ROWS="5" cols="31"></TEXTAREA>                 
+                        </td>
+                        <td width="20%">
+                        </td>
+                        <td>
+                            <TEXTAREA NAME="HvadErReperaret" placeholder="Hvad er repareret?" ROWS="5" cols="31"></TEXTAREA>  
+                        </td>
+                    </tr>
+                </table>  
+
+                <table>
+                    <tr>
+                        <td  width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            Skade 
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <input type="checkbox" name="skadeFugt" value="skadeFugt">    
+                        </td>
+                        <td>
+                            Fugt
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            <input type="checkbox" name="skadeRåd" value="skadeRåd"> 
+                        </td>
+                        <td>
+                            Råd og svamp
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            <input type="checkbox" name="skadeSkimmel" value="skadeSkimmel"> 
+                        </td>
+                        <td>
+                            Skimmel
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            <input type="checkbox" name="skadeBrand" value="skadeBrand"> 
+                        </td>
+                        <td>
+                            Brand
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> 
+                            <input type="checkbox" name="skadeAnden" value="skadeAnden"> 
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Anden skade" name="skadeAndenText">
+                        </td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <td width="50%">
+                            <b>Gennemgang af…</b>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            &nbsp Vægge 
+                        </td>
+                        <td id="rTdBorderRight">
+                            Bemærkninger
+                            <input type="checkbox" name="genVBemærkning" value="genVBemærkning">
+                        </td>
+                        <td>
+                            Billede
+                            <input type="checkbox" name="genVBillede" value="genVBillede">
                         </td>
                 </table>
                 <table>
                     <tr> 
-                        <td>
-                            <input type="file" name="photo" size="20"/>
+                        <td width="100">
+                         <TEXTAREA NAME="textGenVBemærkning" ROWS="5" cols="85"></TEXTAREA>
+                        </td>
+                    </tr>
+                </table>            
+                <table>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            &nbsp Loft 
+                        </td>
+                        <td id="rTdBorderRight">
+                            Bemærkninger
+                             <input type="checkbox" name="genLoftBemærkning" value="genLoftBemærkning">
                         </td>
                         <td>
-                            <TEXTAREA NAME="textTagBemærkning" ROWS="5" cols="50"></TEXTAREA>
-                            </td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                        </tr>
-                        <tr>
-                            <td width="70%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                &nbsp Ydervægge 
-                            </td>
-                            <td id="rTdBorderRight">
-                                Bemærkninger
-                                 <input type="checkbox" name="bemærkning" value="vægBemærkning">
-                            </td>
-                            <td>
-                                Billede
-                                <input type="checkbox" name="billede" value="vægBillede">
-                            </td>
-                    </table>
-                    <table>
-                        <tr> 
-                            <td>
-                             <TEXTAREA NAME="textYdreVægBemærkning" ROWS="5" cols="50"></TEXTAREA>
-                            </td>
-                        </tr>
-                    </table>
+                            Billede
+                            <input type="checkbox" name="genLoftBillede" value="genLoftBillede">
+                        </td>
+                </table>
+                <table>
+                    <tr> 
+                        <td width="100">
+                         <TEXTAREA NAME="textGenLoftBemærkning" ROWS="5" cols="85"></TEXTAREA>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            &nbsp Gulv 
+                        </td>
+                        <td id="rTdBorderRight">
+                            Bemærkninger
+                             <input type="checkbox" name="genGulvBemærkning" value="genGulvBemærkning">
+                        </td>
+                        <td>
+                            Billede
+                            <input type="checkbox" name="genGulvBillede" value="genGulvBillede">
+                        </td>
+                </table>
+                <table>
+                    <tr> 
+                        <td width="100">
+                         <TEXTAREA NAME="textGenGulvBemærkning" ROWS="5" cols="85"></TEXTAREA>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            &nbsp Vinduer/døre 
+                        </td>
+                        <td id="rTdBorderRight">
+                            Bemærkninger
+                             <input type="checkbox" name="genVDBemærkning" value="genVDBemærkning">
+                        </td>
+                        <td>
+                            Billede
+                            <input type="checkbox" name="genVDBillede" value="genVDBillede">
+                        </td>
+                </table>
+                <table>
+                    <tr> 
+                        <td width="100">
+                         <TEXTAREA NAME="textGenVDBemærkning" ROWS="5" cols="85"></TEXTAREA>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            <input type="text" placeholder="Udfyld hvis mere" name="genExtra1Des">
+                        </td>
+                        <td id="rTdBorderRight">
+                            Bemærkninger
+                             <input type="checkbox" name="genExtra1Bemærkning" value="genExtra1Bemærkning">
+                        </td>
+                        <td>
+                            Billede
+                            <input type="checkbox" name="genExtra1Billede" value="genExtra1Billede">
+                        </td>
+                </table>
+                <table>
+                    <tr> 
+                        <td width="100">
+                         <TEXTAREA NAME="textgenExtra1Bemærkning" ROWS="5" cols="85"></TEXTAREA>
+                        </td>
+                    </tr>
+                </table>
 
-                    <table>
-                        <tr>
-                            <td width="50%">
-                                <b>Skade og reperation</b>
-                            </td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td width="70%" >
-                                &nbsp <input type="number" name="roomNr" placeholder="Lokale"> 
-                            </td>
-                            <td>
-                                Bemærkninger
-                                <input type="checkbox" name="bemærkning" value="lokaleBemærkning">
-                            </td>
-                        </tr>
-                    </table>
-  
-                    <table>
-                        <tr>
-                             <td width="85%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                Har der været skade i lokalet? 
-                            </td>
-                            <td style="padding-right:20px" id="rTdBorderRight">
-                                Ja
-                                <input type="radio" name="skadet" value="skadeJa">    
-                            </td>
-                            <td id="rTdCenter"> 
-                                Nej
-                                <input type="radio" name="skadet" value="skadeNej"> 
-                            </td>
-                        </tr>
-                    </table>
-                    
-             
-                    <table id="rTable1">
-                        <tr>
-                            <td>
-                                <input type="date" placeholder="Dato" name="skadeDato">
-                            </td>
-                            <td width="30%">
-                                
-                            </td>
-                            <td>
-                                <input type="text" placeholder="Hvor" name="skadeHvor">
-                            </td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td>
-                                <TEXTAREA NAME="hvadErDerSket" placeholder="Hvad er der sket?" ROWS="5" cols="31"></TEXTAREA>                 
-                            </td>
-                            <td width="20%">
-                            </td>
-                            <td>
-                                <TEXTAREA NAME="HvadErReperaret" placeholder="Hvad er repareret?" ROWS="5" cols="31"></TEXTAREA>  
-                            </td>
-                        </tr>
-                    </table>  
-                    
-                    <table>
-                        <tr>
-                            <td  width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                Skade 
-                            </td>
-                        </tr>
-                        <tr>
-                       
-                            <td>
-                                <input type="checkbox" name="skadeFugt" value="skadeFugt">    
-                            </td>
-                            <td>
-                                Fugt
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <input type="checkbox" name="skadeRåd" value="skadeRåd"> 
-                            </td>
-                            <td>
-                                Råd og svamp
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <input type="checkbox" name="skadeSkimmel" value="skadeSkimmel"> 
-                            </td>
-                            <td>
-                                Skimmel
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <input type="checkbox" name="skadeBrand" value="skadeBrand"> 
-                            </td>
-                            <td>
-                                Brand
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <input type="checkbox" name="skadeAnden" value="skadeAnden"> 
-                            </td>
-                            <td>
-                                <input type="text" placeholder="Anden skade" name="skadeAndenText">
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    <table>
-                        <tr>
-                            <td width="50%">
-                                <b>Gennemgang af…</b>
-                            </td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                        </tr>
-                        <tr>
-                            <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                &nbsp Vægge 
-                            </td>
-                            <td id="rTdBorderRight">
-                                Bemærkninger
-                                <input type="checkbox" name="genVBemærkning" value="genVBemærkning">
-                            </td>
-                            <td>
-                                Billede
-                                <input type="checkbox" name="genVBillede" value="genVBillede">
-                            </td>
-                    </table>
-                    <table>
-                        <tr> 
-                            <td width="100">
-                             <TEXTAREA NAME="textGenVBemærkning" ROWS="5" cols="85"></TEXTAREA>
-                            </td>
-                        </tr>
-                    </table>            
-                    <table>
-                        <tr>
-                        </tr>
-                        <tr>
-                            <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                &nbsp Loft 
-                            </td>
-                            <td id="rTdBorderRight">
-                                Bemærkninger
-                                 <input type="checkbox" name="genLoftBemærkning" value="genLoftBemærkning">
-                            </td>
-                            <td>
-                                Billede
-                                <input type="checkbox" name="genLoftBillede" value="genLoftBillede">
-                            </td>
-                    </table>
-                    <table>
-                        <tr> 
-                            <td width="100">
-                             <TEXTAREA NAME="textGenLoftBemærkning" ROWS="5" cols="85"></TEXTAREA>
-                            </td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                        </tr>
-                        <tr>
-                            <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                &nbsp Gulv 
-                            </td>
-                            <td id="rTdBorderRight">
-                                Bemærkninger
-                                 <input type="checkbox" name="genGulvBemærkning" value="genGulvBemærkning">
-                            </td>
-                            <td>
-                                Billede
-                                <input type="checkbox" name="genGulvBillede" value="genGulvBillede">
-                            </td>
-                    </table>
-                    <table>
-                        <tr> 
-                            <td width="100">
-                             <TEXTAREA NAME="textGenGulvBemærkning" ROWS="5" cols="85"></TEXTAREA>
-                            </td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                        </tr>
-                        <tr>
-                            <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                &nbsp Vinduer/døre 
-                            </td>
-                            <td id="rTdBorderRight">
-                                Bemærkninger
-                                 <input type="checkbox" name="genVDBemærkning" value="genVDBemærkning">
-                            </td>
-                            <td>
-                                Billede
-                                <input type="checkbox" name="genVDBillede" value="genVDBillede">
-                            </td>
-                    </table>
-                    <table>
-                        <tr> 
-                            <td width="100">
-                             <TEXTAREA NAME="textGenVDBemærkning" ROWS="5" cols="85"></TEXTAREA>
-                            </td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                        </tr>
-                        <tr>
-                            <td width="58%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                <input type="text" placeholder="Udfyld hvis mere" name="genExtra1Des">
-                            </td>
-                            <td id="rTdBorderRight">
-                                Bemærkninger
-                                 <input type="checkbox" name="genExtra1Bemærkning" value="genExtra1Bemærkning">
-                            </td>
-                            <td>
-                                Billede
-                                <input type="checkbox" name="genExtra1Billede" value="genExtra1Billede">
-                            </td>
-                    </table>
-                    <table>
-                        <tr> 
-                            <td width="100">
-                             <TEXTAREA NAME="textgenExtra1Bemærkning" ROWS="5" cols="85"></TEXTAREA>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    
-                    <table>
-                        <tr>
-                            <td width="50%">
-                                <b>Fugtscanning</b>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    
-                    <table>
-                        <tr>
-                             <td  width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                Er der foretaget fugtscanning?
-                            </td>
-                            <td width="50px" id="rTdBorderRight">
-                                Ja
-                                <input type="radio" name="fugtScan" value="fugtScanJa">    
-                            </td>
-                            <td width="40px" id="rTdCenter"> 
-                                Nej
-                                <input type="radio" name="fugtScan" value="fugtScanNej"> 
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    
-                     <table id="rTable1">
-                        <tr>
-                            <td>
-                                <input type="text" placeholder="Fugtscanning" name="fugtscanning">
-                            </td>
-                            <td width="30%">
-                            </td>
-                            <td>
-                                <input type="text" placeholder="Målepunkt" name="målepunkt">
-                            </td>
-                        </tr>
-                    </table>
-                    
-                     <table>
-                        <tr> 
-                            <td width="100">
-                             <TEXTAREA NAME="fugtKommentar" ROWS="4" cols="85"></TEXTAREA>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    <table>
-                        <tr>
-                            <td width="50%">
-                                <b>Konklusion</b>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    <table id="rTable1">
-                        <tr>
-                            <td width="20%" id="rTdBorderRight" bgcolor="#E6E6E6">
-                                &nbsp Lokale
-                            </td>
-                            <td width="80%" bgcolor="#E6E6E6">
-                                &nbsp Anbefalinger
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="number" name="konLokale1" >
-                            </td>
-                            <td>
-                                <input type="text" name ="konAnbefaling1">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="number" name="konLokale2" >
-                            </td>
-                            <td>
-                                <input type="text" name ="konAnbefaling2">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="number" name="konLokale3" >
-                            </td>
-                            <td>
-                                <input type="text" name ="konAnbefaling3">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="number" name="konLokale4" >
-                            </td>
-                            <td>
-                                <input type="text" name ="konAnbefaling4">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="number" name="konLokale5">
-                            </td>
-                            <td>
-                                <input type="text" name ="konAnbefaling5">
-                            </td>
-                        </tr>
-                        
-                    </table>
-                    
-                    
-                    
-                     <table id="rTable1">
-                        <tr>
-                            <td>
-                                <b>General information om bygningen</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Bygningsgennemgangen er foretaget af
-                            </td>
-                            <td width="50%">
-                                <input type="text" name="textGenForetagetAf">
-                            </td>
-                            <td>
-                                ,Polygon
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                I samarbejde med 
-                            </td>
-                            <td>
-                                <input type="text" name="textSamarbejdeMed">
-                            </td>
-                            <td>
-                                (bygningsansvarlig)
-                            </td>
-                        </tr>
-                    </table>    
-                    
-                    <table id="rTable3" >
-                        
-                        <tr bgcolor="#E6E6E6">
-                            <td id="rTdBorderRight" width="20%">
-                             <b>Tilstand</b>  
-                            </td>
-                            <td id="rTdBorderRight">
-                               <b>Beskrivelse af bygningen </b>
-                            </td>
-                            <td id="rTdBorderRight">
-                              <b>Funktion af bygningen</b>  
-                            </td>
-                            <td id="rTdBorderRight">
-                               <b>Tilstandsgrad</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td id="rTdBorder3Right">
-                                <b>Tilstandsgrad 0</b> 
-                            </td>
-                            <td id="rTdBorder3Right">
-                                Bygningsdelen er ny og som bygget
-                            </td>
-                            <td id="rTdBorder3Right">
-                                Funktionen er som
-                                beskrevet
-                            </td>
-                            <td id="rTdBorderRight">
-                                <input type="radio" name="tilstand" value="tilstand0">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td id="rTdBorder3Right">
-                                <b>Tilstandsgrad 1 </b>
-                            </td>
-                            <td id="rTdBorder3Right">
-                                Bygningsdelen er intakt, men med
-                                begyndende slid og synlige skader
-                                (kun kosmetiske skader)
-                            </td>
-                            <td id="rTdBorder3Right">
-                                Funktionen er som
-                                beskrevet
-                            </td>
-                            <td id="rTdBorderRight">
-                                <input type="radio" name="tilstand" value="tilstand1">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td id="rTdBorder3Right">
-                                <b>Tilstandsgrad 2</b>
-                            </td>
-                            <td id="rTdBorder3Right">
-                                Bygningsdelen er begyndt at forfalde,
-                                med enkelte defekte komponenter
-                            </td>
-                            <td id="rTdBorder3Right">
-                                Funktionen er nedsat –
-                                fare for følgeskader
-                            </td>
-                            <td id="rTdBorderRight">
-                                <input type="radio" name="tilstand" value="tilstand2">
-                            </td>
-                        </tr>             
-                        <tr>
-                            <td id="rTdBorder3Right">
-                                <b>Tilstandsgrad 3</b>
-                            </td>
-                            <td id="rTdBorder3Right">
-                                Bygningsdelen er nedbrudt og skal
-                                udskiftes
-                            </td>
-                            <td id="rTdBorder3Right">
-                                Funktionen er ophørt –
-                                fare for følgeskader
-                            </td>
-                            <td id="rTdBorderRight">
-                                <input type="radio" name="tilstand" value="tilstand3">
-                            </td>
-                        </tr>
-                        
-                        
-                        
-                    </table>
-                    
-                    <table>
-                        <tr>  
-                            <td>
-                                <button type="submit" id="button4" value="create" onclick="myFunction()">
-                                    <i class="spinner"></i>
-                                    <span class="state">Submit</span>         
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
+
+                <table>
+                    <tr>
+                        <td width="50%">
+                            <b>Fugtscanning</b>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table>
+                    <tr>
+                         <td  width="50%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            Er der foretaget fugtscanning?
+                        </td>
+                        <td width="50px" id="rTdBorderRight">
+                            Ja
+                            <input type="radio" name="fugtScan" value="fugtScanJa">    
+                        </td>
+                        <td width="40px" id="rTdCenter"> 
+                            Nej
+                            <input type="radio" name="fugtScan" value="fugtScanNej"> 
+                        </td>
+                    </tr>
+                </table>
+
+
+                 <table id="rTable1">
+                    <tr>
+                        <td>
+                            <input type="text" placeholder="Fugtscanning" name="fugtscanning">
+                        </td>
+                        <td width="30%">
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Målepunkt" name="målepunkt">
+                        </td>
+                    </tr>
+                </table>
+
+                 <table>
+                    <tr> 
+                        <td width="100">
+                         <TEXTAREA NAME="fugtKommentar" ROWS="4" cols="85"></TEXTAREA>
+                        </td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <td width="50%">
+                            <b>Konklusion</b>
+                        </td>
+                    </tr>
+                </table>
+
+                <table id="rTable1">
+                    <tr>
+                        <td width="20%" id="rTdBorderRight" bgcolor="#E6E6E6">
+                            &nbsp Lokale
+                        </td>
+                        <td width="80%" bgcolor="#E6E6E6">
+                            &nbsp Anbefalinger
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" name="konLokale1" >
+                        </td>
+                        <td>
+                            <input type="text" name ="konAnbefaling1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" name="konLokale2" >
+                        </td>
+                        <td>
+                            <input type="text" name ="konAnbefaling2">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" name="konLokale3" >
+                        </td>
+                        <td>
+                            <input type="text" name ="konAnbefaling3">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" name="konLokale4" >
+                        </td>
+                        <td>
+                            <input type="text" name ="konAnbefaling4">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" name="konLokale5">
+                        </td>
+                        <td>
+                            <input type="text" name ="konAnbefaling5">
+                        </td>
+                    </tr>
+
+                </table>
+
+
+
+                 <table id="rTable1">
+                    <tr>
+                        <td>
+                            <b>General information om bygningen</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Bygningsgennemgangen er foretaget af
+                        </td>
+                        <td width="50%">
+                            <input type="text" name="textGenForetagetAf">
+                        </td>
+                        <td>
+                            ,Polygon
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            I samarbejde med 
+                        </td>
+                        <td>
+                            <input type="text" name="textSamarbejdeMed">
+                        </td>
+                        <td>
+                            (bygningsansvarlig)
+                        </td>
+                    </tr>
+                </table>    
+
+                <table id="rTable3" >
+
+                    <tr bgcolor="#E6E6E6">
+                        <td id="rTdBorderRight" width="20%">
+                         <b>Tilstand</b>  
+                        </td>
+                        <td id="rTdBorderRight">
+                           <b>Beskrivelse af bygningen </b>
+                        </td>
+                        <td id="rTdBorderRight">
+                          <b>Funktion af bygningen</b>  
+                        </td>
+                        <td id="rTdBorderRight">
+                           <b>Tilstandsgrad</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="rTdBorder3Right">
+                            <b>Tilstandsgrad 0</b> 
+                        </td>
+                        <td id="rTdBorder3Right">
+                            Bygningsdelen er ny og som bygget
+                        </td>
+                        <td id="rTdBorder3Right">
+                            Funktionen er som
+                            beskrevet
+                        </td>
+                        <td id="rTdBorderRight">
+                            <input type="radio" name="tilstand" value="tilstand0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="rTdBorder3Right">
+                            <b>Tilstandsgrad 1 </b>
+                        </td>
+                        <td id="rTdBorder3Right">
+                            Bygningsdelen er intakt, men med
+                            begyndende slid og synlige skader
+                            (kun kosmetiske skader)
+                        </td>
+                        <td id="rTdBorder3Right">
+                            Funktionen er som
+                            beskrevet
+                        </td>
+                        <td id="rTdBorderRight">
+                            <input type="radio" name="tilstand" value="tilstand1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="rTdBorder3Right">
+                            <b>Tilstandsgrad 2</b>
+                        </td>
+                        <td id="rTdBorder3Right">
+                            Bygningsdelen er begyndt at forfalde,
+                            med enkelte defekte komponenter
+                        </td>
+                        <td id="rTdBorder3Right">
+                            Funktionen er nedsat –
+                            fare for følgeskader
+                        </td>
+                        <td id="rTdBorderRight">
+                            <input type="radio" name="tilstand" value="tilstand2">
+                        </td>
+                    </tr>             
+                    <tr>
+                        <td id="rTdBorder3Right">
+                            <b>Tilstandsgrad 3</b>
+                        </td>
+                        <td id="rTdBorder3Right">
+                            Bygningsdelen er nedbrudt og skal
+                            udskiftes
+                        </td>
+                        <td id="rTdBorder3Right">
+                            Funktionen er ophørt –
+                            fare for følgeskader
+                        </td>
+                        <td id="rTdBorderRight">
+                            <input type="radio" name="tilstand" value="tilstand3">
+                        </td>
+                    </tr>
+
+
+
+                </table>
+
+                <table>
+                    <tr>  
+                        <td>
+                            <button type="submit" id="button4" value="create" onclick="myFunction()">
+                                <i class="spinner"></i>
+                                <span class="state">Submit</span>         
+                            </button>
+                        </td>
+                    </tr>
+                </table>
                     
                     
                     

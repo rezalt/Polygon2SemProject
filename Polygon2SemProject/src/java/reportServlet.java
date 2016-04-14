@@ -5,6 +5,7 @@
  */
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,11 +24,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author JAJAJABLESES
  */
+@MultipartConfig
 public class reportServlet extends HttpServlet
 {
 
@@ -149,17 +153,29 @@ public class reportServlet extends HttpServlet
             return 0;
         }
     }
+    
+  
 
-    public void createReport(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+    public void createReport(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException
     {
-
-        if (request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty() || request.getParameter("dato").isEmpty())
-        {
-
-            session.setAttribute("text", "You need to fill out name, address and date.");
-            //forward(request, response, "/CreateReport.jsp");
-            return;
-        }
+        
+        InputStream iS1 = null;
+        InputStream iS2 = null;
+        
+        Part filePart = request.getPart("roofPicture");
+                
+                if (filePart != null) 
+                {
+                    iS1 = filePart.getInputStream();
+                }
+                
+        Part filePart2 = request.getPart("wallPicture");
+                
+                if (filePart2 != null) 
+                {
+                    iS2 = filePart2.getInputStream();
+                }
+        
 
         conn = DBC.getConnection();
         PreparedStatement ps1 = null;
@@ -199,12 +215,13 @@ public class reportServlet extends HttpServlet
 
         try
         {
+            
             // Inserting our new report to the database.
             ps1 = conn.prepareStatement("insert into "
-                    + "report(reportNr, nameOfBuilding, rDate, address, zipCode, yearBuild, buildingSizeInSquareMeters,"
+                    + "report (reportNr, nameOfBuilding, rDate, address, zipCode, yearBuild, buildingSizeInSquareMeters,"
                     + "buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean,"
-                    + "wallPictureBoolean, WallNotice, roomId, writer, coWriter, buildingCondition)"
-                    + " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "wallPictureBoolean, WallNotice, roomId, writer, coWriter, buildingCondition, roofPicture, wallPicture)"
+                    + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
             ps1.setInt(1, tryParse(request.getParameter("rapportNr")));
             ps1.setString(2, request.getParameter("buildingName"));
@@ -236,6 +253,17 @@ public class reportServlet extends HttpServlet
             ps1.setString(17, request.getParameter("textSamarbejdeMed"));
             ps1.setInt(18, tryParse(request.getParameter("tilstand")));
 
+
+            if(iS1 != null)
+            {  
+                ps1.setBinaryStream(19, iS1 );
+            }
+          
+            if(iS2 != null)
+            {
+                ps1.setBinaryStream(20, iS2 );
+            }
+            
             int i = ps1.executeUpdate();
             if (i > 0)
             {
@@ -295,13 +323,11 @@ public class reportServlet extends HttpServlet
             }
 
             ps2.close();
-            //forward(request, response, "/CreateReport.jsp");        
-            return;
         }
         catch (SQLException ex)
         {
             Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     /**
