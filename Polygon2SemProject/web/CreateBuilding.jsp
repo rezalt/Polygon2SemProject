@@ -18,6 +18,7 @@
         <%
          if(session.getAttribute("loggedIn")== null)
             {
+                session.setAttribute("text", "You need to log in first.");
                 response.sendRedirect("Login.jsp");
             }
          %>

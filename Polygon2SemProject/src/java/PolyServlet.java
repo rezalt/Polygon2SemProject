@@ -146,9 +146,7 @@ public class PolyServlet extends HttpServlet
                                 session.setAttribute("loggedIn", "Admin");
 
                                 ArrayList<String> buildingNames = new ArrayList();
-                                //buildingNames.add("JohnHytten");
-                                //buildingNames.add("Bygning nr fucking 2");
-                                
+                           
                                 buildingNames = getUsersBuildingNames(request, response, tempUser);
                                 
                                 session.setAttribute("Name", tempUser);
@@ -159,10 +157,18 @@ public class PolyServlet extends HttpServlet
                             }
                             else
                             {
-                                ps.close();
                                 session.setAttribute("loggedIn", "user");
+                                
+                                ArrayList<String> buildingNames = new ArrayList();
+                           
+                                buildingNames = getUsersBuildingNames(request, response, tempUser);
+                                
+                                session.setAttribute("Name", tempUser);
+                                session.setAttribute("buildingNames", buildingNames);
+                                myID = rs.getInt("userId");
                                 RequestDispatcher rd = request.getRequestDispatcher("CreateUser.jsp");
-                                rd.include(request, response);
+                                ps.close();
+                                forward(request, response, "/MainPage.jsp");
                             }
 
                         }
@@ -243,7 +249,7 @@ public class PolyServlet extends HttpServlet
                         }
 
                         ps.close();
-                        forward(request, response, "/index.html");
+                        forward(request, response, "/Login.jsp");
                     }
 
                     catch (SQLException e)

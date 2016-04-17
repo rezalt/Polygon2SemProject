@@ -32,7 +32,7 @@ public class buildingServlet extends HttpServlet
     String username = "";
     int myID = 0;
     int ID = 0;
-
+ String company;
     // END OF VARIABLES
     DBConnector DBC = new DBConnector();
     Connection conn;
@@ -178,12 +178,11 @@ public class buildingServlet extends HttpServlet
                         }
 
                         ps1.close();
-                        forward(request, response, "/CreateBuilding.jsp");
+                        forward(request, response, "/Login.jsp");
                     }
 
                     catch (SQLException e)
                     {
-                        Logger.getLogger(buildingServlet.class.getName()).log(Level.SEVERE, null, e + "new building");
                         session.setAttribute("text", "" + e);
                         forward(request, response, "/CreateBuilding.jsp");
                     }
