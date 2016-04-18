@@ -52,24 +52,13 @@
                 }
             %>
             <%=session.getAttribute("text")%>
-        <%
-           //out.print(session.getAttribute("username"));
-            if(session.getAttribute("loggedIn")== null)
-            {
-                response.sendRedirect("index.html");
-            }
-            else
-            {
-                ArrayList<String> buildingNames = new ArrayList();
-                buildingNames = (ArrayList<String>) session.getAttribute("buildingNames");
-                for(int i = 0; i < buildingNames.size(); i++)
-                {
-                    out.print("<INPUT TYPE=\"SUBMIT\" name=\"buildingChosen\" value=\""+buildingNames.get(i)+"\"><br>");  
-                }
        
-            }
-        %>          
-              
+                
+            <c:forEach var="i" items="${requestScope.buildingChosen}">
+   
+            <input type="submit" id="buildingName" name="buildingName" value="<c:out value="${buildingChosen}"/>">
+
+            </c:forEach>
             
         </form>
         </div>
