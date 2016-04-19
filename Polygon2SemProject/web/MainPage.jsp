@@ -41,7 +41,7 @@
         <br>
      
             
-        <form class="login" action="buildingServ2" method="POST"> 
+        <form name="buildingList" class="login" action="buildingServ2" method="POST"> 
             <img src="Logo.JPG" alt="Logo">
             <p class="title">Your company have the following buildings. <br> </p>
             <%
@@ -53,10 +53,11 @@
             %>
             <%=session.getAttribute("text")%>
        
-                
-            <c:forEach var="i" items="${requestScope.buildingChosen}">
+            
+            <input type="hidden" name="buildingValue" value="" />    
+            <c:forEach var="building" items="${requestScope.buildingNames}">
    
-            <input type="submit" id="buildingName" name="buildingName" value="<c:out value="${buildingChosen}"/>">
+            <input type="submit" id="buildingName" name="buildingChosen" value="<c:out value="${building.name}"/>">
 
             </c:forEach>
             

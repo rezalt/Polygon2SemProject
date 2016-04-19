@@ -145,12 +145,12 @@ public class PolyServlet extends HttpServlet
 
                                 session.setAttribute("loggedIn", "Admin");
 
-                                ArrayList<String> buildingNames = new ArrayList();
+                                ArrayList buildingNames = new ArrayList();
                            
                                 buildingNames = getUsersBuildingNames(request, response, tempUser);
                                 
                                 session.setAttribute("Name", tempUser);
-                                session.setAttribute("buildingNames", buildingNames);
+                                request.setAttribute("buildingNames", buildingNames);
                                 myID = rs.getInt("userId");
                                 ps.close();
                                 forward(request, response, "/MainPage.jsp");
@@ -159,7 +159,7 @@ public class PolyServlet extends HttpServlet
                             {
                                 session.setAttribute("loggedIn", "user");
                                 
-                                ArrayList<String> buildingNames = new ArrayList();
+                                ArrayList buildingNames = new ArrayList();
                            
                                 buildingNames = getUsersBuildingNames(request, response, tempUser);
                                 
@@ -267,9 +267,11 @@ public class PolyServlet extends HttpServlet
         processRequest(request, response);
     } // end of doPost
 
-    public ArrayList<String> getUsersBuildingNames(HttpServletRequest request, HttpServletResponse response, String username)throws IOException, ServletException
+    public ArrayList<Building> getUsersBuildingNames(HttpServletRequest request, HttpServletResponse response, String username)throws IOException, ServletException
     {
-        ArrayList<String> buildingNames = new ArrayList();
+        
+        
+        ArrayList buildingNames = new ArrayList();
         conn = DBC.getConnection();
         
         String sql = "SELECT * FROM building WHERE buildingCompany =?";
@@ -280,10 +282,10 @@ public class PolyServlet extends HttpServlet
             ResultSet rs = ps.executeQuery();
             
             while(rs.next())
-            {
-                buildingNames.add(rs.getString(2));
+            
+                buildingNames.add(new Building(rs.getString(2)));
             }
-        }
+        
         catch (Exception e)
         {
             Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "WHAT");
