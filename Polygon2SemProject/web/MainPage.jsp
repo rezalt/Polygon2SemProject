@@ -53,8 +53,7 @@
             %>
             <%=session.getAttribute("text")%>
        
-            
-            <input type="hidden" name="buildingValue" value="" />    
+               
             <c:forEach var="building" items="${requestScope.buildingNames}">
    
             <input type="submit" id="buildingName" name="buildingChosen" value="<c:out value="${building.name}"/>">
