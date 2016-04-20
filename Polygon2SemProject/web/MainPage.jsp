@@ -15,52 +15,49 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
-       <div class="wrapper">
-        
-        <ul>
-            <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
-            <li><a href="CreateReport.jsp">CreateReport</a></li>
-        </ul>
-        
-        Hello,
-        <%
-            
-            //out.print(session.getAttribute("loggedIn"));
-            if(session.getAttribute("loggedIn")== null)
-            {
-                response.sendRedirect("index.html");
-            }
-            
-            String name = (String) session.getAttribute("Name");
-            out.print(name + ".");
-        %>
-        
-      
-        <br>
-        <br>
-     
-            
-        <form name="buildingList" class="login" action="buildingServ2" method="POST"> 
-            <img src="Logo.JPG" alt="Logo">
-            <p class="title">Your company have the following buildings. <br> </p>
-            <%
-                String text = (String) session.getAttribute("text");
-                if (text == null)
-                {
-                    session.setAttribute("text", "");
-                }
-            %>
-            <%=session.getAttribute("text")%>
-       
-               
-            <c:forEach var="building" items="${requestScope.buildingNames}">
-   
-            <input type="submit" id="buildingName" name="buildingChosen" value="<c:out value="${building.name}"/>">
 
-            </c:forEach>
+        <div class="wrapper">
+
+            <ul>
+                <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
+                <li><a href="CreateReport.jsp">CreateReport</a></li>
+            </ul>
+            <br>
+
             
-        </form>
+            Hello,
+            <%-- 
+            Redirects to index if the user is not logged in.
+            If logged in, the username will be shown.
+            --%>
+            <c:if test="${empty loggedIn}">
+                <c:redirect url="index.html"/>
+            </c:if>
+            <c:out value="${Name}."/>
+
+
+            <br>
+            <br>
+
+
+            <form name="buildingList" class="login" action="buildingServ2" method="POST"> 
+                <img src="Logo.JPG" alt="Logo">
+                <p class="title">Your company has the following buildings. <br> </p>
+
+                <%-- Error messages shown here, if any. --%>
+                <c:if test="${empty text}">
+                    <c:set var="text" value="" scope="session"/>
+                </c:if>
+                <c:out value="${text}"/>
+
+                <%-- List of buildings --%>       
+                <c:forEach var="building" items="${requestScope.buildingNames}">
+
+                    <input type="submit" id="buildingName" name="buildingChosen" value="<c:out value="${building.name}"/>">
+
+                </c:forEach>
+
+            </form>
         </div>
     </body>
 </html>
