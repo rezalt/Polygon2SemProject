@@ -53,10 +53,6 @@ public class buildingServlet extends HttpServlet
 
         super.init(conf);
 
-        DBC.setDbURL("jdbc:mysql://91.100.100.141:3360/polygondb");
-        DBC.setDbUsername("Admin");
-        DBC.setDbPassword("CBAmoria");
-
     }
 
     /**

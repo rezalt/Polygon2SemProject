@@ -16,10 +16,11 @@ import java.sql.SQLException;
  */
 public class DBConnector
 {
-
-    String URL;
-    String Username;
-    String Password;
+    SecretData sd = new SecretData();
+    
+    String URL = sd.getURL();
+    String Username = sd.getUsername();
+    String Password = sd.Password;
 
     public Connection getConnection()
     {
