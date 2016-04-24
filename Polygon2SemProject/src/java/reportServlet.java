@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Domain.DBConnector;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
