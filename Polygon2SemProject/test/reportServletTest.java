@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Controllers.reportServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,7 +63,7 @@ public class reportServletTest
         
        
         reportServlet instance = new reportServlet();
-        instance.createReport(request, response, session);
+        //instance.createReport(request, response, session);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

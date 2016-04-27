@@ -1,6 +1,6 @@
 package Domain;
 
-import Model.reportServlet;
+import Controllers.reportServlet;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;

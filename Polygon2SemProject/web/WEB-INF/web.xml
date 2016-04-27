@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>PolyServlet</servlet-name>
-        <servlet-class>PolyServlet</servlet-class>
+        <servlet-class>Controllers.PolyServlet</servlet-class>
         <init-param>
             <param-name>jdbcDriver</param-name>
             <param-value>com.mysql.jdbc.Driver</param-value>
@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>buildingServlet</servlet-name>
-        <servlet-class>buildingServlet</servlet-class>
+        <servlet-class>Controllers.buildingServlet</servlet-class>
         <init-param>
             <param-name>jdbcDriver</param-name>
             <param-value>com.mysql.jdbc.Driver</param-value>
@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>reportServlet</servlet-name>
-        <servlet-class>reportServlet</servlet-class>
+        <servlet-class>Controllers.reportServlet</servlet-class>
         <init-param>
             <param-name>jdbcDriver</param-name>
             <param-value>com.mysql.jdbc.Driver</param-value>
@@ -26,7 +26,7 @@
     </servlet>
     <servlet>
         <servlet-name>buildingServ2</servlet-name>
-        <servlet-class>buildingServ2</servlet-class>
+        <servlet-class>Controllers.buildingServ2</servlet-class>
         <init-param>
             <param-name>jdbcDriver</param-name>
             <param-value>com.mysql.jdbc.Driver</param-value>
