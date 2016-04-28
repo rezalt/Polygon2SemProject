@@ -24,7 +24,7 @@
             </ul>
             <br>
 
-            
+
             Hello,
             <%-- 
             Redirects to index if the user is not logged in.
@@ -44,16 +44,16 @@
                 <img src="Logo.JPG" alt="Logo">
                 <p class="title">Your company has the following buildings. <br> </p>
 
-                <%-- Error messages shown here, if any. --%>
+                <%-- Error message shown here, if any. --%>
                 <c:if test="${empty text}">
                     <c:set var="text" value="" scope="session"/>
                 </c:if>
                 <c:out value="${text}"/>
 
                 <%-- List of buildings --%>       
-                <c:forEach var="building" items="${requestScope.buildingNames}">
+                <c:forEach var="buildingName" items="${requestScope.buildingNames}">
 
-                    <input type="submit" id="buildingName" name="buildingChosen" value="<c:out value="${building.name}"/>">
+                    <input type="submit" id="buildingName" name="buildingChosen" value="<c:out value="${buildingName}"/>">
 
                 </c:forEach>
 

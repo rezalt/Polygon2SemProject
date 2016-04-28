@@ -31,9 +31,9 @@
             <form class="login" NAME="form1" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
                 <input type="hidden" name="user" value="" />
                 <p class="title" >Customer login</p>
-                <input type="text" placeholder="Username" name="Username"  autofocus/>
+                <input type="text" placeholder="Username" name="Username"  required="" autofocus/>
                 <i class="fa fa-user"></i>
-                <input type="password" placeholder="Password" name="Password" />
+                <input type="password" placeholder="Password" name="Password" required=""/>
                 <i class="fa fa-key"></i>
                 <%
                     String text = (String) session.getAttribute("text");

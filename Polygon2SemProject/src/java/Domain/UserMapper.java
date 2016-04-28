@@ -14,45 +14,170 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Statement;
 
 public class UserMapper
 {
 
-    Connection conn;
-    DBConnector DBC = new DBConnector();
-    String company;
-
-    public ArrayList<String> getUsersBuildingNames(String username) throws DataMapperException
+    public UserMapper()
     {
-        ArrayList<String> buildingNames = new ArrayList();
+
+    }
+
+    DBConnector DBC = new DBConnector();
+    Connection conn;
+
+    public User login(String username, String password) throws DataMapperException
+    {
+        User user = null;
         conn = DBC.getConnection();
-
-        String sql = "SELECT * FROM building WHERE buildingCompany =?";
-
+        String sql = "SELECT * FROM user WHERE name =? and password =?";
         try (PreparedStatement ps = conn.prepareStatement(sql))
         {
-            ps.setString(1, company);
+
+            ps.setString(1, username);
+            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
+
+            if (rs.next())
+            {
+
+                int type = rs.getInt(7);
+                String company = rs.getString(4);
+                if (type == 2) // Admin 
+                {
+                    user = new User(username, password, company, type);
+                    user.setBuildingNames(setUserBuildingNames(username, company, type));
+                }
+
+                else if (type == 0) // 0: User
+                {
+                    user = new User(username, password, company, type);
+                    user.setBuildingNames(setUserBuildingNames(username, company, type));
+                }
+            }
+            else
+            {
+                // 4: User does not exist
+                user = new User(username, password, "doesNotExists", 4);
+            }
+            return user;
+
+        }
+        catch (SQLException e)
+        {
+            throw new DataMapperException("Error occured at user log-in ", e);
+        }
+
+    }
+
+    public User newUser(String username, String password, String companyName, String companyAddress, int Zip) throws DataMapperException
+    {
+        User user = null;
+        conn = DBC.getConnection();
+
+        try (Statement st = conn.createStatement())
+        {
+
+            // Creating a user                      
+            st.executeQuery("SELECT userid, name FROM user");
+            ResultSet rs = st.getResultSet();
 
             while (rs.next())
             {
 
-                buildingNames.add(rs.getString(2));
+                if (rs.getString("name").equals(username))
+                {
+                    // type 3: User already exists
+                    user = new User(username, password, "alreadyExists", 3);
+                    st.close();
+                    return user;
+                }
 
             }
+            st.close();
+
+            try ( // Her indsætter vi vores nye user ind i databasen.
+                    PreparedStatement ps = conn.prepareStatement("insert into user(name,password,"
+                            + "companyName,companyAddress,Zip) "
+                            + "values(?,?,?,?,?)"))
+            {
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ps.setString(3, companyName);
+                ps.setString(4, companyAddress);
+                ps.setInt(5, Zip);
+
+                int i = ps.executeUpdate();
+                if (i > 0)
+                {
+                    user = new User(username, password, companyName, 0);
+                    user.setBuildingNames(setUserBuildingNames(username, companyName, 0));
+                }
+                else
+                {
+                    // Error creating user
+                    // 4: User does not exist
+                    user = new User(username, password, "doesNotExists", 4);
+                    ps.close();
+                }
+            }
+
+            return user;
         }
         catch (SQLException e)
         {
-            throw new DataMapperException("Error occured when getting building names", e);
+            throw new DataMapperException("Error occured at user creation ", e);
+        }
+    }
+
+    public ArrayList<String> setUserBuildingNames(String username, String company, int type) throws DataMapperException
+    {
+        ArrayList<String> buildingNames = new ArrayList();
+        conn = DBC.getConnection();
+        String sql;
+
+        if (type == 2)
+        {
+            sql = "SELECT buildingName FROM building";
+            try (PreparedStatement ps = conn.prepareStatement(sql))
+            {
+                
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next())
+                {
+                    buildingNames.add(rs.getString("buildingName"));
+                }
+                ps.close();
+            }
+            catch (SQLException e)
+            {
+                throw new DataMapperException("Error occured when getting building names to admin ", e);
+            }
+        }
+        else
+        {
+            sql = "SELECT buildingName, buildingCompany FROM building WHERE buildingCompany = ?";
+            try (PreparedStatement ps = conn.prepareStatement(sql))
+            {
+                ps.setString(1, company);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next())
+                {
+                    buildingNames.add(rs.getString(2));
+                }
+                ps.close();
+            }
+            catch (SQLException e)
+            {
+                throw new DataMapperException("Error occured when getting building names", e);
+            }
         }
 
         return buildingNames;
 
-    }
-
-    public String getUserType(String username)
-    {
-        return null;
     }
 
 }

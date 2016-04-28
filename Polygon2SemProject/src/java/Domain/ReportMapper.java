@@ -68,7 +68,7 @@ public class ReportMapper {
                 
         Part filePart2 = request.getPart("wallPicture");
                 
-                if (filePart2 != null) 
+               if (filePart2 != null) 
                 {
                     iS2 = filePart2.getInputStream();
                 }

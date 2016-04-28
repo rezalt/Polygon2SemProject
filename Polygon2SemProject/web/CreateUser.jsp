@@ -33,13 +33,13 @@
             <form class="login" NAME="form1" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
                 <input type="hidden" name="user" value="" />
                 <p class="title">Create user</p>
-                <input type="text" placeholder="Brugernavn" name="Username"  autofocus/>
+                <input type="text" placeholder="Brugernavn" name="Username" required="" autofocus/>
                 <i class="fa fa-user"></i>
-                <input type="password" placeholder="Adgangskode" name="Password" />
+                <input type="password" placeholder="Adgangskode" name="Password" required=""  />
                 <i class="fa fa-key"></i>
-                <input type="text" placeholder="Firmanavn" name="companyName" />
-                <input type="text" placeholder="Adresse" name="companyAddress" />
-                <input type="number" placeholder="Postnr." name="Zip" />
+                <input type="text" placeholder="Firmanavn" name="companyName" required="" />
+                <input type="text" placeholder="Adresse" name="companyAddress" required=""  />
+                <input type="number" placeholder="Postnr." name="Zip" required=""  />
 
                 <%
                     String text = (String) session.getAttribute("text");

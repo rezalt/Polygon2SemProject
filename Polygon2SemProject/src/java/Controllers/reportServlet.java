@@ -142,20 +142,6 @@ public class reportServlet extends HttpServlet
         rd.forward(request, response);
     }
 
-    public static Integer tryParse(String text)
-    {
-        try
-        {
-            return Integer.parseInt(text);
-        }
-        catch (NumberFormatException e)
-        {
-            return 0;
-        }
-    }
-    
-  
-
     public void createReport(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException
     {
         
@@ -299,6 +285,17 @@ public class reportServlet extends HttpServlet
         } 
     }
 
+      public static Integer tryParse(String text)
+    {
+        try
+        {
+            return Integer.parseInt(text);
+        }
+        catch (NumberFormatException e)
+        {
+            return 0;
+        }
+    }
     /**
      * Returns a short description of the servlet.
      *
