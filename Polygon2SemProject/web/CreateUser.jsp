@@ -10,8 +10,6 @@
 <html>
     <head>
 
-
-
         <link href="<c:url value="/Resources/Theme/Index.css"/>" rel="stylesheet">
         <link href="<c:url value="/Resources/Customer/Customer.css"/>" rel="stylesheet">
 

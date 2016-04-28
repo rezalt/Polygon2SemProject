@@ -29,7 +29,7 @@ public class DBConnector
         {
             conn = DriverManager.getConnection(getDbURL(), getDbUsername(), getDbPassword());
         }
-        catch (SQLException e)
+        catch (Exception e)
         {
             System.out.println("Could not connect to DB: " + e.getMessage());
         }

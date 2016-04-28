@@ -117,6 +117,7 @@ public class PolyServlet extends HttpServlet
              Type 2: Admin
              Type 3: User already exists
              Type 4: Account does not exist.
+             Type 5: No connection.
              This is an interesting way of doing things.
              */
             UserMapper um = new UserMapper();
@@ -127,7 +128,6 @@ public class PolyServlet extends HttpServlet
             {
 
                 case "Login":
-                {
                     try
                     {
                         user = um.login(request.getParameter("Username"), request.getParameter("Password"));
@@ -157,25 +157,30 @@ public class PolyServlet extends HttpServlet
                         request.setAttribute("buildingNames", buildingNames);
                         session.setAttribute("Name", user.getUsername());
 
-                        RequestDispatcher rd = request.getRequestDispatcher("CreateUser.jsp");
                         forward(request, response, "/MainPage.jsp");
+                    }
+                    else if(type == 4)
+                    {
+                        session.setAttribute("text", "Wrong username or password.");
+                        
+                        forward(request, response, "/Login.jsp");
                     }
                     else
                     {
-                        session.setAttribute("text", "Wrong username or password.");
+                        session.setAttribute("text", "Cannot get connection to server.");
+                        
                         forward(request, response, "/Login.jsp");
                     }
 
                     break;
-                }
+
                 case "NewUser":
-                {
 
                     try
                     {
                         user = um.newUser(
-                            request.getParameter("Username"), request.getParameter("Password"), request.getParameter("companyName"),
-                            request.getParameter("companyAddress"), tryParse(request.getParameter("Zip"))
+                                request.getParameter("Username"), request.getParameter("Password"), request.getParameter("companyName"),
+                                request.getParameter("companyAddress"), tryParse(request.getParameter("Zip"))
                         );
                         type = user.getType();
                         buildingNames = user.getBuildingNames();
@@ -201,22 +206,18 @@ public class PolyServlet extends HttpServlet
                         session.setAttribute("text", "User already exists");
                         forward(request, response, "/MainPage.jsp");
                     }
-                    else // Type 4
+                    else if(type == 4) // Type 4
                     {
                         session.setAttribute("text", "Error creating user");
                         forward(request, response, "/MainPage.jsp");
+                    }       
+                    else
+                    {
+                        session.setAttribute("text", "Cannot get connection to server.");
+                        forward(request, response, "/CreateUser.jsp");
                     }
-
-                }
-                // Makes sure we don't show a meaningless error message.
-                session.setAttribute("text", " ");
-
-                forward(request, response, "/CreateUser.jsp");
-
-                forward(request, response, "/Login.jsp");
-
-                break;
-
+                    
+                    break;
             }
 
         }
