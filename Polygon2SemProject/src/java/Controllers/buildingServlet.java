@@ -30,15 +30,6 @@ import javax.servlet.http.HttpSession;
 public class buildingServlet extends HttpServlet
 {
 
-    // VARIABLES
-    String username = "";
-    int myID = 0;
-    int ID = 0;
-    String company;
-    // END OF VARIABLES
-    DBConnector DBC = new DBConnector();
-    Connection conn;
-
     @Override
     public void init(ServletConfig conf) throws ServletException
     {
@@ -100,7 +91,10 @@ public class buildingServlet extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession(true);
-
+        
+        DBConnector DBC = new DBConnector();
+        Connection conn;
+        
         String do_this = (String) request.getParameter("building");
         if (do_this == null)
         {
@@ -163,6 +157,7 @@ public class buildingServlet extends HttpServlet
                         }
 
                         ps1.close();
+                        
                         forward(request, response, "/MainPage.jsp");
                     }
 

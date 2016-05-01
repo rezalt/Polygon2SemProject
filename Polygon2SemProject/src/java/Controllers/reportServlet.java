@@ -5,15 +5,12 @@ package Controllers;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import Domain.DBConnector;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -37,15 +34,6 @@ import javax.servlet.http.Part;
 @MultipartConfig
 public class reportServlet extends HttpServlet
 {
-
-    // VARIABLES
-    String username = "";
-    int myID = 0;
-    int ID = 0;
-
-    // END OF VARIABLES
-    DBConnector DBC = new DBConnector();
-    Connection conn;
 
     @Override
     public void init(ServletConfig conf) throws ServletException
@@ -107,6 +95,9 @@ public class reportServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+
+        DBConnector DBC = new DBConnector();
+        Connection conn;
         HttpSession session = request.getSession(true);
 
         String do_this = request.getParameter("report");
@@ -115,7 +106,7 @@ public class reportServlet extends HttpServlet
         {
             forward(request, response, "/index.html");
         }
-        
+
         else
         {
             switch (do_this)
@@ -144,35 +135,33 @@ public class reportServlet extends HttpServlet
 
     public void createReport(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException
     {
-        
+
         InputStream iS1 = null;
         InputStream iS2 = null;
-        
+
         Part filePart = request.getPart("roofPicture");
-                
-                if (filePart != null) 
-                {
-                    iS1 = filePart.getInputStream();
-                }
-                
+
+        if (filePart != null)
+        {
+            iS1 = filePart.getInputStream();
+        }
+
         Part filePart2 = request.getPart("wallPicture");
-                
-                if (filePart2 != null) 
-                {
-                    iS2 = filePart2.getInputStream();
-                }
-        
+
+        if (filePart2 != null)
+        {
+            iS2 = filePart2.getInputStream();
+        }
 
         conn = DBC.getConnection();
         PreparedStatement ps1 = null;
         PreparedStatement ps2 = null;
 
-     
-                // Makes sure we don't show a meaningless error message.
-            session.setAttribute("text", " ");
+        // Makes sure we don't show a meaningless error message.
+        session.setAttribute("text", " ");
         try
         {
-            
+
             // Inserting our new report to the database.
             ps1 = conn.prepareStatement("insert into "
                     + "report (nameOfBuilding, rDate, address, zipCode, yearBuild, buildingSizeInSquareMeters,"
@@ -208,17 +197,16 @@ public class reportServlet extends HttpServlet
             ps1.setString(15, request.getParameter("textSamarbejdeMed"));
             ps1.setInt(16, tryParse(request.getParameter("tilstand")));
 
-
-            if(iS1 != null)
-            {  
-                ps1.setBinaryStream(17, iS1 );
-            }
-          
-            if(iS2 != null)
+            if (iS1 != null)
             {
-                ps1.setBinaryStream(18, iS2 );
+                ps1.setBinaryStream(17, iS1);
             }
-            
+
+            if (iS2 != null)
+            {
+                ps1.setBinaryStream(18, iS2);
+            }
+
             int i = ps1.executeUpdate();
             if (i > 0)
             {
@@ -231,7 +219,7 @@ public class reportServlet extends HttpServlet
                 //forward(request, response, "/CreateReport.jsp");
                 return;
             }
-             session.setAttribute("text", "You have successfully created a report.");
+            session.setAttribute("text", "You have successfully created a report.");
             ps1.close();
             forward(request, response, "/MainPage.jsp");
 //            ps2 = conn.prepareStatement("insert into "
@@ -282,10 +270,10 @@ public class reportServlet extends HttpServlet
         catch (SQLException ex)
         {
             Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
 
-      public static Integer tryParse(String text)
+    public static Integer tryParse(String text)
     {
         try
         {
@@ -296,6 +284,7 @@ public class reportServlet extends HttpServlet
             return 0;
         }
     }
+
     /**
      * Returns a short description of the servlet.
      *

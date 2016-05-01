@@ -28,8 +28,7 @@ import javax.servlet.http.HttpSession;
  */
 public class buildingServ2 extends HttpServlet
 {
-DBConnector DBC = new DBConnector();
-Connection conn;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -89,13 +88,13 @@ Connection conn;
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        
+        
         HttpSession session = request.getSession(true);
         String buildingName = (String) request.getParameter("buildingChosen");
         System.out.println("-------->"+buildingName+"<---------");
         session.setAttribute("buildingChosen", buildingName);
         setBuildingAttributes(session, request, response, buildingName);
-        
-        
         
         
         
@@ -123,7 +122,9 @@ Connection conn;
      
     public void setBuildingAttributes(HttpSession session, HttpServletRequest request, HttpServletResponse response, String buildingName) throws IOException, ServletException
     {
-        conn = DBC.getConnection();
+        DBConnector DBC = new DBConnector();
+        Connection conn = DBC.getConnection();
+        
         String sql = "SELECT * FROM building WHERE buildingName =?";
         
         try(PreparedStatement ps = conn.prepareStatement(sql))

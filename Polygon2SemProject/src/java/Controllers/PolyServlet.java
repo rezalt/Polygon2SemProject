@@ -9,9 +9,6 @@ import Domain.DataMapperException;
 import Domain.UserMapper;
 import Domain.User;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,16 +27,7 @@ import javax.servlet.http.HttpSession;
  */
 public class PolyServlet extends HttpServlet
 {
-
-    // VARIABLES
-    String username = "";
-    int myID = 0;
-    int ID = 0;
-
-    // END OF VARIABLES
-    Connection conn;
-    String company;
-
+    
     @Override
     public void init(ServletConfig conf) throws ServletException
     {
@@ -118,8 +106,9 @@ public class PolyServlet extends HttpServlet
              Type 3: User already exists
              Type 4: Account does not exist.
              Type 5: No connection.
-             This is an interesting way of doing things.
+             This is an interesting way of doing things. Maybe not next time.
              */
+            
             UserMapper um = new UserMapper();
             User user = new User();
             int type = 4;
@@ -142,6 +131,7 @@ public class PolyServlet extends HttpServlet
 
                     if (type == 2)
                     {
+                        session.setAttribute("userObject",user);
                         session.setAttribute("text", " ");
                         session.setAttribute("loggedIn", "Admin");
                         session.setAttribute("Name", user.getUsername());
@@ -153,6 +143,7 @@ public class PolyServlet extends HttpServlet
                     }
                     else if (type == 1)
                     {
+                        session.setAttribute("userObject",user);
                         session.setAttribute("text", " ");
                         session.setAttribute("loggedIn", "Employee");
                         session.setAttribute("Name", user.getUsername());
@@ -163,6 +154,7 @@ public class PolyServlet extends HttpServlet
                     }
                     else if (type == 0)
                     {
+                        session.setAttribute("userObject",user);
                         session.setAttribute("text", " ");
                         session.setAttribute("loggedIn", "user");
                         session.setAttribute("Name", user.getUsername());
@@ -205,7 +197,7 @@ public class PolyServlet extends HttpServlet
 
                     if (type == 0)
                     {
-
+                        session.setAttribute("userObject",user);
                         session.setAttribute("text", " ");
                         session.setAttribute("loggedIn", "user");
                         session.setAttribute("Name", user.getUsername());
