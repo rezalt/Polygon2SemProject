@@ -96,8 +96,7 @@ public class reportServlet extends HttpServlet
             throws ServletException, IOException
     {
 
-        DBConnector DBC = new DBConnector();
-        Connection conn;
+
         HttpSession session = request.getSession(true);
 
         String do_this = request.getParameter("report");
@@ -136,6 +135,9 @@ public class reportServlet extends HttpServlet
     public void createReport(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, ServletException
     {
 
+        DBConnector DBC = new DBConnector();
+        Connection conn;
+        
         InputStream iS1 = null;
         InputStream iS2 = null;
 
