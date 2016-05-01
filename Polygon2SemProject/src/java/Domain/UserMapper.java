@@ -53,6 +53,12 @@ public class UserMapper
                         user.setBuildingNames(setUserBuildingNames(username, company, type));
                     }
 
+                    else if (type == 1) // 1: Employee
+                    {
+                        user = new User(username, password, company, type);
+                        user.setBuildingNames(setUserBuildingNames(username, company, type));
+                    }
+                    
                     else if (type == 0) // 0: User
                     {
                         user = new User(username, password, company, type);
@@ -149,7 +155,7 @@ public class UserMapper
         conn = DBC.getConnection();
         String sql;
 
-        if (type == 2)
+        if (type == 2 || type == 1)
         {
             sql = "SELECT buildingName FROM building";
             try (PreparedStatement ps = conn.prepareStatement(sql))

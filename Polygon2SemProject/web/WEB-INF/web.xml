@@ -35,6 +35,7 @@
     <servlet-mapping>
         <servlet-name>PolyServlet</servlet-name>
         <url-pattern>/PolyServlet</url-pattern>
+          <url-pattern>/MainPage/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>buildingServlet</servlet-name>

@@ -5,7 +5,6 @@ package Controllers;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import Domain.DBConnector;
 import java.io.IOException;
 import java.sql.Connection;
@@ -35,7 +34,7 @@ public class buildingServlet extends HttpServlet
     String username = "";
     int myID = 0;
     int ID = 0;
- String company;
+    String company;
     // END OF VARIABLES
     DBConnector DBC = new DBConnector();
     Connection conn;
@@ -102,13 +101,7 @@ public class buildingServlet extends HttpServlet
     {
         HttpSession session = request.getSession(true);
 
-        String do_this =(String) request.getParameter("building");
-//        String buildingChosen = request.getParameter("buildingChosen");
-//        if (buildingChosen!=null)
-//        {
-//            forward(request, response, "/BuildingJSP.jsp");
-//        }
-
+        String do_this = (String) request.getParameter("building");
         if (do_this == null)
         {
             forward(request, response, "/index.html");
@@ -119,13 +112,6 @@ public class buildingServlet extends HttpServlet
             {
 
                 case "create":
-
-                    if (request.getParameter("buildingName").isEmpty() || request.getParameter("address").isEmpty())
-                    {
-
-                        session.setAttribute("text", "You need to fill out all the fields.");
-                        forward(request, response, "/CreateBuilding.jsp");
-                    }
 
                     conn = DBC.getConnection();
                     PreparedStatement ps1 = null;
@@ -177,7 +163,7 @@ public class buildingServlet extends HttpServlet
                         }
 
                         ps1.close();
-                        forward(request, response, "/Login.jsp");
+                        forward(request, response, "/MainPage.jsp");
                     }
 
                     catch (SQLException e)
@@ -186,9 +172,14 @@ public class buildingServlet extends HttpServlet
                         forward(request, response, "/CreateBuilding.jsp");
                     }
                     break;
+
+                default:
+                    session.setAttribute("text", "");
+                    forward(request, response, "/index.html");
+                    break;
+
             }
         }
-       
 
         processRequest(request, response);
     } // end of doPost

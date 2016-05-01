@@ -145,30 +145,42 @@ public class PolyServlet extends HttpServlet
                         session.setAttribute("text", " ");
                         session.setAttribute("loggedIn", "Admin");
                         session.setAttribute("Name", user.getUsername());
-                        request.setAttribute("buildingNames", buildingNames);
+                        session.setAttribute("buildingCompany", user.getCompanyName());
+                        session.setAttribute("buildingNames", buildingNames);
 
                         forward(request, response, "/MainPage.jsp");
 
+                    }
+                    else if (type == 1)
+                    {
+                        session.setAttribute("text", " ");
+                        session.setAttribute("loggedIn", "Employee");
+                        session.setAttribute("Name", user.getUsername());
+                        session.setAttribute("buildingCompany", user.getCompanyName());
+                        session.setAttribute("buildingNames", buildingNames);
+
+                        forward(request, response, "/MainPage.jsp");
                     }
                     else if (type == 0)
                     {
                         session.setAttribute("text", " ");
                         session.setAttribute("loggedIn", "user");
-                        request.setAttribute("buildingNames", buildingNames);
                         session.setAttribute("Name", user.getUsername());
+                        session.setAttribute("buildingCompany", user.getCompanyName());
+                        session.setAttribute("buildingNames", buildingNames);
 
                         forward(request, response, "/MainPage.jsp");
                     }
-                    else if(type == 4)
+                    else if (type == 4)
                     {
                         session.setAttribute("text", "Wrong username or password.");
-                        
+
                         forward(request, response, "/Login.jsp");
                     }
                     else
                     {
                         session.setAttribute("text", "Cannot get connection to server.");
-                        
+
                         forward(request, response, "/Login.jsp");
                     }
 
@@ -197,7 +209,8 @@ public class PolyServlet extends HttpServlet
                         session.setAttribute("text", " ");
                         session.setAttribute("loggedIn", "user");
                         session.setAttribute("Name", user.getUsername());
-                        request.setAttribute("buildingNames", buildingNames);
+                        session.setAttribute("buildingCompany", user.getCompanyName());
+                        session.setAttribute("buildingNames", buildingNames);
 
                         forward(request, response, "/MainPage.jsp");
                     }
@@ -206,18 +219,19 @@ public class PolyServlet extends HttpServlet
                         session.setAttribute("text", "User already exists");
                         forward(request, response, "/MainPage.jsp");
                     }
-                    else if(type == 4) // Type 4
+                    else if (type == 4) // Type 4
                     {
                         session.setAttribute("text", "Error creating user");
                         forward(request, response, "/MainPage.jsp");
-                    }       
+                    }
                     else
                     {
                         session.setAttribute("text", "Cannot get connection to server.");
                         forward(request, response, "/CreateUser.jsp");
                     }
-                    
+
                     break;
+
             }
 
         }

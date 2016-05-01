@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-       <%
+        <%
             if (session.getAttribute("loggedIn") != "Admin" && session.getAttribute("loggedIn") != null)
             {
                 session.setAttribute("text", "You need to be a Polygon A/S employee to create a report.");
@@ -27,7 +27,7 @@
                 response.sendRedirect("Login.jsp");
             }
         %> 
-       <div class="wrapper">
+        <div class="wrapper">
 
             <ul>
                 <li><a href="Login.jsp">Login</a></li>
@@ -44,45 +44,45 @@
                 <input type="hidden" name="building" value="" />
                 <p class="title">Create building
                 <div align="center">
-                <table border="0">
-                    <tr>  
-                        <td>
-                            <input type="text" placeholder="Building name" name="buildingName">
-                        </td>  
-                        <td>
-                            <input type="text" placeholder="Address" name="address">
-                        </td>
-                    </tr>
-                    <tr>  
-                        <td>
-                            <input type="number" placeholder="buildingCondition" name="buildingCondition" min="0" max="3">
-                        </td>
-                        <td>
-                            <input type="text" placeholder="Owner" name="buildingCompany">
-                        </td>
-                    </tr>
-                    <tr>  
-                        <td>
-                            <input type="number" placeholder="parcelNr" name="parcelNr">
-                        </td>
-                        <td>
-                            <input type="number" placeholder="Size in m3" name="Size">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="number" placeholder="Zipcode" name="Zipcode">
-                        </td>
-                    </tr>
-                    <tr>  
-                        <td>
-                            <button type="submit" id="button3" value="create" onclick="myFunction()">
-                                <i class="spinner"></i>
-                                <span class="state">Submit</span> 
-                            </button> 
-                        </td>
-                    </tr>
-                </table>  
+                    <table border="0">
+                        <tr>  
+                            <td>
+                                <input type="text" placeholder="Building name" name="buildingName" required="">
+                            </td>  
+                            <td>
+                                <input type="text" placeholder="Address" name="address" required="">
+                            </td>
+                        </tr>
+                        <tr>  
+                            <td>
+                                <input type="number" placeholder="buildingCondition" name="buildingCondition" required="" min="0" max="3" title= "From 0-3 where 0 is the best possible condition.">
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Owner" name="buildingCompany" required="" value="<c:out value="${buildingCompany}"/>"  >
+                            </td>
+                        </tr>
+                        <tr>  
+                            <td>
+                                <input type="number" placeholder="parcelNr" name="parcelNr" required="">
+                            </td>
+                            <td>
+                                <input type="number" placeholder="Size in m3" name="Size" required="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" placeholder="Zipcode" name="Zipcode" required="">
+                            </td>
+                        </tr>
+                        <tr>  
+                            <td>
+                                <button type="submit" id="button3" value="create" onclick="myFunction()">
+                                    <i class="spinner"></i>
+                                    <span class="state">Submit</span> 
+                                </button> 
+                            </td>
+                        </tr>
+                    </table>  
                 </div>    
             </form>
             <footer><a target="blank"> Gruppe 4 - A </a></footer>

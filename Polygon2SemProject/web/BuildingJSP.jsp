@@ -27,16 +27,16 @@
             
             
             //out.print("<td>The address is: <td"+);
-            
-            out.print("<tr><td>The address is: </td><td>"+session.getAttribute("address")+"</td></tr>");
+            // 
+            out.print("<tr><td>The address is: </td><td>"+session.getAttribute("thisAddress")+"</td></tr>");
             String strOut = "<tr><td>";
             
-            out.print("<tr><td>The company owning the building is: </td><td>"+session.getAttribute("buildingCompany")+"</td></tr>");
-            out.print("<tr><td>The parcel nr for this building: </td><td>"+session.getAttribute("parcelNr")+"</td></tr>");
-            out.print("<tr><td>The size is: </td><td>"+session.getAttribute("size")+"m2</td></tr>");
-            out.print("<tr><td>The zipcode is: </td><td>"+session.getAttribute("zipcode")+"</td></tr>");
+            out.print("<tr><td>The company owning the building is: </td><td>"+session.getAttribute("thisBuildingCompany")+"</td></tr>");
+            out.print("<tr><td>The parcel nr for this building: </td><td>"+session.getAttribute("thisParcelNr")+"</td></tr>");
+            out.print("<tr><td>The size is: </td><td>"+session.getAttribute("thisSize")+"m2</td></tr>");
+            out.print("<tr><td>The zipcode is: </td><td>"+session.getAttribute("thisZipcode")+"</td></tr>");
             
-            String buildingCondition = ""+session.getAttribute("buildingCondition");
+            String buildingCondition = ""+session.getAttribute("thisBuildingCondition");
             if(buildingCondition.equals("0"))
             {
             out.print("<tr><td>The buildings condtion is: </td><td>"+"Bygningsdelen er ny og som bygget, og Funktionen er som beskrevet "+"</td></tr>");

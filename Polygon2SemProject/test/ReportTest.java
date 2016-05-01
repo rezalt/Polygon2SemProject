@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-import Controllers.Room;
-import Controllers.Report;
+import Domain.Room;
+import Domain.Report;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;

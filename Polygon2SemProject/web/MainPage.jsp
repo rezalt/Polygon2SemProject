@@ -51,7 +51,7 @@
                 <c:out value="${text}"/>
 
                 <%-- List of buildings --%>       
-                <c:forEach var="buildingName" items="${requestScope.buildingNames}">
+                <c:forEach var="buildingName" items="${sessionScope.buildingNames}">
 
                     <input type="submit" id="buildingName" name="buildingChosen" value="<c:out value="${buildingName}"/>">
 

@@ -134,14 +134,16 @@ Connection conn;
           
           if(rs.next())
           {
+              // "this" is added as prefix to prevent overriding user session info, 
+              // especially the users company name. Was a problem for Polygon employees.
               System.out.println("<-<-<-<-<-<>_>_>_>_>_2");
               System.out.println(rs.getString(5));
-              session.setAttribute("address", (String)rs.getString(3));
-              session.setAttribute("buildingCondition", rs.getInt(4));
-              session.setAttribute("buildingCompany", rs.getString(5));
-              session.setAttribute("parcelNr", rs.getInt(6));
-              session.setAttribute("size", rs.getInt(7));
-              session.setAttribute("zipcode", rs.getInt(8));
+              session.setAttribute("thisAddress", (String)rs.getString(3));
+              session.setAttribute("thisBuildingCondition", rs.getInt(4));
+              session.setAttribute("thisBuildingCompany", rs.getString(5));
+              session.setAttribute("thisParcelNr", rs.getInt(6));
+              session.setAttribute("thisSize", rs.getInt(7));
+              session.setAttribute("thisZipcode", rs.getInt(8));
           }
         }
         catch (Exception e)
@@ -151,9 +153,6 @@ Connection conn;
             forward(request, response, "/Login.jsp");
         }
 
-        
-        
-        
     }
 
 }
