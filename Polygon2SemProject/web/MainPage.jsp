@@ -23,8 +23,6 @@
         
         <div class="wrapper">
 
-            
-            
             <ul>
                 <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
                 <li><a href="CreateReport.jsp">CreateReport</a></li>
@@ -48,7 +46,7 @@
             <br>
 
 
-            <form name="buildingList" class="login" action="buildingServ2" method="POST"> 
+            <form name="buildingList" class="login" action="BuildingServ2" method="POST"> 
                 <img src="Logo.JPG" alt="Logo">
                 <p class="title">Your company has the following buildings. <br> </p>
 

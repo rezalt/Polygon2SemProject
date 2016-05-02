@@ -51,7 +51,7 @@
                 Please fill the report.
             </h1>
 
-            <form class="login" name="form3" action="reportServlet" enctype="multipart/form-data" method="POST" > <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
+            <form class="login" name="form3" action="ReportServlet" enctype="multipart/form-data" method="POST" > <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
                 <input type="hidden" name="report" value="" />
                 <p class="title">
                 <h2>

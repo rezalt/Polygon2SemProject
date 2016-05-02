@@ -34,7 +34,7 @@
                 Please insert building info.
             </h1>
 
-            <form class="login" name="form2" action="buildingServlet" method="get"> <img src="Logo.JPG" alt="Logo">
+            <form class="login" name="form2" action="BuildingServlet" method="get"> <img src="Logo.JPG" alt="Logo">
                 <input type="hidden" name="building" value="" />
                 <p class="title">Create building
                 <div align="center">

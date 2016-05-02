@@ -44,7 +44,7 @@
           
             </h1>
 
-            <form class="login" name="addRoom" action="reportServlet" enctype="multipart/form-data" method="POST" > <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
+            <form class="login" name="addRoom" action="ReportServlet" enctype="multipart/form-data" method="POST" > <img src="Logo.JPG" id="Image1" alt="Logo"> <img src="SB.JPG" id="Image2" alt="SB">
                 <input type="hidden" name="room" value="" />
                 <p class="title">
 

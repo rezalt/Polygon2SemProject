@@ -92,13 +92,10 @@ public class BuildingMapper
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, buildingName);
             ResultSet rs = ps.executeQuery();
-            System.out.println("<-<-<-<-<-<>_>_>_>_>_");
 
             if (rs.next()) {
                 // "this" is added as prefix to prevent overriding user session info, 
                 // especially the users company name. Was a problem for Polygon employees.
-                System.out.println("<-<-<-<-<-<>_>_>_>_>_2");
-                System.out.println(rs.getString(5));
                 session.setAttribute("thisAddress", (String) rs.getString(3));
                 session.setAttribute("thisBuildingCondition", rs.getInt(4));
                 session.setAttribute("thisBuildingCompany", rs.getString(5));
