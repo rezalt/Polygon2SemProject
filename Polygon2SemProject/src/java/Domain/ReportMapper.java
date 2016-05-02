@@ -86,8 +86,8 @@ public class ReportMapper
         ps = conn.prepareStatement("INSERT INTO "
                 + "REPORT (nameOfBuilding, rDate, address, zipCode, yearBuild, buildingSizeInSquareMeters,"
                 + "buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean,"
-                + "wallPictureBoolean, WallNotice, writer, coWriter, buildingCondition, roofPicture, wallPicture, userId)"
-                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                + "wallPictureBoolean, WallNotice, writer, coWriter, buildingCondition, roofPicture, wallPicture, userId, buildingId)"
+                + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
         ps.setString(1, request.getParameter("buildingName"));
 
@@ -131,6 +131,7 @@ public class ReportMapper
         }
         
         ps.setInt(19, myId);
+        ps.setInt(20, buildingId);
 
         
         int i = ps.executeUpdate();

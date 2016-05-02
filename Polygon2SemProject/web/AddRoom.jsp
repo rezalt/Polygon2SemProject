@@ -1,5 +1,5 @@
 <%-- 
-    Document   : addRoom
+    Document   : AddRoom
     Created on : 14-04-2016, 20:02:02
     Author     : Henrik
 --%>
