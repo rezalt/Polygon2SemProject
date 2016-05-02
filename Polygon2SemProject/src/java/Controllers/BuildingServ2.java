@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author JAJAJABLESES
  */
-public class buildingServ2 extends HttpServlet
+public class BuildingServ2 extends HttpServlet
 {
 
     /**

@@ -9,24 +9,24 @@
         </init-param>
     </servlet>
     <servlet>
-        <servlet-name>buildingServlet</servlet-name>
-        <servlet-class>Controllers.buildingServlet</servlet-class>
+        <servlet-name>BuildingServlet</servlet-name>
+        <servlet-class>Controllers.BuildingServlet</servlet-class>
         <init-param>
             <param-name>jdbcDriver</param-name>
             <param-value>com.mysql.jdbc.Driver</param-value>
         </init-param>
     </servlet>
     <servlet>
-        <servlet-name>reportServlet</servlet-name>
-        <servlet-class>Controllers.reportServlet</servlet-class>
+        <servlet-name>ReportServlet</servlet-name>
+        <servlet-class>Controllers.ReportServlet</servlet-class>
         <init-param>
             <param-name>jdbcDriver</param-name>
             <param-value>com.mysql.jdbc.Driver</param-value>
         </init-param>
     </servlet>
     <servlet>
-        <servlet-name>buildingServ2</servlet-name>
-        <servlet-class>Controllers.buildingServ2</servlet-class>
+        <servlet-name>BuildingServ2</servlet-name>
+        <servlet-class>Controllers.BuildingServ2</servlet-class>
         <init-param>
             <param-name>jdbcDriver</param-name>
             <param-value>com.mysql.jdbc.Driver</param-value>
@@ -38,16 +38,16 @@
           <url-pattern>/MainPage/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>buildingServlet</servlet-name>
-        <url-pattern>/buildingServlet</url-pattern>
+        <servlet-name>BuildingServlet</servlet-name>
+        <url-pattern>/BuildingServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>reportServlet</servlet-name>
-        <url-pattern>/reportServlet</url-pattern>
+        <servlet-name>ReportServlet</servlet-name>
+        <url-pattern>/ReportServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>buildingServ2</servlet-name>
-        <url-pattern>/buildingServ2</url-pattern>
+        <servlet-name>BuildingServ2</servlet-name>
+        <url-pattern>/BuildingServ2</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

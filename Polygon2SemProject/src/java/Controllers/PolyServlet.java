@@ -94,7 +94,7 @@ public class PolyServlet extends HttpServlet
 
         if (do_this == null)
         {
-            forward(request, response, "/index.html");
+            forward(request, response, "/Index.html");
         }
         else
         {

@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author JAJAJABLESES
  */
-public class buildingServlet extends HttpServlet
+public class BuildingServlet extends HttpServlet
 {
 
     @Override
@@ -36,7 +36,7 @@ public class buildingServlet extends HttpServlet
         }
         catch (ClassNotFoundException ex)
         {
-            Logger.getLogger(buildingServlet.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
 
         super.init(conf);
@@ -91,7 +91,7 @@ public class buildingServlet extends HttpServlet
         String do_this = (String) request.getParameter("building");
         if (do_this == null)
         {
-            forward(request, response, "/index.html");
+            forward(request, response, "/Index.html");
         }
         else
         {
@@ -121,7 +121,7 @@ public class buildingServlet extends HttpServlet
                     
                     session.setAttribute("text", "");
                     
-                    forward(request, response, "/index.html");
+                    forward(request, response, "/Index.html");
                     break;
 
             }

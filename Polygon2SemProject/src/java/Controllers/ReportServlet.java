@@ -25,7 +25,7 @@ import javax.servlet.annotation.MultipartConfig;
  * @author JAJAJABLESES
  */
 @MultipartConfig
-public class reportServlet extends HttpServlet
+public class ReportServlet extends HttpServlet
 {
 
     @Override
@@ -38,7 +38,7 @@ public class reportServlet extends HttpServlet
         }
         catch (ClassNotFoundException ex)
         {
-            Logger.getLogger(reportServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReportServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         super.init(conf);
@@ -95,7 +95,7 @@ public class reportServlet extends HttpServlet
 
         if (do_this == null)
         {
-            forward(request, response, "/index.html");
+            forward(request, response, "/Index.html");
         }
 
         else
@@ -119,7 +119,7 @@ public class reportServlet extends HttpServlet
                     break;
 
                 default:
-                    forward(request, response, "/index.html");
+                    forward(request, response, "/Index.html");
                     break;
 
             }

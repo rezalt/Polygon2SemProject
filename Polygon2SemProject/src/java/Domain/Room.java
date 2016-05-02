@@ -23,7 +23,6 @@ public class Room
     Boolean moisture;
     Boolean sponge;
     Boolean mold;
-
     Boolean fire;
     Boolean otherDamage;
     String moistureDesctription;

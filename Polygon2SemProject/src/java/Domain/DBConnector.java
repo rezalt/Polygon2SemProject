@@ -17,10 +17,9 @@ import java.sql.SQLException;
 public class DBConnector
 {
     SecretData sd = new SecretData();
-    
-    String URL = sd.getURL();
-    String Username = sd.getUsername();
-    String Password = sd.Password;
+    String url = sd.getURL();
+    String username = sd.getUsername();
+    String password = sd.Password;
 
     public Connection getConnection()
     {
@@ -50,34 +49,34 @@ public class DBConnector
         }
     }
 
-    public void setDbURL(String URL)
+    public void setDbURL(String url)
     {
-        this.URL = URL;
+        this.url = url;
     }
 
-    public void setDbUsername(String Username)
+    public void setDbUsername(String username)
     {
-        this.Username = Username;
+        this.username = username;
     }
 
-    public void setDbPassword(String Password)
+    public void setDbPassword(String password)
     {
-        this.Password = Password;
+        this.password = password;
     }
 
     public String getDbURL()
     {
-        return URL;
+        return url;
     }
 
     public String getDbUsername()
     {
-        return Username;
+        return username;
     }
 
     public String getDbPassword()
     {
-        return Password;
+        return password;
     }
 
 }
