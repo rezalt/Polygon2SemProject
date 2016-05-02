@@ -30,9 +30,8 @@ public class Building
         
     }
     
-    public Building(int ID, String name, String address, int condition, String owner, String parcelNo)
+    public Building(String name, String address, int condition, String owner, String parcelNo)
     {
-        this.ID = ID;
         this.name = name;
         this.address = address;
         this.condition = condition;

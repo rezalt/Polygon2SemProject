@@ -25,12 +25,12 @@ public class UserMapper
     }
 
     DBConnector DBC = new DBConnector();
-    Connection conn;
-
+    Connection conn = DBC.getConnection();;
+    User user = null;
+    
     public User login(String username, String password) throws DataMapperException
     {
-        User user = null;
-        conn = DBC.getConnection();
+      
 
         if (conn != null)
         {
@@ -47,6 +47,7 @@ public class UserMapper
 
                     int type = rs.getInt(7);
                     String company = rs.getString(4);
+                    
                     if (type == 2) // Admin 
                     {
                         user = new User(username, password, company, type);
@@ -86,8 +87,6 @@ public class UserMapper
 
     public User newUser(String username, String password, String companyName, String companyAddress, int Zip) throws DataMapperException
     {
-        User user = null;
-        conn = DBC.getConnection();
 
         if (conn != null)
         {
@@ -152,7 +151,6 @@ public class UserMapper
     public ArrayList<String> setUserBuildingNames(String username, String company, int type) throws DataMapperException
     {
         ArrayList<String> buildingNames = new ArrayList();
-        conn = DBC.getConnection();
         String sql;
 
         if (type == 2 || type == 1)

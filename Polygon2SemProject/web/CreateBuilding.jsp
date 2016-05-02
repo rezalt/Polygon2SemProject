@@ -16,11 +16,6 @@
     </head>
     <body>
         <%
-            if (session.getAttribute("loggedIn") != "Admin" && session.getAttribute("loggedIn") != null)
-            {
-                session.setAttribute("text", "You need to be a Polygon A/S employee to create a report.");
-                response.sendRedirect("Login.jsp");
-            }
             if (session.getAttribute("loggedIn") == null)
             {
                 session.setAttribute("text", "You need to log in first.");
@@ -28,7 +23,6 @@
             }
         %> 
         <div class="wrapper">
-
             <ul>
                 <li><a href="Login.jsp">Login</a></li>
                 <li><a href="MainPage.jsp">MainPage</a></li>

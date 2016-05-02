@@ -28,7 +28,7 @@
             <h1>Hello, and welcome. <br>
             Please login.</h1>
 
-            <form class="login" NAME="form1" action="PolyServlet" method="get"> <img src="Logo.JPG" alt="Logo">
+            <form class="login" NAME="form1" action="PolyServlet" method="post"> <img src="Logo.JPG" alt="Logo">
                 <input type="hidden" name="user" value="" />
                 <p class="title" >Customer login</p>
                 <input type="text" placeholder="Username" name="Username"  required="" autofocus/>

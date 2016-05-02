@@ -5,13 +5,9 @@ package Controllers;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import Domain.DBConnector;
+import Domain.BuildingMapper;
+import Domain.DataMapperException;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -91,10 +87,7 @@ public class buildingServlet extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession(true);
-        
-        DBConnector DBC = new DBConnector();
-        Connection conn;
-        
+
         String do_this = (String) request.getParameter("building");
         if (do_this == null)
         {
@@ -102,74 +95,32 @@ public class buildingServlet extends HttpServlet
         }
         else
         {
+
+            BuildingMapper bm = new BuildingMapper();
             switch (do_this)
             {
 
                 case "create":
 
-                    conn = DBC.getConnection();
-                    PreparedStatement ps1 = null;
-
-                    try (Statement st = conn.createStatement())
+                    try
                     {
-
-                        // Creating a building                     
-                        st.executeQuery("SELECT buildingId, buildingName FROM building");
-                        ResultSet rs = st.getResultSet();
-
-                        while (rs.next())
-                        {
-
-                            if (rs.getString("buildingName").equals(request.getParameter("buildingName")))
-                            {
-
-                                session.setAttribute("text", "Building already exists");
-                                st.close();
-                                forward(request, response, "/CreateBuilding.jsp");
-                            }
-
-                        }
-                        // Makes sure we don't show a meaningless error message.
-                        session.setAttribute("text", " ");
-                        st.close();
-
-                        // Inserting our new building to the database.
-                        ps1 = conn.prepareStatement("insert into building(buildingName, address, buildingCondition, buildingCompany, parcelNr, size, zipcode) values(?,?,?,?,?,?,?)");
-
-                        ps1.setString(1, request.getParameter("buildingName"));
-                        ps1.setString(2, request.getParameter("address"));
-                        ps1.setInt(3, Integer.parseInt(request.getParameter("buildingCondition")));
-                        ps1.setString(4, request.getParameter("buildingCompany"));
-                        ps1.setInt(5, Integer.parseInt(request.getParameter("parcelNr")));
-                        ps1.setInt(6, Integer.parseInt(request.getParameter("Size")));
-                        ps1.setInt(7, Integer.parseInt(request.getParameter("Zipcode")));
-
-                        int i = ps1.executeUpdate();
-                        if (i > 0)
-                        {
-                            // UB.setUserName(username); -- Bean doesn't exist yet.
-                        }
-                        else
-                        {
-                            session.setAttribute("text", "Error creating building");
-                            ps1.close();
-                            forward(request, response, "/CreateBuilding.jsp");
-                        }
-
-                        ps1.close();
-                        
-                        forward(request, response, "/MainPage.jsp");
+                        bm.create(request, response, session);
+                    }
+                    catch (DataMapperException ex)
+                    {
+                        session.setAttribute("text", ex);
                     }
 
-                    catch (SQLException e)
-                    {
-                        session.setAttribute("text", "" + e);
-                        forward(request, response, "/CreateBuilding.jsp");
-                    }
+                    request.setAttribute("updateBuildingList", 1);
+                    session.setAttribute("text", "");
+                    
+                    forward(request, response, "/MainPage.jsp");
                     break;
 
                 default:
+                    
                     session.setAttribute("text", "");
+                    
                     forward(request, response, "/index.html");
                     break;
 

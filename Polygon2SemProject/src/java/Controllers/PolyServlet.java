@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  */
 public class PolyServlet extends HttpServlet
 {
-    
+
     @Override
     public void init(ServletConfig conf) throws ServletException
     {
@@ -98,7 +98,6 @@ public class PolyServlet extends HttpServlet
         }
         else
         {
-
             /*
              Type 0: User
              Type 1: Employee
@@ -121,17 +120,18 @@ public class PolyServlet extends HttpServlet
                     {
                         user = um.login(request.getParameter("Username"), request.getParameter("Password"));
                         type = user.getType();
+                        session.setAttribute("type", type);
                         buildingNames = user.getBuildingNames();
                     }
                     catch (DataMapperException ex)
                     {
                         session.setAttribute("text", " Error creating user object for Login " + ex);
+                        
                         forward(request, response, "/Login.jsp");
                     }
-
                     if (type == 2)
                     {
-                        session.setAttribute("userObject",user);
+                        session.setAttribute("userObject", user);
                         session.setAttribute("text", " ");
                         session.setAttribute("loggedIn", "Admin");
                         session.setAttribute("Name", user.getUsername());
@@ -139,11 +139,10 @@ public class PolyServlet extends HttpServlet
                         session.setAttribute("buildingNames", buildingNames);
 
                         forward(request, response, "/MainPage.jsp");
-
                     }
                     else if (type == 1)
                     {
-                        session.setAttribute("userObject",user);
+                        session.setAttribute("userObject", user);
                         session.setAttribute("text", " ");
                         session.setAttribute("loggedIn", "Employee");
                         session.setAttribute("Name", user.getUsername());
@@ -154,7 +153,7 @@ public class PolyServlet extends HttpServlet
                     }
                     else if (type == 0)
                     {
-                        session.setAttribute("userObject",user);
+                        session.setAttribute("userObject", user);
                         session.setAttribute("text", " ");
                         session.setAttribute("loggedIn", "user");
                         session.setAttribute("Name", user.getUsername());
@@ -166,13 +165,13 @@ public class PolyServlet extends HttpServlet
                     else if (type == 4)
                     {
                         session.setAttribute("text", "Wrong username or password.");
-
+                        
                         forward(request, response, "/Login.jsp");
                     }
                     else
                     {
                         session.setAttribute("text", "Cannot get connection to server.");
-
+                        
                         forward(request, response, "/Login.jsp");
                     }
 
@@ -183,11 +182,12 @@ public class PolyServlet extends HttpServlet
                     try
                     {
                         user = um.newUser(
-                                request.getParameter("Username"), request.getParameter("Password"), request.getParameter("companyName"),
-                                request.getParameter("companyAddress"), tryParse(request.getParameter("Zip"))
+                            request.getParameter("Username"), request.getParameter("Password"), request.getParameter("companyName"),
+                            request.getParameter("companyAddress"), tryParse(request.getParameter("Zip"))
                         );
                         type = user.getType();
                         buildingNames = user.getBuildingNames();
+                        session.setAttribute("type", type);
                     }
                     catch (DataMapperException ex)
                     {
@@ -197,8 +197,8 @@ public class PolyServlet extends HttpServlet
 
                     if (type == 0)
                     {
-                        session.setAttribute("userObject",user);
                         session.setAttribute("text", " ");
+                        session.setAttribute("userObject", user);
                         session.setAttribute("loggedIn", "user");
                         session.setAttribute("Name", user.getUsername());
                         session.setAttribute("buildingCompany", user.getCompanyName());
@@ -221,7 +221,23 @@ public class PolyServlet extends HttpServlet
                         session.setAttribute("text", "Cannot get connection to server.");
                         forward(request, response, "/CreateUser.jsp");
                     }
+                    break;
 
+                case "updateBuildingList":
+                    
+                    try
+                    {
+                        buildingNames = um.setUserBuildingNames( (String)session.getAttribute("Username"), (String)session.getAttribute("buildingCompany"), (Integer)session.getAttribute("type") );
+                    }
+                    catch (DataMapperException ex)
+                    {
+                       session.setAttribute("text", ex);
+                    }
+                    
+                    session.setAttribute("text", "");
+                    request.setAttribute("updateBuildingList", 0);
+                    session.setAttribute("buildingNames", buildingNames);
+                    forward(request, response, "/MainPage.jsp");
                     break;
 
             }

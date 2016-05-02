@@ -16,8 +16,15 @@
     </head>
     <body>
 
+        <c:if test="${updateBuildingList == 1}">
+            <c:redirect url="PolyServlet?user=updateBuildingList"/>
+        </c:if>
+        
+        
         <div class="wrapper">
 
+            
+            
             <ul>
                 <li><a href="CreateBuilding.jsp">CreateBuilding</a></li>
                 <li><a href="CreateReport.jsp">CreateReport</a></li>
@@ -28,10 +35,11 @@
             Hello,
             <%-- 
             Redirects to index if the user is not logged in.
-            If logged in, the username will be shown.
+            If logged in, the username will be shown. 
+            Should not even be here without being logged in.
             --%>
             <c:if test="${empty loggedIn}">
-                <c:redirect url="index.html"/>
+                <c:redirect url="login.jsp"/>
             </c:if>
             <c:out value="${Name}."/>
 

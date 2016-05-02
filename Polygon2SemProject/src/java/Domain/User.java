@@ -84,7 +84,7 @@ public class User
 
     public User()
     {
-
+        this.type = 0;
     }
     
     public User(String username, String password, String companyName, int type)
