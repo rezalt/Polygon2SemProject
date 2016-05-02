@@ -19,34 +19,7 @@ import static org.junit.Assert.*;
  */
 public class DBConnectorTest
 {
-    
-    public DBConnectorTest()
-    {
-    }
-    
-    @BeforeClass
-    public static void setUpClass()
-    {
-    }
-    
-    @AfterClass
-    public static void tearDownClass()
-    {
-    }
-    
-    @Before
-    public void setUp()
-    {
-    }
-    
-    @After
-    public void tearDown()
-    {
-    }
 
-    /**
-     * Test of getConnection method, of class DBConnector.
-     */
     @Test
     public void testGetConnection()
     {
@@ -63,5 +36,4 @@ public class DBConnectorTest
     /**
      * Test of putConnection method, of class DBConnector.
      */
-
 }
