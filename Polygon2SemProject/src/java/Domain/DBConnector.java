@@ -5,7 +5,6 @@ package Domain;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,6 +15,7 @@ import java.sql.SQLException;
  */
 public class DBConnector
 {
+
     SecretData sd = new SecretData();
     String url = sd.getURL();
     String username = sd.getUsername();
@@ -24,12 +24,10 @@ public class DBConnector
     public Connection getConnection()
     {
         Connection conn = null;
-        try
-        {
+        try {
             conn = DriverManager.getConnection(getDbURL(), getDbUsername(), getDbPassword());
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println("Could not connect to DB: " + e.getMessage());
         }
         return conn;
@@ -37,14 +35,11 @@ public class DBConnector
 
     public void putConnection(Connection conn)
     {
-        if (conn != null)
-        {
-            try
-            {
+        if (conn != null) {
+            try {
                 conn.close();
             }
-            catch (SQLException e)
-            {
+            catch (SQLException e) {
             }
         }
     }

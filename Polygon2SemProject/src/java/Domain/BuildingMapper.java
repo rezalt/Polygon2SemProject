@@ -9,11 +9,16 @@ package Domain;
  *
  * @author josephawwal
  */
+import Controllers.PolyServlet;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,7 +29,6 @@ public class BuildingMapper
     DBConnector DBC = new DBConnector();
     Connection conn = DBC.getConnection();
 
-
     public BuildingMapper()
     {
 
@@ -32,23 +36,19 @@ public class BuildingMapper
 
     public void create(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws DataMapperException
     {
-        if (conn != null)
-        {
+        if (conn != null) {
 
             PreparedStatement ps = null;
 
-            try (Statement st = conn.createStatement())
-            {
+            try (Statement st = conn.createStatement()) {
 
                 // Creating a building                     
                 st.executeQuery("SELECT buildingId, buildingName FROM building");
                 ResultSet rs = st.getResultSet();
 
-                while (rs.next())
-                {
+                while (rs.next()) {
 
-                    if (rs.getString("buildingName").equals(request.getParameter("buildingName")))
-                    {
+                    if (rs.getString("buildingName").equals(request.getParameter("buildingName"))) {
                         session.setAttribute("text", "Building already exists");
                         st.close();
                     }
@@ -74,8 +74,7 @@ public class BuildingMapper
                 ps.close();
 
             }
-            catch (SQLException e)
-            {
+            catch (SQLException e) {
                 throw new DataMapperException("Error occured at building creation ", e);
             }
 
@@ -83,14 +82,45 @@ public class BuildingMapper
 
     }
 
+    public void setBuildingAttributes(HttpSession session, HttpServletRequest request, HttpServletResponse response, String buildingName) throws IOException, ServletException
+    {
+        DBConnector DBC = new DBConnector();
+        Connection conn = DBC.getConnection();
+
+        String sql = "SELECT * FROM building WHERE buildingName =?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, buildingName);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("<-<-<-<-<-<>_>_>_>_>_");
+
+            if (rs.next()) {
+                // "this" is added as prefix to prevent overriding user session info, 
+                // especially the users company name. Was a problem for Polygon employees.
+                System.out.println("<-<-<-<-<-<>_>_>_>_>_2");
+                System.out.println(rs.getString(5));
+                session.setAttribute("thisAddress", (String) rs.getString(3));
+                session.setAttribute("thisBuildingCondition", rs.getInt(4));
+                session.setAttribute("thisBuildingCompany", rs.getString(5));
+                session.setAttribute("thisParcelNr", rs.getInt(6));
+                session.setAttribute("thisSize", rs.getInt(7));
+                session.setAttribute("thisZipcode", rs.getInt(8));
+            }
+        }
+        catch (Exception e) {
+            session.setAttribute("text", e);
+            //Logger.getLogger(PolyServlet.class.getName()).log(Level.SEVERE, null, e + "WHAT");
+            //forward(request, response, "/Login.jsp");
+        }
+
+    }
+
     public static Integer tryParse(String text)
     {
-        try
-        {
+        try {
             return Integer.parseInt(text);
         }
-        catch (NumberFormatException e)
-        {
+        catch (NumberFormatException e) {
             return 0;
         }
     }

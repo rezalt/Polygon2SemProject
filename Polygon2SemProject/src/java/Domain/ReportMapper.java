@@ -40,46 +40,42 @@ public class ReportMapper
 
         Part filePart = request.getPart("roofPicture");
 
-        if (filePart != null)
-        {
+        if (filePart != null) {
             iS1 = filePart.getInputStream();
         }
 
         Part filePart2 = request.getPart("wallPicture");
 
-        if (filePart2 != null)
-        {
+        if (filePart2 != null) {
             iS2 = filePart2.getInputStream();
         }
 
         conn = DBC.getConnection();
-        
+
         // Here we save the userId.
         PreparedStatement st = null;
-        
+
         st = conn.prepareStatement("SELECT userID, name FROM user WHERE name = ?");
-        
-        st.setString( 1, (String)session.getAttribute("Name") );
-        
+
+        st.setString(1, (String) session.getAttribute("Name"));
+
         ResultSet rs = st.executeQuery();
-        
-        if( rs.next() )
-        {
+
+        if (rs.next()) {
             myId = rs.getInt("userId");
         }
-        
+
         st = conn.prepareStatement("SELECT buildingId, buildingName FROM building WHERE buildingName = ?");
-        
-        st.setString( 1, request.getParameter("buildingName") );
-        
+
+        st.setString(1, request.getParameter("buildingName"));
+
         rs = st.executeQuery();
-        
-        if( rs.next() )
-        {
+
+        if (rs.next()) {
             buildingId = rs.getInt("buildingId");
         }
         st.close();
-        
+
         PreparedStatement ps = null;
 
         // Inserting our new report to the database.
@@ -93,13 +89,11 @@ public class ReportMapper
 
         Date date = null;
 
-        try
-        {
+        try {
             date = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("dato"));
 
         }
-        catch (ParseException ex)
-        {
+        catch (ParseException ex) {
             session.setAttribute("text", ex);
         }
 
@@ -120,27 +114,22 @@ public class ReportMapper
         ps.setString(15, request.getParameter("textSamarbejdeMed"));
         ps.setInt(16, tryParse(request.getParameter("tilstand")));
 
-        if (iS1 != null)
-        {
+        if (iS1 != null) {
             ps.setBinaryStream(17, iS1);
         }
 
-        if (iS2 != null)
-        {
+        if (iS2 != null) {
             ps.setBinaryStream(18, iS2);
         }
-        
+
         ps.setInt(19, myId);
         ps.setInt(20, buildingId);
 
-        
         int i = ps.executeUpdate();
-        if (i > 0)
-        {
+        if (i > 0) {
 
         }
-        else
-        {
+        else {
             session.setAttribute("text", "Error creating report");
             ps.close();
 
@@ -153,12 +142,10 @@ public class ReportMapper
 
     public static Integer tryParse(String text)
     {
-        try
-        {
+        try {
             return Integer.parseInt(text);
         }
-        catch (NumberFormatException e)
-        {
+        catch (NumberFormatException e) {
             return 0;
         }
     }

@@ -1,6 +1,5 @@
 package Domain;
 
-
 import Domain.Room;
 import java.util.ArrayList;
 

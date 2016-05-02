@@ -30,13 +30,11 @@ public class BuildingServlet extends HttpServlet
     public void init(ServletConfig conf) throws ServletException
     {
 
-        try
-        {
+        try {
             java.lang.Class.forName(conf.getInitParameter("jdbcDriver"));
         }
-        catch (ClassNotFoundException ex)
-        {
-            
+        catch (ClassNotFoundException ex) {
+
         }
 
         super.init(conf);
@@ -89,38 +87,33 @@ public class BuildingServlet extends HttpServlet
         HttpSession session = request.getSession(true);
 
         String do_this = (String) request.getParameter("building");
-        if (do_this == null)
-        {
+        if (do_this == null) {
             forward(request, response, "/Index.html");
         }
-        else
-        {
+        else {
 
             BuildingMapper bm = new BuildingMapper();
-            switch (do_this)
-            {
+            switch (do_this) {
 
                 case "create":
 
-                    try
-                    {
+                    try {
                         bm.create(request, response, session);
                     }
-                    catch (DataMapperException ex)
-                    {
+                    catch (DataMapperException ex) {
                         session.setAttribute("text", ex);
                     }
 
                     request.setAttribute("updateBuildingList", 1);
                     session.setAttribute("text", "");
-                    
+
                     forward(request, response, "/MainPage.jsp");
                     break;
 
                 default:
-                    
+
                     session.setAttribute("text", "");
-                    
+
                     forward(request, response, "/Index.html");
                     break;
 

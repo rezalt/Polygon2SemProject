@@ -1,28 +1,31 @@
-
 package Domain;
 
 /**
  *
  * @author Henrik
  */
+public class DataMapperException extends Exception
+{
 
-public class DataMapperException extends Exception {
+    public DataMapperException()
+    {
 
-    public DataMapperException() {
-       
     }
 
-    public DataMapperException(String message) {
+    public DataMapperException(String message)
+    {
         super(message);
-    
+
     }
 
-    public DataMapperException(Throwable cause) {
+    public DataMapperException(Throwable cause)
+    {
         super(cause);
- 
+
     }
 
-    public DataMapperException(String message, Throwable cause) {
+    public DataMapperException(String message, Throwable cause)
+    {
         super(message, cause);
 
     }

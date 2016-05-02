@@ -86,7 +86,7 @@ public class User
     {
         this.type = 0;
     }
-    
+
     public User(String username, String password, String companyName, int type)
     {
         this.username = username;

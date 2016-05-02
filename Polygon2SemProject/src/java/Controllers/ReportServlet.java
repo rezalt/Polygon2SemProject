@@ -32,12 +32,10 @@ public class ReportServlet extends HttpServlet
     public void init(ServletConfig conf) throws ServletException
     {
 
-        try
-        {
+        try {
             java.lang.Class.forName(conf.getInitParameter("jdbcDriver"));
         }
-        catch (ClassNotFoundException ex)
-        {
+        catch (ClassNotFoundException ex) {
             Logger.getLogger(ReportServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -93,25 +91,20 @@ public class ReportServlet extends HttpServlet
 
         String do_this = request.getParameter("report");
 
-        if (do_this == null)
-        {
+        if (do_this == null) {
             forward(request, response, "/Index.html");
         }
 
-        else
-        {
-            switch (do_this)
-            {
+        else {
+            switch (do_this) {
 
                 case "create":
                     ReportMapper rm = new ReportMapper();
 
-                    try
-                    {
+                    try {
                         rm.createReport(request, response, session);
                     }
-                    catch (SQLException ex)
-                    {
+                    catch (SQLException ex) {
                         session.setAttribute("text", "" + ex);
                     }
 

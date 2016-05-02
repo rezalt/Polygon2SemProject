@@ -1,6 +1,5 @@
 package Domain;
 
-
 import Domain.Report;
 import java.util.ArrayList;
 
@@ -24,12 +23,11 @@ public class Building
     String parcelNo;
     ArrayList<Report> reports = new ArrayList();
 
-    
     public void Building()
     {
-        
+
     }
-    
+
     public Building(String name, String address, int condition, String owner, String parcelNo)
     {
         this.name = name;
@@ -38,12 +36,13 @@ public class Building
         this.owner = owner;
         this.parcelNo = parcelNo;
     }
+
     public void addReport(int reportId, String nameOfBuilding, String date, String address, String zipCode, String yearBuild, int buildingSizeInSquareMetres, String buildingPurpose, Boolean roofNoticeBoolean, Boolean roofPictureBoolean, String roofNotice, Boolean wallNoticeBoolean, Boolean wallPictureBoolean, String wallNotice, String writer, String coWriter, int condition)
     {
         Report tempReport = new Report(reportId, nameOfBuilding, date, address, zipCode, yearBuild, buildingSizeInSquareMetres, buildingPurpose, roofNoticeBoolean, roofPictureBoolean, roofNotice, wallNoticeBoolean, wallPictureBoolean, wallNotice, writer, coWriter, condition);
         reports.add(tempReport);
     }
-    
+
     public ArrayList<Report> getReports()
     {
         return reports;
@@ -118,6 +117,5 @@ public class Building
     {
         this.name = name;
     }
-    
 
 }
